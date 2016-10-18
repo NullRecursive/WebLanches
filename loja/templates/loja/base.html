@@ -1,0 +1,44 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+    <head>
+        <title>WebLanches</title>
+        <!--Bootstrap-->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <!--End Bootstrap-->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <!--Fonte Loobster do google-->
+        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}" />
+    </head>
+    <body>
+        <!-- Nome da loja -->
+        <div class="page-header">
+            	<h1><a href="/" id="#page_header_link">WebLanches</a></h1>
+        </div>
+        <!-- Navegacao entre paginas -->
+        <div class="hr-divider" id="porra">
+            <ul class="nav nav-pills hr-divider-content hr-divider-nav">
+                <li class="active">
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="#">Faça seu pedido</a>
+                </li>
+                <li>
+                    <a href="#">Tab</a>
+                </li>
+            </ul>
+        </div>
+        <!-- Conteudo da pagina -->
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
