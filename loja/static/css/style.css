@@ -72,3 +72,19 @@ h1 a {
     color: white;
     background-color: #00F;
 }
+
+footer {
+    background-color: #fff00f;
+    padding: 20px;
+    text-align: center;
+
+}
+
+#link_footer {
+    color: black;  
+    text-decoration: none;
+}
+
+#link_footer:hover{
+    color: gray;
+}

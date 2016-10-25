@@ -1,17 +1,31 @@
 {% load staticfiles %}
 <!DOCTYPE html>
+<html lang="pt-BR">
     <head>
+        <!--Configuracoes iniciais-->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!--Nome da pagina-->
         <title>WebLanches</title>
+        
         <!--Bootstrap-->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <!--End Bootstrap-->
+        
+        <!--Loading static files locais-->
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        
         <!--Fonte Loobster do google-->
         <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+        <!--Adicionando icone da pagina-->
         <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}" />
     </head>
     <body>
+
         <!-- Nome da loja -->
         <div class="page-header">
             	<h1><a href="/" id="#page_header_link">WebLanches</a></h1>
@@ -35,10 +49,21 @@
             <div class="row">
                 <div class="col-md-8">
                     {% block content %}
+                    <!--Local onde carregara os dados da pagina-->
                     {% endblock %}
                 </div>
             </div>
         </div>
+
+        <!--Adicionando secao, nao sei se vou realmente necessitar-->
+        <section class="aw-layout-content  js-content" layout:fragment="conteudo"></section>
+
+        <!--Conteudo final da pagina ou rodape-->
+        <footer class="aw-layout-footer  js-content">
+            <div class="container-fluid">
+                <span class="aw-footer-disclaimer">&copy; 2016 <a id="link_footer" href="http://github.com/NullRecursive">NullRecursive</a>. Todos os direitos reservados.</span>
+            </div>
+        </footer>
 
     </body>
 </html>
