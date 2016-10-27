@@ -3,7 +3,7 @@
     /*background-color: #ff9400;*/
     background-color: #0F37D9;
     padding: 20px 20px 20px 10%;
-    margin: -1px;
+    margin: auto;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
@@ -77,7 +77,6 @@ footer {
     background-color: #fff00f;
     padding: 20px;
     text-align: center;
-
 }
 
 #link_footer {
