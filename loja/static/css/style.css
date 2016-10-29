@@ -1,11 +1,4 @@
-
-.page-header {
-    /*background-color: #ff9400;*/
-    background-color: #0F37D9;
-    padding: 20px 20px 20px 10%;
-    margin: auto;
-}
-
+    
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
     color: #ffffff;
     font-size: 36pt;
@@ -63,16 +56,6 @@ h1 a {
     font-style: bold;
 }
 
-#page_header_link:hover{
-	color: #FFF;
-	text-decoration: underline;
-}
-
-.basic_link {
-    color: white;
-    background-color: #00F;
-}
-
 footer {
     background-color: #fff00f;
     padding: 20px;
@@ -87,3 +70,8 @@ footer {
 #link_footer:hover{
     color: gray;
 }
+
+#distance {
+    margin-left: 8%;
+}
+

@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <!--End Bootstrap-->
+
         
         <!--Loading static files locais-->
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -27,12 +28,11 @@
     <body>
 
         <!-- Navbar (sit on top) -->
-        <nav class="navbar" style="background-color: #0F37D9; margin-bottom: 0px; padding-left: 8%; color: white;">
-          <div class="container-fluid">
+        <nav>
+          <div class="container-fluid  col-md-offset-1">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">Page 1</a></li>
-              <li><a href="#">Page 2</a></li> 
+                <p class="navbar-text"><span class="glyphicon glyphicon-map-marker"></span> Localizacao</p>
+                <p class="navbar-text"><span class="glyphicon glyphicon-earphone"></span> contato</p> 
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -43,22 +43,24 @@
 
         <!-- Nome da loja -->
         <div class="page-header">
-            	<h1><a href="/" id="#page_header_link">WebLanches</a></h1>
-        </div>
-        <!-- Navegacao entre paginas -->
-        <div class="hr-divider">
-            <ul class="nav nav-pills hr-divider-content hr-divider-nav">
-                <li class="active">
-                    <a href="#" class="basic_link">Home</a>
-                </li>
-                <li>
-                    <a href="#" class="basic_link">Faça seu pedido</a>
-                </li>
-                <li>
-                    <a href="#" class="basic_link">Tab</a>
-                </li>
-            </ul>
-        </div>
+            	<h1><a href="/">WebLanches</a></h1>
+
+        </div>        
+            <!-- Navegacao entre paginas -->
+            <div class="hr-divider">
+                <ul class="nav nav-pills hr-divider-content hr-divider-nav">
+                    <li class="active">
+                        <a href="#" >Home</a>
+                    </li>
+                    <li>
+                        <a href="#" >Faça seu pedido</a>
+                    </li>
+                    <li>
+                        <a href="#" >Tab</a>
+                    </li>
+                </ul>
+            </div>
+
         <!-- Conteudo da pagina -->
         <div class="content container">
             <div class="row">
