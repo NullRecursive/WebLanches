@@ -22,9 +22,19 @@ h1 a {
     color: #FFF;
 }
 
-
-/* http://work.smarchal.com/twbscolor */
-
 a.basic_link {
     color: #000;
+}
+
+.distance {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.pagamento{
+    margin-bottom: 5px;
+}
+
+.padrao li {
+    margin: 2px;
 }

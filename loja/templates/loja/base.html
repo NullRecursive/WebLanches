@@ -1,6 +1,8 @@
 {% load staticfiles %}
 <!DOCTYPE html>
     <head>
+        <!-- Copyright (c) NullRecursive (http://www.gihub.com/NullRecursive) -->
+
         <!-- Configuracoes iniciais -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +10,14 @@
 
         <!-- Titulo da pagina -->
         <title>WebLanches</title>
+    
+        <!-- meta tags -->
+        <meta property="og:title" content="" />         
+        <meta property="og:type" content="website" />           
+        <meta property="og:url" content="http://www.pythonanywhere.weblanches.com/" />         
+        <meta property="og:site_name" content="Weblanches" />         
+        <meta property="og:description" content="" />           
+        <meta property="fb:app_id" content="" />
 
         <!-- Bootstrap -->
             <!-- Latest compiled and minified CSS -->
@@ -42,12 +52,12 @@
                     <li>
                         <a href="#" class="btn basic_link">
                             <span class="glyphicon glyphicon-user"></span> 
-                            Sign Up </a>
+                            <b>Sign Up</b> </a>
                     </li> 
                     <li>
                         <a href="#" class="btn basic_link">
                             <span class="glyphicon glyphicon-log-in"></span> 
-                            Login </a>
+                            <b>Login</b> </a>
                     </li> 
                 </ul> 
             </div> 
@@ -59,13 +69,13 @@
             <div class="col-md-offset-1 col-md-10 col-md-offset-1">
                 <ul class="nav nav-pills navbar-default">
                     <li class="active">
-                        <a href="#" class="btn basic_link">Home</a>
+                        <a href="#" class="btn basic_link"><b>Home</b></a>
                     </li>
                     <li>
-                        <a href="#" class="btn basic_link">Fazer pedido</a>
+                        <a href="#" class="btn basic_link"><b>Faça seu pedido</b></a>
                     </li>
                     <li>
-                        <a href="#" class="btn basic_link">Cardapio</a>
+                        <a href="#" class="btn basic_link"><b>Cardápio</b></a>
                     </li>
                 </ul>
             </div>   
@@ -73,7 +83,7 @@
         
         <!-- CONTEUDO -->
 
-        <div class="content container">
+        <div class="content container distance">
             <div class="row">
                 <div class="col-md-10">
                     {% block content %}
@@ -82,5 +92,49 @@
             </div>
         </div>
 
+        <!-- Rodape -->
+        <footer class="distance">
+            <div class="pagamento">
+                <div class="well">
+                    <p><b>Formas de pagamento:</b></p>
+                    <ul class="nav nav-pills padrao">
+                        <li><img alt="Dinheiro" title="Dinheiro" src="{% static 'images/dinheiro.png' %}"/></li>        
+                        <li><img alt="Visa" title="Visa" src="{% static 'images/visa.png' %}"/></li>
+                        <li><img alt="Mastercard" title="Mastercard" src="{% static 'images/mastercard.png' %}"/></li>  
+                        <li><img alt="Paypal" title="Paypal" src="{% static 'images/paypal.png' %}"/></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-copyright">
+                <div class="container">
+                    <a class="btn pull-right basic_link" href="http://www.github.com/NullRecursive">
+                        <span class="glyphicon glyphicon-fire"></span>
+                        <b>NullRecursive</b></a>    
+                    <span class="glyphicon glyphicon-copyright-mark"></span> 2016. Weblanches.
+                </div>
+            </div>
+        </footer>
+
+    <!--
+        <div id="modal-alert" class="modal hide fade">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Atenção!</h3>
+            </div>
+            <div class="modal-body">
+            <p><h4>O horário de entregas é das 18:00:00 às 23:00:00 (de acordo com o bairro). Por favor volte mais tarde.</h4></p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Fechar</a>
+            </div>
+        </div>
+    
+        <script>
+            $(function() {
+                $('#modal-alert').modal('show');
+            });
+        </script>
+    -->
     </body>
 </html>
