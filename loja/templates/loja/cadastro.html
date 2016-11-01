@@ -1,0 +1,29 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Cadastro</title>
+	<link rel="stylesheet" type="text/css" href="estilo.css">
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    <!-- Icone da pagina -->
+     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}" />
+</head>
+<body>
+<div class="form">
+    <form class="cad-form">
+     <input type="text" placeholder="Digite o seu nome completo"/>
+      <input type="text" placeholder="Digite o nome de usuario"/>
+      <input type="password" placeholder="Digite a senha"/>
+       <input type="password" placeholder="Confirme a senha"/>
+       <input id="CPF" type="text" pattern="[0-9]+" placeholder="Digite seu CPF">
+       <input type="text" placeholder="Digite seu bairro">
+       <input type="text" placeholder="Digite o endereço">
+       <input type="text" pattern="[0-9]+" placeholder="Digite o CEP">
+     	 <button>Cadastrar - se </button>
+    </form>
+  </div>
+
+</body>
+</html>
