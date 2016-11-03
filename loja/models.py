@@ -8,9 +8,6 @@ class Usuario(User):
 	telefone = models.CharField(max_length=20)
 	cpf = models.CharField(max_length=20)
 
-	def __init__(self):
-		self.is_superuser = False;
-		self.is_staff = False;
 
 	def setTelefone(self,telefone):
 		self.telefone = telefone
@@ -18,6 +15,5 @@ class Usuario(User):
 	def setCPF(self,cpf):
 		self.cpf = cpf
 	
-	def publish(self):
-		self.save() 
+
 
