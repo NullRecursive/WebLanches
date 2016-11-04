@@ -2,7 +2,8 @@
 
 {% block content %}
 
-<form class="form-horizontal col-md-offset-1 col-md-10 my_form">
+<form class="form-horizontal col-md-offset-1 col-md-10 my_form" method="POST">{% csrf_token %}
+    {{ form }}
     <div class="form-group">
         <label class="control-label col-sm-2" for="nome">Nome:</label>
         <div class="col-sm-10">
