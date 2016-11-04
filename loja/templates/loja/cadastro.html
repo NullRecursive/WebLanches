@@ -20,7 +20,7 @@
     <div class="form-group">
         <label class="control-label col-sm-2" for="cpf">CPF:</label>
         <div class="col-sm-10">
-            <input id="CPF" type="text" pattern="[0-9]{3}.*[0-9]{3}.*[0-9]{3}-*[0-9]{2}" class="form-control" placeholder="Digite seu CPF" id="cpf" title="xxx.xxx.xxx-xx" required/>
+            <input id="CPF" type="text" pattern="[0-9]{3}.{0,1}[0-9]{3}.{0,1}[0-9]{3}-{0,1}[0-9]{2}" class="form-control" placeholder="Digite seu CPF" id="cpf" title="xxx.xxx.xxx-xx" required/>
         </div>
     </div>
     
@@ -34,7 +34,7 @@
     <div class="form-group">
         <label class="control-label col-sm-2" for="cep">CEP:</label>
         <div class="col-sm-10">
-            <input type="text" pattern="[0-9]{5}-*[0-9]{3}" class="form-control" placeholder="Digite o CEP" id="cep" title="xxxxx-xxx"/>
+            <input type="text" pattern="[0-9]{5}-{0,1}[0-9]{3}" class="form-control" placeholder="Digite o CEP" id="cep" title="xxxxx-xxx"/>
         </div>
     </div>
 
@@ -42,16 +42,17 @@
         <label class="control-label col-sm-2" for="senha">Senha:</label>
         <div class="col-sm-10">
             <input type="password" class="form-control" placeholder="Digite a senha" id="senha"
-             maxlength="40" required/>
+             maxlength="40" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" required/>
         </div>
     </div>
     
     <div class="form-group">
         <label class="control-label col-sm-2" for="csenha">Confirmar senha:</label>
         <div class="col-sm-10">
-            <input type="password" class="form-control" placeholder="Confirme a senha" id="csenha" maxlength="40" required/>
+            <input type="password" class="form-control" placeholder="Confirme a senha" id="csenha" maxlength="40" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');" required/>
         </div>
     </div>
+
 
     <div class="form-group"> 
         <div class="col-sm-offset-2 col-sm-10">
