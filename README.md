@@ -17,7 +17,7 @@ Django é um framework gratuito e de código aberto para a criação de aplicaç
 		- Spyder
 	- Outros
 		- [Atom](atom.io) (Recomendado)
-		- Sublime Text 
+		- Sublime Text
 		- Gedit
 
 - Configurar o ambiente virtual(tambem chamado de virtualenv)  
@@ -32,7 +32,8 @@ Django é um framework gratuito e de código aberto para a criação de aplicaç
 - Instale o Django
 ``` pip install django==1.8.5 ```  
 	- Em caso de erro instale o pip  
-	``` sudo apt install pip ```  
+	``` sudo apt install pip ```
+	Ou acesse: [PIP](https://pip.pypa.io/en/stable/installing/)
 
 ### Uso
 - Para criar sua aplicacao, use:
@@ -54,8 +55,7 @@ Django é um framework gratuito e de código aberto para a criação de aplicaç
 	``` python manage.py runserver ```
 	- Para acessar local:
 	``` http://127.0.0.1:8000/ ```
-- Para criar um app 
+- Para criar um app
  ``` python manage.py startapp nome_app ```
 - Para criar migraçoes dos apps
  ``` python manage.py makemigrations nome_app ```
-
