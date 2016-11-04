@@ -1,22 +1,64 @@
-
 {% extends 'loja/base.html' %}
 
 {% block content %}
 
-<div class="form">
-  <form class="cad-form">
-    <input type="text" placeholder="Digite o seu nome completo"/>
-    <input type="text" placeholder="Digite o nome de usuario"/>
-    <input type="password" placeholder="Digite a senha"/>
-    <input type="password" placeholder="Confirme a senha"/>
-    <input id="CPF" type="text" pattern="[0-9]+" placeholder="Digite seu CPF">
-    <input type="text" placeholder="Digite seu bairro">
-    <input type="text" placeholder="Digite o endereço">
-    <input type="text" pattern="[0-9]+" placeholder="Digite o CEP">
+<form class="form-horizontal col-md-offset-1 col-md-10 my_form">
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="nome">Nome:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Digite o seu nome completo" id="nome"/>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="email">E-mail:</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" placeholder="Digite o seu e-mail" id="email"/>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="cpf">CPF:</label>
+        <div class="col-sm-10">
+            <input id="CPF" type="text" pattern="[0-9]+" class="form-control" placeholder="Digite seu CPF" id="cpf"/>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="endereco">Endereço:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="Digite o endereço: Bairro; Rua; Nº do local" id="endereco"/>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="cep">CEP:</label>
+        <div class="col-sm-10">
+            <input type="text" pattern="[0-9]+" class="form-control" placeholder="Digite o CEP" id="cep"/>
+        </div>
+    </div>
 
-    <button>Cadastrar - se </button>
-  </form>
-</div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="senha">Senha:</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" placeholder="Digite a senha" id="senha"/>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="csenha">Nome:</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" placeholder="Confirme a senha" id="csenha"/>
+        </div>
+    </div>
+
+    <div class="form-group"> 
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Cadastrar-se</button>
+        </div>
+    </div>
+     
+</form>
+
 
 {% endblock %}
-

@@ -25,6 +25,7 @@
 
         <!-- Arquivos estaticos-->
         <link rel="stylesheet" href="{% static 'css/loja.css' %}">
+        <link rel="stylesheet" href="{% static 'css/formularios.css' %}">
 
         <!--Fonte Loobster do google-->
         <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
@@ -49,12 +50,12 @@
                     <li>
                         <a href="{% url 'cadastrar' %}" class="btn basic_link">
                             <span class="glyphicon glyphicon-user"></span> 
-                            <b>Sign Up</b> </a>
+                            <b>Cadastrar-se</b> </a>
                     </li> 
                     <li>
                         <a href="{% url 'login' %}" class="btn basic_link">
                             <span class="glyphicon glyphicon-log-in"></span> 
-                            <b>Login</b> </a>
+                            <b>Entrar</b> </a>
                     </li> 
                 </ul> 
             </div> 
@@ -82,7 +83,7 @@
 
         <div class="content container distance">
             <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-offset-1 col-md-10">
                     {% block content %}
                     {% endblock %}
                 </div>
