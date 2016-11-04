@@ -1,4 +1,4 @@
-
+	
 function validarTamSenha(senha) {
 	if (senha.value.length < 4)
 		senha.setCustomValidity("A senha deve ter no minimo 4 caracteres!");
