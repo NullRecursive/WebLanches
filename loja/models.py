@@ -14,6 +14,10 @@ class Usuario(User):
 
 	def setCPF(self,cpf):
 		self.cpf = cpf
+
+	def save(self,*args,**kwargs):
+		self.set_password(self.password)
+		User.save(self);
 	
 
 
