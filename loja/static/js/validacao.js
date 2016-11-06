@@ -13,3 +13,8 @@ function validarSenha(senha, conf_senha){
   	else
   		conf_senha.setCustomValidity('');
 }
+//rejeita caracteres que nao sejam digitos
+function rejeitaLetras(telefone){
+	telefone.value = telefone.value.replace(/\D/g,"")
+}
+
