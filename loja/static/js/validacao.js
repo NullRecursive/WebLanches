@@ -13,4 +13,3 @@ function validarSenha(senha, conf_senha){
   	else
   		conf_senha.setCustomValidity('');
 }
-
