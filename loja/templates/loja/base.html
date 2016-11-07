@@ -1,34 +1,38 @@
 {% load staticfiles %}
+
 <!DOCTYPE html>
     <head>
         <!-- Copyright (c) NullRecursive (http://www.gihub.com/NullRecursive) -->
 
         <!-- Configuracoes iniciais -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name=description content="Conheça a WebLanches, ferramenta completa de pedidos online." />
+        <meta name=keywords content="restaurantes, restaurante web, restaurants, pedidos online, vendas on line, pizzaria, pizzaria delivery, pizza delivery, pizza online, pizza express, pizza pela internet, fast food, food delivery, delivery food, delivery pizzaria, delivery, deliveri pizza, sistema delivery, compra pizza online, restaurante, comida a domicilio, lanches" />
+        <meta name=author content=NullRecursive />
+  
         <!-- Titulo da pagina -->
         <title>WebLanches</title>
     
         <!-- meta tags -->
-        <meta property="og:title" content="" />         
+        <meta property="og:title" content="WebLanches. Sistema de pedidos online para pizzarias, restaurantes e lanchonetes." />         
         <meta property="og:type" content="website" />           
         <meta property="og:url" content="http://www.pythonanywhere.weblanches.com/" />         
-        <meta property="og:site_name" content="Weblanches" />         
-        <meta property="og:description" content="" />           
+        <meta property="og:site_name" content="weblanches.pythonanywhere.com" />         
+        <meta property="og:description" content="Conheça a WebLanches, ferramenta completa de pedidos online." />           
         <meta property="fb:app_id" content="" />
 
         <!-- Bootstrap -->
         <link rel="stylesheet" href="{% static 'css/bootstrap/css/bootstrap.min.css' %}">        
         <link rel="stylesheet" href="{% static 'css/bootstrap/css/bootstrap-theme.min.css' %}">
 
-        <!-- Arquivos estaticos-->
+        <!-- CSS -->
         <link rel="stylesheet" href="{% static 'css/loja.css' %}">
         <link rel="stylesheet" href="{% static 'css/formularios.css' %}">
 
 
-        <!-- JavaScript-->
+        <!-- JS -->
         <script src="{% static 'js/validacao.js' %}"></script>
 
         <!--Fonte Loobster do google-->
@@ -108,13 +112,12 @@
                 </div>
             </div>
 
-            <div class="footer-copyright">
-                <div class="container">
-                    <a class="btn pull-right basic_link" href="http://www.github.com/NullRecursive">
-                        <span class="glyphicon glyphicon-fire"></span>
-                        <b>NullRecursive</b></a>    
-                    <span class="glyphicon glyphicon-copyright-mark"></span> 2016. Weblanches.
-                </div>
+            <div class="container">    
+                <span class="glyphicon glyphicon-copyright-mark"></span> <b>Weblanches.</b> Todos os direitos reservados.
+
+                <a class="btn pull-right basic_link" href="http://www.github.com/NullRecursive">
+                    <span class="glyphicon glyphicon-fire"></span>
+                    <b>NullRecursive</b></a>
             </div>
         </footer>
     </body>
