@@ -23,9 +23,3 @@ jQuery(function($){
   //  $("#tin").mask("99-9999999");
    // 	$("#ssn").mask("999-99-9999");
 });
-
-//rejeita caracteres que nao sejam digitos
-function rejeitaLetras(telefone){
-	telefone.value = telefone.value.replace(/\D/g,"")
-}
-
