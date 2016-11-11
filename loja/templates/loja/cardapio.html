@@ -1,11 +1,12 @@
 {% extends 'loja/base.html' %}
 
 {% block content %}
-
+{% load staticfiles %}
 <div class="row">
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-    
+      <img alt="Hamburguer" title="Hamburguer" src="{% static 'images/hamburguer.jpg' %}"/>
+
       <div class="caption">
         <h3>Humburguer Simples</h3>
         <p>R$ 3,50</p>
@@ -13,7 +14,6 @@
     </div>
   </div>
 </div>
-
 
 
 {% endblock %}
