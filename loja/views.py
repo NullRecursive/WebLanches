@@ -9,5 +9,5 @@ def login_page(request):
 def cad_page(request):
 	return render(request,'loja/cadastro.html')
 
-def cad_page(request):
+def card_page(request):
 	return render(request,'loja/cardapio.html')
