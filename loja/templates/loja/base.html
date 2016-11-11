@@ -10,17 +10,17 @@
 
         <!-- Titulo da pagina -->
         <title>WebLanches</title>
-    
+
         <!-- meta tags -->
-        <meta property="og:title" content="" />         
-        <meta property="og:type" content="website" />           
-        <meta property="og:url" content="http://www.pythonanywhere.weblanches.com/" />         
-        <meta property="og:site_name" content="Weblanches" />         
-        <meta property="og:description" content="" />           
+        <meta property="og:title" content="" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://www.pythonanywhere.weblanches.com/" />
+        <meta property="og:site_name" content="Weblanches" />
+        <meta property="og:description" content="" />
         <meta property="fb:app_id" content="" />
 
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="{% static 'css/bootstrap/css/bootstrap.min.css' %}">        
+        <link rel="stylesheet" href="{% static 'css/bootstrap/css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/bootstrap/css/bootstrap-theme.min.css' %}">
 
         <!-- Arquivos estaticos-->
@@ -40,29 +40,29 @@
     </head>
     <body>
         <!-- NAVBAR (sit on top)-->
-        <nav> 
-            <div class="col-md-offset-1 col-md-10 col-md-offset-1"> 
-                <ul class="nav navbar-nav"> 
+        <nav>
+            <div class="col-md-offset-1 col-md-10 col-md-offset-1">
+                <ul class="nav navbar-nav">
                     <p class="navbar-text">
-                        <span class="glyphicon glyphicon-map-marker"></span> 
-                            Localizacao</p> 
+                        <span class="glyphicon glyphicon-map-marker"></span>
+                            Localizacao</p>
                     <p class="navbar-text">
-                        <span class="glyphicon glyphicon-earphone"></span> 
-                            Contato</p> 
-                </ul> 
-                <ul class="nav navbar-nav navbar-right"> 
+                        <span class="glyphicon glyphicon-earphone"></span>
+                            Contato</p>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="{% url 'cadastrar' %}" class="btn basic_link">
-                            <span class="glyphicon glyphicon-user"></span> 
+                            <span class="glyphicon glyphicon-user"></span>
                             <b>Cadastrar-se</b> </a>
-                    </li> 
+                    </li>
                     <li>
                         <a href="{% url 'login' %}" class="btn basic_link">
-                            <span class="glyphicon glyphicon-log-in"></span> 
+                            <span class="glyphicon glyphicon-log-in"></span>
                             <b>Entrar</b> </a>
-                    </li> 
-                </ul> 
-            </div> 
+                    </li>
+                </ul>
+            </div>
 
         <!-- MAIN -->
         <div class="page-header">
@@ -80,18 +80,24 @@
                         <a href="#" class="btn basic_link"><b>Cardápio</b></a>
                     </li>
                 </ul>
-            </div>   
+            </div>
         </div>
-        
+
         <!-- CONTEUDO -->
 
         <div class="content container distance">
-            <div class="row">
-                <div class="col-md-offset-1 col-md-10">
-                    {% block content %}
-                    {% endblock %}
-                </div>
+          <div class="row">
+          <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+              <img src="hamburguer.jpg" alt="Strike through" height="240" width="200">
+              <div class="caption">
+                <h3>Humburgue Simples</h3>
+                <p>R$ 3,50</p>
+                <p><a href="#" class="btn btn-primary" role="button">Comprar</a></p>
+              </div>
             </div>
+          </div>
+        </div>
         </div>
 
         <!-- Rodape -->
@@ -100,9 +106,9 @@
                 <div class="well">
                     <p><b>Formas de pagamento:</b></p>
                     <ul class="nav nav-pills padrao">
-                        <li><img alt="Dinheiro" title="Dinheiro" src="{% static 'images/dinheiro.png' %}"/></li>        
+                        <li><img alt="Dinheiro" title="Dinheiro" src="{% static 'images/dinheiro.png' %}"/></li>
                         <li><img alt="Visa" title="Visa" src="{% static 'images/visa.png' %}"/></li>
-                        <li><img alt="Mastercard" title="Mastercard" src="{% static 'images/mastercard.png' %}"/></li>  
+                        <li><img alt="Mastercard" title="Mastercard" src="{% static 'images/mastercard.png' %}"/></li>
                         <li><img alt="Paypal" title="Paypal" src="{% static 'images/paypal.png' %}"/></li>
                     </ul>
                 </div>
@@ -112,10 +118,10 @@
                 <div class="container">
                     <a class="btn pull-right basic_link" href="http://www.github.com/NullRecursive">
                         <span class="glyphicon glyphicon-fire"></span>
-                        <b>NullRecursive</b></a>    
+                        <b>NullRecursive</b></a>
                     <span class="glyphicon glyphicon-copyright-mark"></span> 2016. Weblanches.
                 </div>
-            </div>
+              </div>
         </footer>
     </body>
 </html>
