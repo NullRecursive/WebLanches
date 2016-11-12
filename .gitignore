@@ -5,7 +5,11 @@ db.sqlite3
 .DS_Store
 
 .idea/*
-
+.idea/WebLanches.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
 # Created by https://www.gitignore.io/api/bower
 
 ### Bower ###
