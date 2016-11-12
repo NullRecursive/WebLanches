@@ -1,5 +1,5 @@
 from django import forms
-
+'''
 class FormCadastro(forms.Form):
 	 nome = forms.CharField()
 	 email = forms.EmailField()
