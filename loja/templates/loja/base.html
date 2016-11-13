@@ -30,6 +30,8 @@
 
         <!-- JavaScript-->
         <script src="{% static 'js/validacao.js' %}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
         <!--Fonte Loobster do google-->
         <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
@@ -39,31 +41,61 @@
 
     </head>
     <body>
-        <!-- NAVBAR (sit on top)-->
-        <nav>
-            <div class="col-md-offset-1 col-md-10 col-md-offset-1">
-                <ul class="nav navbar-nav">
-                    <p class="navbar-text">
-                        <span class="glyphicon glyphicon-map-marker"></span>
-                            Localizacao</p>
-                    <p class="navbar-text">
-                        <span class="glyphicon glyphicon-earphone"></span>
-                            Contato</p>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="{% url 'cadastrar' %}" class="btn basic_link">
-                            <span class="glyphicon glyphicon-user"></span>
-                            <b>Cadastrar-se</b> </a>
-                    </li>
-                    <li>
-                        <a href="{% url 'login' %}" class="btn basic_link">
-                            <span class="glyphicon glyphicon-log-in"></span>
-                            <b>Entrar</b> </a>
-                    </li>
-                </ul>
-            </div>
+       <!-- 
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Page 1</a></li>
+        <li><a href="#">Page 2</a></li> 
+        <li><a href="#">Page 3</a></li> 
+      </ul>
 
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+    </div>
+  -->
+        <!-- NAVBAR (sit on top)-->
+        <nav class="navbar navbar-default">
+            <div class="col-md-offset-1 col-md-10 col-md-offset-1 container-fluid">
+                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <p class="navbar-text">
+                            <span class="glyphicon glyphicon-map-marker"></span>
+                                Localizacao</p>
+                        <p class="navbar-text">
+                            <span class="glyphicon glyphicon-earphone"></span>
+                                Contato</p>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="{% url 'cadastrar' %}" class="btn basic_link">
+                                <span class="glyphicon glyphicon-user"></span>
+                                <b>Cadastrar-se</b> </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'login' %}" class="btn basic_link">
+                                <span class="glyphicon glyphicon-log-in"></span>
+                                <b>Entrar</b> </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <!-- MAIN -->
         <div class="page-header">
 
@@ -79,7 +111,7 @@
             <div class="col-md-offset-1 col-md-10 col-md-offset-1">
                 <ul class="nav nav-pills navbar-default">
                     <li class="active">
-                        <a href="#" class="btn basic_link"><b>Home</b></a>
+                        <a href="/" class="btn basic_link"><b>Home</b></a>
                     </li>
                     <li>
                         <a href="#" class="btn basic_link"><b>Faça seu pedido</b></a>
