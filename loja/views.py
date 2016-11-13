@@ -19,6 +19,7 @@ def cad_page(request):
 			nome = form.cleaned_data['nome']
 			endereco = form.cleaned_data['endereco']
 			senha = form.cleaned_data['senha']
+			csenha = form.cleaned_data['csenha']
 			cpf = form.cleaned_data['cpf']	
 			cep = form.cleaned_data['cep']
 
