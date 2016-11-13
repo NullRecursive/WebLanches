@@ -47,9 +47,7 @@
             <div class="col-md-offset-1 col-md-10 col-md-offset-1">
                  
                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar "></span>
-                    <span class="icon-bar "></span>
-                    <span class="icon-bar "></span>
+                    <span class="glyphicon glyphicon-th-list"></span>
                   </button>
 
                 <div class="collapse navbar-collapse" id="myNavbar">
@@ -81,11 +79,21 @@
 
         <!-- MAIN -->
         
-            <div class="col-md-offset-1 col-md-10 col-md-offset-1" >
-                <h1><a href="/" class="page_header_link">WebLanches</a></h1>
+            <div class="col-md-offset-1 col-md-10 col-md-offset-1 distance" >
+                <h1><a href="/" class="col-md-10 page_header_link">WebLanches</a></h1>
 
-                <div class="shopping-cart hide">							
+                <div class="col-md-2 pull-right">
                     <div class="btn-group">
+                        <button class="btn btn-large btn-cart" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                            <span class="text hidden-phone">
+                                Meu pedido<br />
+                                    <strong class="quantity">
+                                    0</strong> 
+                                    itens</span>
+                        </button>
+                    <!--							
+                    
                         <button class="btn btn-large btn-cart" data-toggle="dropdown"><span class="icon"><i class="icon-shopping-cart"></i></span><span class="text hidden-phone">Meu pedido<br /><strong class="quantity">0</strong> itens</span></button>
                         <button class="btn btn-large btn-cart-drop dropdown-toggle" data-toggle="dropdown">
                             <span class="size-up"><span class="caret"></span></span>										
@@ -100,10 +108,15 @@
                                 Total: <span class="price">R$ <span class="value">0,00</span></span>
                             </div>									
                         </div>
+                  -->
                     </div>
                 </div>
             </div>
-            
+         
+         <!--
+             Barra de navegacao
+         -->
+
             <div class="col-md-offset-1 col-md-10 col-md-offset-1">
                 <ul class="nav nav-pills navbar-default">
                     <li class="active">
