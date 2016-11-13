@@ -1,12 +1,28 @@
 from .models import Usuario
 from .forms import FormCadastro
 from django.shortcuts import render
+from .forms import FormLogin
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render,redirect
 
 def home_page(request):
 	return render(request, 'loja/base.html')
 
 def login_page(request):
-	return render(request,'loja/login.html')
+	if request.method == 'POST':
+		usuario = request.POST['usuario']
+		senha = request.POST['senha']
+		user = authenticate(username=usuario, password=senha)
+		if user is not None:
+			login(request,user)
+			return redirect("/cardapio/")
+			
+	else: 
+		form = FormLogin()
+
+	return render(request,'loja/login.html',{'form': form,})
+
+	
 
 # falta tratar a excessao de username repetido
 def cad_page(request):
@@ -23,7 +39,7 @@ def cad_page(request):
 			cep = form.cleaned_data['cep']
 
 			user = Usuario()
-			user.set_password(senha)
+			user.password =  senha
 			user.email = email
 			user.telefone = telefone
 			user.endereco = endereco
@@ -31,7 +47,7 @@ def cad_page(request):
 			user.cpf = cpf
 			user.username = usuario
 			user.cep = cep
-			user.save()
+			Usuario.save(user)
 	else:
 		form = FormCadastro()
 		
