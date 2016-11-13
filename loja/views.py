@@ -8,7 +8,7 @@ def home_page(request):
 def login_page(request):
 	return render(request,'loja/login.html')
 
-# falta tratar a excessaõ de username repetido
+# falta tratar a excessao de username repetido
 def cad_page(request):
 	if request.method == 'POST':
 		form = FormCadastro(request.POST)

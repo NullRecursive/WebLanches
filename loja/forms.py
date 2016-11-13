@@ -11,6 +11,3 @@ class FormCadastro(forms.Form):
 	 telefone = forms.CharField()
 	 cep = forms.CharField()
 
-class FormLogin(forms.Form):
-	username = CharField()
-	senha = CharField(widget=forms.PasswordInput)
