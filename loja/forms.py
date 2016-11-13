@@ -47,6 +47,9 @@ class FormCadastro(forms.Form):
 			self.add_error('csenha', 'As senhas sao diferentes')
 			
 
-		
-			
-	
+
+class FormLogin(forms.Form):
+	usuario = forms.CharField()
+	senha = forms.CharField(widget=forms.PasswordInput)
+
+
