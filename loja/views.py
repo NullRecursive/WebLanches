@@ -1,11 +1,9 @@
 from .models import Usuario
-from .forms import FormCadastro
+from .forms import FormLogin, FormCadastro
 from django.shortcuts import render
-from .forms import FormLogin
-from django.contrib.auth import authenticate, login
+from django.contrib import authenticate, login, messages
 from django.shortcuts import render,redirect
-from django.db import IntegrityError
-from django.contrib import messages 
+from django.db import IntegrityError  
 
 def home_page(request):
 	return render(request, 'loja/base.html')
@@ -14,9 +12,16 @@ def login_page(request):
 	if request.method == 'POST':
 		form = FormLogin(request.POST)
 		if form.is_valid():
+<<<<<<< HEAD
 			usuario = form.cleaned_data['usuario']
 			senha = form.cleaned_data['senha']
 			user = authenticate(username = usuario, password = senha)
+=======
+			usuario = request.POST['usuario']	
+			senha = request.POST['senha']
+			user = authenticate(username = usuario, password = senha)
+	
+>>>>>>> 9356e3bed34f3a4ce05278ecd7dfec9eb82aae87
 			if user is not None:
 				login(request,user)
 				return redirect("/cardapio/")
@@ -32,7 +37,7 @@ def login_page(request):
 def cad_page(request):
 	if request.method == 'POST':
 		form = FormCadastro(request.POST)
-		if(form.is_valid()):
+		if form.is_valid():
 			usuario = form.cleaned_data['username']
 			email = form.cleaned_data['email']
 			telefone = form.cleaned_data['telefone']
@@ -57,10 +62,10 @@ def cad_page(request):
 			except IntegrityError: #messages not running
 				 messages.error(request, "Usuario ja existente!")
 				
-	else:
+	else:	
 		form = FormCadastro()
 		
-	return render(request,'loja/cadastro.html',{'form': form,})
+	return render(request,'loja/cadastro.html',{'form': form})
 
 def cardapio(request):
 	return render(request,'loja/cardapio.html')

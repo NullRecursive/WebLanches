@@ -4,20 +4,25 @@ from django.core.exceptions import ValidationError
 class FormCadastro(forms.Form):
 	nome = forms.CharField(
 		widget = forms.TextInput(
-			attrs={'autofocus': 'autofocus', 'required': 'required'}))
+			attrs={'autofocus': 'autofocus', 'required': 'required'}),
+		max_length = 40)
 	email = forms.EmailField(
 		widget = forms.TextInput(
 			attrs={'required': 'required'}))
 	senha = forms.CharField(
-		widget = forms.PasswordInput)
+		widget = forms.PasswordInput, 
+		required = True,
+		min_length = 4)
 	csenha  = forms.CharField(
-		widget = forms.PasswordInput)
+		widget = forms.PasswordInput, 
+		required = True)
 	endereco = forms.CharField(
 		widget = forms.TextInput(
 			attrs={'required': 'required'}))
 	username = forms.CharField(
 		widget = forms.TextInput(
-			attrs={'required': 'required'}))
+			attrs={'required': 'required'}),
+		max_length = 40)
 	cpf = forms.CharField(
 		widget = forms.TextInput(
 			attrs={'required': 'required'}))
@@ -28,21 +33,18 @@ class FormCadastro(forms.Form):
 		widget = forms.TextInput(
 			attrs={'required': 'required'}))
 
-
-	def clean_pass(self):
+	
+	def clean(self):
 		cleaned_data = super(FormCadastro, self).clean()
-		senha = cleaned_data.get("senha")
-		csenha = cleaned_data.get("csenha")
-		
-		#if len(senha) < 4:
-		#	raise forms.ValidationError("A senha deve ter no minimo 4 caracteres")
-			
-		if senha and senha != csenha:
-			raise forms.ValidationError(
-				self.error_messages["A senhas sao diferentes"])
+		senha = self.cleaned_data['senha']
+		csenha = self.cleaned_data['csenha']
 
+		if senha and senha != csenha:
+			raise forms.ValidationError("A senhas sao diferentes")
+				
 
 class FormLogin(forms.Form):
-	usuario = forms.CharField()
+	usuario = forms.CharField(
+		max_length = 40)
 	senha = forms.CharField(
 		widget = forms.PasswordInput)
