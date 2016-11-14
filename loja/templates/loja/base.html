@@ -59,18 +59,35 @@
                             <span class="glyphicon glyphicon-earphone"></span>
                                 Contato</p>
                     </ul>
+                    
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="{% url 'cadastrar' %}" class="btn basic_link">
-                                <span class="glyphicon glyphicon-user"></span>
-                                <b>Cadastrar-se</b> </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'login' %}" class="btn basic_link">
-                                <span class="glyphicon glyphicon-log-in"></span>
-                                <b>Entrar</b> </a>
-                        </li>
+                        <!-- Apos o login -->
+                        {% if user.is_authenticated %}
+                		    <li>
+                                <a href="#" class="btn basic_link">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    {% if is_superuser %}
+                                        <b>{{ user.username }}</b>
+                                    {% else %}  
+                                        <b>{{ user.nome }}</b> <!-- Problemas de identificacao no banco-->
+                                    {% endif %}
+                                </a>
+                            </li>
+	        	        {% else %}
+                            <!-- Antes de logar-->
+                            <li>
+                                <a href="{% url 'cadastrar' %}" class="btn basic_link">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <b>Cadastrar-se</b> </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'login' %}" class="btn basic_link">
+                                    <span class="glyphicon glyphicon-log-in"></span>
+                                    <b>Entrar</b> </a>
+                            </li>
+                        {% endif %}
                     </ul>
+                    
                 </div>
             </div>
 
