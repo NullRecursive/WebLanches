@@ -9,11 +9,9 @@ class FormCadastro(forms.Form):
 		widget = forms.TextInput(
 			attrs={'required': 'required'}))
 	senha = forms.CharField(
-		widget = forms.PasswordInput(
-			attrs={'required': 'required'}))
+		widget = forms.PasswordInput)
 	csenha  = forms.CharField(
-		widget = forms.PasswordInput(
-			attrs={'required': 'required'}))
+		widget = forms.PasswordInput)
 	endereco = forms.CharField(
 		widget = forms.TextInput(
 			attrs={'required': 'required'}))
@@ -29,27 +27,24 @@ class FormCadastro(forms.Form):
 	cep = forms.CharField(
 		widget = forms.TextInput(
 			attrs={'required': 'required'}))
-	 
-	def __init__(self, *args, **kwargs):
-		super(FormCadastro, self).__init__(*args, **kwargs)
-		
-		self.fields['senha'].required = False
-		self.fields['csenha'].required = False
-	
-	def clean(self):
+
+
+	def clean_pass(self):
 		cleaned_data = super(FormCadastro, self).clean()
 		senha = cleaned_data.get("senha")
 		csenha = cleaned_data.get("csenha")
 		
-		if len(senha) < 4:
-			self.add_error('senha', 'A senha deve ter no minimo 4 caracteres')
-		if senha != csenha:
-			self.add_error('csenha', 'As senhas sao diferentes')
+		#if len(senha) < 4:
+		#	raise forms.ValidationError("A senha deve ter no minimo 4 caracteres")
 			
+		if senha and senha != csenha:
+			raise forms.ValidationError(
+				self.error_messages["A senhas sao diferentes"])
 
 
 class FormLogin(forms.Form):
 	usuario = forms.CharField()
-	senha = forms.CharField(widget=forms.PasswordInput)
+	senha = forms.CharField(
+		widget = forms.PasswordInput)
 
 

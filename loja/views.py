@@ -4,6 +4,8 @@ from django.shortcuts import render
 from .forms import FormLogin
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render,redirect
+from django.db import IntegrityError
+from django.contrib import messages 
 
 def home_page(request):
 	return render(request, 'loja/base.html')
@@ -12,7 +14,7 @@ def login_page(request):
 	if request.method == 'POST':
 		usuario = request.POST['usuario']
 		senha = request.POST['senha']
-		user = authenticate(username=usuario, password=senha)
+		user = authenticate(username = usuario, password = senha)
 		if user is not None:
 			login(request,user)
 			return redirect("/cardapio/")
@@ -39,16 +41,20 @@ def cad_page(request):
 			cpf = form.cleaned_data['cpf']	
 			cep = form.cleaned_data['cep']
 
-			user = Usuario()
-			user.password =  senha
-			user.email = email
-			user.telefone = telefone
-			user.endereco = endereco
-			user.first_name = nome
-			user.cpf = cpf
-			user.username = usuario
-			user.cep = cep
-			Usuario.save(user)
+			try:
+				user = Usuario()
+				user.password =  senha
+				user.email = email
+				user.telefone = telefone
+				user.endereco = endereco	
+				user.first_name = nome
+				user.cpf = cpf		
+				user.username = usuario
+				user.cep = cep
+				Usuario.save(user)
+			except IntegrityError: #messages not running
+				 messages.error(request, "Usuario ja existente!")
+				
 	else:
 		form = FormCadastro()
 		
