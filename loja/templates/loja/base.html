@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load app_filters %}
 
 <!DOCTYPE html>
     <head>
@@ -30,8 +31,8 @@
 
         <!-- JavaScript-->
         <script src="{% static 'js/validacao.js' %}"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
         <!--Fonte Loobster do google-->
         <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
@@ -64,16 +65,18 @@
                         <!-- Apos o login -->
                         {% if user.is_authenticated %}
                 		    <li>
-                                <a href="#" class="btn basic_link">
-                                    <span class="glyphicon glyphicon-user"></span>
+                                <a href="#" class="btn basic_link"> <!-- Fazer btn dropdown-->
                                     {% if user.is_superuser %}
-                                        <b>{{ user.username }}</b>
+                                        <b>{{ user.username | title | show_admin }}</b>
                                     {% else %}  
-                                        <b>{{ user.first_name }}</b> <!-- Problemas de identificacao no banco-->
+                                        <b>{{ user.first_name | title }}</b> <!-- Problemas de identificacao no banco-->
                                     {% endif %}
+                                    <span class="glyphicon glyphicon-user"></span>
                                 </a>
                             </li>
+
 	        	        {% else %}
+
                             <!-- Antes de logar-->
                             <li>
                                 <a href="{% url 'cadastrar' %}" class="btn basic_link">
@@ -97,35 +100,33 @@
         <!-- MAIN -->
         
             <div class="col-md-offset-1 col-md-10 col-md-offset-1 distance" >
-                <h1><a href="/" class="col-md-10 page_header_link">WebLanches</a></h1>
+                <h1><a href="{% url 'home' %}" class="col-md-10 page_header_link">WebLanches</a></h1>
 
                 <div class="col-md-2 pull-right">
-                    <div class="btn-group">
-                        <button class="btn btn-large btn-cart" data-toggle="dropdown">
+                    <div class="dropdown btn-group">
+                        <button class="btn dropdown-toggle" type="button" id="menu_itens" data-toggle="dropdown">
                             <span class="glyphicon glyphicon-shopping-cart"></span>
-                            <span class="text hidden-phone">
-                                Meu pedido<br />
-                                    <strong class="quantity">
-                                    0</strong> 
-                                    itens</span>
+                                Meu pedido <span class="caret"></span> <br />
+                                <strong>0</strong>itens</span>
                         </button>
-                    <!--							
-                    
-                        <button class="btn btn-large btn-cart" data-toggle="dropdown"><span class="icon"><i class="icon-shopping-cart"></i></span><span class="text hidden-phone">Meu pedido<br /><strong class="quantity">0</strong> itens</span></button>
-                        <button class="btn btn-large btn-cart-drop dropdown-toggle" data-toggle="dropdown">
-                            <span class="size-up"><span class="caret"></span></span>										
-                        </button>
-                        <div class="dropdown-menu pull-right">
-                            <div class="itens">
-                                <ul id="list-itens">
-                                </ul>
-                            </div>
-                            <div class="bottom">
-                                <a href="/checkout/" class="btn btn-primary btn-checkout-cart pull-right" data-loading-text="Avançando...">Fechar pedido</a>
-                                Total: <span class="price">R$ <span class="value">0,00</span></span>
-                            </div>									
-                        </div>
-                  -->
+                        
+                        <!-- Lista com produtos -->
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu_itens">
+                                <!-- ITENS -->
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">HTML</a></li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+
+                                <div role="presentation" class="divider"></div>
+                                
+                                
+                                <div> 
+                                    <a href="#" class="btn btn-primary pull-right" data-loading-text="Avançando...">Fechar pedido</a>
+                                    <div>Total: R$ 0,00 </div>
+                                </div>
+                            </ul>								
+
                     </div>
                 </div>
             </div>
@@ -137,7 +138,7 @@
             <div class="col-md-offset-1 col-md-10 col-md-offset-1">
                 <ul class="nav nav-pills navbar-default">
                     <li class="active">
-                        <a href="/" class="btn basic_link"><b>Home</b></a>
+                        <a href="{% url 'home' %}" class="btn basic_link"><b>Home</b></a>
                     </li>
                     <li>
                         <a href="#" class="btn basic_link"><b>Faça seu pedido</b></a>
