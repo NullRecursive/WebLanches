@@ -16,7 +16,8 @@ Django é um framework gratuito e de código aberto para a criação de aplicaç
 		- PyCharm
 		- Spyder
 	- Outros
-		- [Atom](atom.io) (Recomendado)
+		- Visual Studio Code (Recomendado)
+		- [Atom](atom.io)
 		- Sublime Text
 		- Gedit
 
@@ -48,14 +49,23 @@ Django é um framework gratuito e de código aberto para a criação de aplicaç
 	- Se for SQLite, ele ja é o padrao
 	- Se for outro, tera que procurar na documentacao e ir em settings.py coloca a definicao do banco em DATABASES
 	- Para executar a criação do banco de dados:
-	``` python manage.py migrate ```
+	``` python3.5 manage.py migrate ```
 - Pronto, agora so iniciar o server local ou externo
 	- Server Externo, recomendado o [PythonAnywhere](www.pythonanywhere.com)
 	- Para iniciar o local:
-	``` python manage.py runserver ```
+	``` python3.5 manage.py runserver ```
 	- Para acessar local:
 	``` http://127.0.0.1:8000/ ```
 - Para criar um app
- ``` python manage.py startapp nome_app ```
+ ``` python3.5 manage.py startapp nome_app ```
 - Para criar migraçoes dos apps
- ``` python manage.py makemigrations nome_app ```
+ ``` python3.5 manage.py makemigrations nome_app ```
+- Para criar um superusuario (ou administrador)
+``` python3.5 manage.py createsuperuser```
+	- Abaixo temos um exemplo de criação:
+		``` Username: admin
+			Email address: admin@admin.com
+			Password: 
+			Password (again): 
+			Superuser created successfully.
+		```
