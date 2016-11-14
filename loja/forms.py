@@ -46,5 +46,3 @@ class FormLogin(forms.Form):
 	usuario = forms.CharField()
 	senha = forms.CharField(
 		widget = forms.PasswordInput)
-
-

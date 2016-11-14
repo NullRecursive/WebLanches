@@ -12,12 +12,14 @@ def home_page(request):
 
 def login_page(request):
 	if request.method == 'POST':
-		usuario = request.POST['usuario']
-		senha = request.POST['senha']
-		user = authenticate(username = usuario, password = senha)
-		if user is not None:
-			login(request,user)
-			return redirect("/cardapio/")
+		form = FormLogin(request.POST)
+		if form.is_valid():
+			usuario = form.cleaned_data['usuario']
+			senha = form.cleaned_data['senha']
+			user = authenticate(username = usuario, password = senha)
+			if user is not None:
+				login(request,user)
+				return redirect("/cardapio/")
 			
 	else: 
 		form = FormLogin()
