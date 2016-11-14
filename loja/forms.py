@@ -10,12 +10,11 @@ class FormCadastro(forms.Form):
 		widget = forms.TextInput(
 			attrs={'required': 'required'}))
 	senha = forms.CharField(
-		widget = forms.PasswordInput, 
-		required = True,
-		min_length = 4)
+		widget = forms.PasswordInput(
+			attrs={'required' : 'required', 'onchange' : 'validarTamSenha(senha)'}))
 	csenha  = forms.CharField(
-		widget = forms.PasswordInput, 
-		required = True)
+		widget = forms.PasswordInput(
+			attrs={'required' : 'required' , 'onchange' : 'validarSenha(senha, csenha)'}))
 	endereco = forms.CharField(
 		widget = forms.TextInput(
 			attrs={'required': 'required'}))
@@ -32,16 +31,6 @@ class FormCadastro(forms.Form):
 	cep = forms.CharField(
 		widget = forms.TextInput(
 			attrs={'required': 'required'}))
-
-	
-	def clean(self):
-		cleaned_data = super(FormCadastro, self).clean()
-		senha = self.cleaned_data['senha']
-		csenha = self.cleaned_data['csenha']
-
-		if senha and senha != csenha:
-			raise forms.ValidationError("A senhas sao diferentes")
-				
 
 class FormLogin(forms.Form):
 	usuario = forms.CharField(

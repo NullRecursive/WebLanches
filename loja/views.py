@@ -1,9 +1,8 @@
 from .models import Usuario
 from .forms import FormLogin, FormCadastro
-from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.db import IntegrityError  
 
 def home_page(request):
@@ -25,7 +24,7 @@ def login_page(request):
 
 	return render(request,'loja/login.html',{'form': form})
 
-# falta tratar a excessao de username repetido
+
 def cad_page(request):
 	if request.method == 'POST':
 		form = FormCadastro(request.POST)
@@ -40,7 +39,7 @@ def cad_page(request):
 			cpf = form.cleaned_data['cpf']	
 			cep = form.cleaned_data['cep']
 
-			try:
+			try: #tentar levar esse tratamento para o model
 				user = Usuario()
 				user.password =  senha
 				user.email = email
