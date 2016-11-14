@@ -66,7 +66,7 @@
                 		    <li>
                                 <a href="#" class="btn basic_link">
                                     <span class="glyphicon glyphicon-user"></span>
-                                    {% if is_superuser %}
+                                    {% if user.is_superuser %}
                                         <b>{{ user.username }}</b>
                                     {% else %}  
                                         <b>{{ user.first_name }}</b> <!-- Problemas de identificacao no banco-->
