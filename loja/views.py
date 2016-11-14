@@ -1,7 +1,8 @@
 from .models import Usuario
 from .forms import FormLogin, FormCadastro
 from django.shortcuts import render
-from django.contrib import authenticate, login, messages
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.db import IntegrityError  
 
@@ -12,26 +13,17 @@ def login_page(request):
 	if request.method == 'POST':
 		form = FormLogin(request.POST)
 		if form.is_valid():
-<<<<<<< HEAD
 			usuario = form.cleaned_data['usuario']
 			senha = form.cleaned_data['senha']
 			user = authenticate(username = usuario, password = senha)
-=======
-			usuario = request.POST['usuario']	
-			senha = request.POST['senha']
-			user = authenticate(username = usuario, password = senha)
-	
->>>>>>> 9356e3bed34f3a4ce05278ecd7dfec9eb82aae87
+
 			if user is not None:
 				login(request,user)
 				return redirect("/cardapio/")
-			
 	else: 
 		form = FormLogin()
 
-	return render(request,'loja/login.html',{'form': form,})
-
-	
+	return render(request,'loja/login.html',{'form': form})
 
 # falta tratar a excessao de username repetido
 def cad_page(request):
@@ -65,7 +57,7 @@ def cad_page(request):
 	else:	
 		form = FormCadastro()
 		
-	return render(request,'loja/cadastro.html',{'form': form})
+	return render(request, 'loja/cadastro.html', {'form': form})
 
 def cardapio(request):
-	return render(request,'loja/cardapio.html')
+	return render(request, 'loja/cardapio.html')
