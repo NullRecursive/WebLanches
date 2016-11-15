@@ -1,18 +1,20 @@
 {% extends 'loja/base.html' %}
-
+{% load widget_tweaks %}
 {% block content %}
 
-<form class="form-horizontal col-md-offset-1 col-md-9 my_form">
+<form action="/entrar/" method="POST" class="form-horizontal col-md-offset-1 col-md-9 my_form">{% csrf_token %}
+
   <div class="form-group">
-    <label class="control-label col-sm-2" for="email">E-mail:</label>
+    <label class="control-label col-sm-2" for="usuario">Usuario:</label>
     <div class="col-sm-10">
-      <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" placeholder="Digite o seu e-mail" id="email" required autofocus/>
+     {% render_field form.usuario class="form-control" placeholder="Digite o usuario" %}
+
     </div>
   </div>
   <div class="form-group">
     <label class="control-label col-sm-2" for="senha">Senha:</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control" placeholder="Digite a senha" id="senha" maxlength="40" required/>
+       {% render_field form.senha class="form-control" placeholder="Digite a senha" %}
     </div>
   </div>
   
