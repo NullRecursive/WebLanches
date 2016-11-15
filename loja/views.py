@@ -61,5 +61,5 @@ def cad_page(request):
 def cardapio(request):
 	return render(request, 'loja/cardapio.html')
 
-def cardapio(request):
+def humburguer(request):
 	return render(request, 'loja/humburguer.html')
