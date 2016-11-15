@@ -4,25 +4,27 @@
 {% load staticfiles %}
 {% load app_filters %}
 
-<div class="btn-group btn-group-justified" role="group" aria-label="...">
-  <div class="btn-group" role="group">
-    <button type="button" class="btn btn-default"><a href="{% url 'humburguer' %}" class="btn basic_link"><b>Humburguer</b></a></button>
+<div class="row distance">
+  <div class="btn-group btn-group-justified" role="group" aria-label="...">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default"><a href="{% url 'humburguer' %}" class="btn basic_link"><b>Humburguer</b></a></button>
+    </div>
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default">Bebida</button>
+    </div>
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default">Pastel</button>
+    </div>
   </div>
-  <div class="btn-group" role="group">
-    <button type="button" class="btn btn-default">Bebida</button>
-  </div>
-  <div class="btn-group" role="group">
-    <button type="button" class="btn btn-default">Pastel</button>
-  </div>
-</div>
-<!--Conteudo -->
-<div class="content container distance">
-    <div class="row">
-        <div class="col-md-offset-1 col-md-10">
+  <!--Conteudo -->
+  <div class="content container distance">
+      <div class="row">
+          <div class="col-md-offset-1 col-md-10">
             {% block list %}
 
             {% endblock %}
-        </div>
-    </div>
+          </div>
+      </div>
+  </div>
 </div>
 {% endblock %}
