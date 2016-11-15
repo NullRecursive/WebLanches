@@ -3,7 +3,7 @@ from .forms import FormLogin, FormCadastro
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.db import IntegrityError  
+from django.db import IntegrityError
 
 def home_page(request):
 	return render(request, 'loja/base.html')
@@ -19,7 +19,7 @@ def login_page(request):
 			if user is not None:
 				login(request,user)
 				return redirect("/cardapio/")
-	else: 
+	else:
 		form = FormLogin()
 
 	return render(request,'loja/login.html',{'form': form})
@@ -36,7 +36,7 @@ def cad_page(request):
 			endereco = form.cleaned_data['endereco']
 			senha = form.cleaned_data['senha']
 			csenha = form.cleaned_data['csenha']
-			cpf = form.cleaned_data['cpf']	
+			cpf = form.cleaned_data['cpf']
 			cep = form.cleaned_data['cep']
 
 			try: #tentar levar esse tratamento para o model
@@ -44,19 +44,22 @@ def cad_page(request):
 				user.password =  senha
 				user.email = email
 				user.telefone = telefone
-				user.endereco = endereco	
+				user.endereco = endereco
 				user.first_name = nome
-				user.cpf = cpf		
+				user.cpf = cpf
 				user.username = usuario
 				user.cep = cep
 				Usuario.save(user)
 			except IntegrityError: #messages not running
 				 messages.error(request, "Usuario ja existente!")
-				
-	else:	
+
+	else:
 		form = FormCadastro()
-		
+
 	return render(request, 'loja/cadastro.html', {'form': form})
 
 def cardapio(request):
 	return render(request, 'loja/cardapio.html')
+
+def cardapio(request):
+	return render(request, 'loja/humburguer.html')
