@@ -2,6 +2,7 @@
 
 {% block content %}
 {% load staticfiles %}
+{% load app_filters %}
 
 <div class="row distance" class="btn-group btn-group-justified" role="group" aria-label="...">
   <div class="btn-group" role="group">
@@ -17,7 +18,7 @@
 <!--Conteudo -->
 <div class="content container distance">
     <div class="row">
-        <div class="col-md-offset-1 col-md-10">
+        <div class="col-md-offset-1 col-md-9">
             {% block content %}
 
             {% endblock %}
