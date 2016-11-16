@@ -37,3 +37,11 @@ class ControllerUsuario:
         if user is not None:
             login(request,user)
             return True
+        return False
+
+        
+    def logout(self,request):
+        if request.user.is_authenticated:
+            request.user.logout()
+
+	

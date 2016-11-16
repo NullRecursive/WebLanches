@@ -5,14 +5,16 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.db import IntegrityError
 from .controllers import ControllerUsuario
+
+controller = ControllerUsuario()
 def home(request):
 	return render(request, 'loja/home.html')
 
 def login_page(request):
+	
 	if request.method == 'POST':
 		form = FormLogin(request.POST)
 		if form.is_valid():
-			controller = ControllerUsuario()
 			
 			if controller.logar(request,form):
 				 return redirect("/cardapio/")
@@ -27,7 +29,6 @@ def cad_page(request):
 		form = FormCadastro(request.POST)
 		if form.is_valid():
 			try: 
-				controller = ControllerUsuario()
 				controller.cadastrar(request,form)
 			except IntegrityError: #messages not running
 				 messages.error(request, "Usuario ja existente!")
