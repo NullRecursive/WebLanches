@@ -46,7 +46,7 @@
         <!-- NAVBAR (sit on top)-->
         <nav class="navbar">
             <div class="col-md-offset-1 col-md-10 col-md-offset-1">
-                 
+
                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="glyphicon glyphicon-th-list"></span>
                   </button>
@@ -60,7 +60,7 @@
                             <span class="glyphicon glyphicon-earphone"></span>
                                 Contato</p>
                     </ul>
-                    
+
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Apos o login -->
                         {% if user.is_authenticated %}
@@ -68,7 +68,7 @@
                                 <a href="#" class="btn basic_link"> <!-- Fazer btn dropdown-->
                                     {% if user.is_superuser %}
                                         <b>{{ user.username | title | show_admin }}</b>
-                                    {% else %}  
+                                    {% else %}
                                         <b>{{ user.first_name | title }}</b> <!-- Problemas de identificacao no banco-->
                                     {% endif %}
                                     <span class="glyphicon glyphicon-user"></span>
@@ -90,15 +90,15 @@
                             </li>
                         {% endif %}
                     </ul>
-                    
+
                 </div>
             </div>
 
-            
+
         </nav>
 
         <!-- MAIN -->
-        
+
             <div class="col-md-offset-1 col-md-10 col-md-offset-1 distance" >
                 <h1><a href="{% url 'home' %}" class="col-md-10 page_header_link">WebLanches</a></h1>
 
@@ -109,7 +109,7 @@
                                 Meu pedido <span class="caret"></span> <br />
                                 <strong>0</strong>itens</span>
                         </button>
-                        
+
                         <!-- Lista com produtos -->
                             <ul class="dropdown-menu" role="menu" aria-labelledby="menu_itens">
                                 <!-- ITENS -->
@@ -119,26 +119,26 @@
                                     <a role="menuitem" tabindex="-1" href="#">CSS</a></li>
 
                                 <div role="presentation" class="divider"></div>
-                                
+                             
                                 
                                 <div class="bottom"> 
                                     <a href="#" class="btn btn-primary pull-right" data-loading-text="Avançando...">Fechar pedido</a>
                                     <div class="pedido">Total: R$ 0,00 </div>
                                 </div>
-                            </ul>								
+                            </ul>
 
                     </div>
                 </div>
             </div>
-         
+
          <!--
              Barra de navegacao
          -->
 
             <div class="col-md-offset-1 col-md-10 col-md-offset-1">
                 <ul class="nav nav-pills navbar-default">
-                    <li class="active">
-                        <a href="{% url 'home' %}" class="btn basic_link"><b>Home</b></a>
+                    <li>
+                        <a href="{% url 'home_2' %}" class="btn basic_link"><b>Home</b></a>
                     </li>
                     <li>
                         <a href="#" class="btn basic_link"><b>Faça seu pedido</b></a>
@@ -154,7 +154,7 @@
             <div class="row">
                 <div class="col-md-offset-1 col-md-10">
                     {% block content %}
-                    
+
                     {% endblock %}
                 </div>
             </div>
