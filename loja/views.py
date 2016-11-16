@@ -5,9 +5,6 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.db import IntegrityError
 
-def home_page(request):
-	return render(request, 'loja/base.html')
-
 def login_page(request):
 	if request.method == 'POST':
 		form = FormLogin(request.POST)
@@ -63,3 +60,6 @@ def cardapio(request):
 
 def hamburguer(request):
 	return render(request, 'loja/hamburguer.html')
+
+def home(request):
+	return render(request, 'loja/home.html')
