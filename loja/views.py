@@ -55,11 +55,11 @@ def cad_page(request):
 
 	return render(request, 'loja/cadastro.html', {'form': form})
 
+def home(request):
+	return render(request, 'loja/home.html')
+
 def cardapio(request):
 	return render(request, 'loja/cardapio.html')
 
 def hamburguer(request):
 	return render(request, 'loja/hamburguer.html')
-
-def home(request):
-	return render(request, 'loja/home.html')
