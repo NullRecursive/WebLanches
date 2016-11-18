@@ -31,7 +31,7 @@ def cad_page(request):
 		if form.is_valid():
 			try: 
 				controller.cadastrar(request,form)
-			except IntegrityError: #messages not running
+			except IntegrityError:
 				 messages.error(request, 'error')
 	else:
 		form = FormCadastro()
