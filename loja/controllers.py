@@ -1,7 +1,7 @@
 from .models import Usuario
 from django.db import IntegrityError
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 #contem as operacoes de usuario
 class ControllerUsuario:
@@ -41,7 +41,6 @@ class ControllerUsuario:
 
         
     def logout(self, request):
-        if request.user.is_authenticated:
-            request.user.logout()
+        logout(request)
 
 	
