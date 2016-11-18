@@ -12,10 +12,8 @@ class Usuario(User):
 		self.set_password(self.password)
 		User.save(self)
 
-
-
 class Produto(models.Model):
-	nome = models.CharField(max_length=250,primary_key=True)
+	nome = models.CharField(max_length = 250, primary_key = True)
 	preco = models.FloatField()
 	descricao = models.TextField(blank = True)
 	imagem = models.ImageField(upload_to='loja/static/product_images') #falta corrigir bug no GET
@@ -23,3 +21,16 @@ class Produto(models.Model):
 
 	def __str__(self):
 		return self.nome
+
+class Item(models.Model):
+	id_produto = models.ForeignKey(
+		'Produto',
+		on_delete = models.CASCADE,
+	)
+	quantidade = models.IntegerField(default = 0)
+
+class Pedido(models.Model):
+	meus_itens = models.TextField(null=True) #JSON-serialized (text) 
+
+
+		
