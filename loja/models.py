@@ -18,7 +18,7 @@ class Produto(models.Model):
 	nome = models.CharField(max_length=250,primary_key=True)
 	preco = models.FloatField()
 	descricao = models.TextField(blank = True)
-	imagem = models.ImageField(upload_to='loja/static/product_images')
+	imagem = models.ImageField(upload_to='loja/static/product_images') #falta corrigir bug no GET
 	em_Falta = models.BooleanField()
 
 	def __str__(self):
