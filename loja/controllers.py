@@ -1,8 +1,6 @@
 from .models import Usuario
-from django.db import IntegrityError
-from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect
+
 #contem as operacoes de usuario
 class ControllerUsuario:
     
@@ -35,7 +33,7 @@ class ControllerUsuario:
         user = authenticate(username = usuario, password = senha)
 
         if user is not None:
-            login(request,user)
+            login(request, user)
             return True
         return False
 

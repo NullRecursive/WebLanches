@@ -32,7 +32,7 @@ def cad_page(request):
 			try: 
 				controller.cadastrar(request,form)
 			except IntegrityError: #messages not running
-				 messages.error(request, "Usuario ja existente!")
+				 messages.success(request, 'Usuario ja existente!')
 
 	else:
 		form = FormCadastro()
