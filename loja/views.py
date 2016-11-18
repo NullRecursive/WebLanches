@@ -1,23 +1,24 @@
-from .models import Usuario
+from django.shortcuts import render, redirect
+from django.db import IntegrityError
 from .forms import FormLogin, FormCadastro
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from django.shortcuts import render, redirect
-from django.db import IntegrityError
+
 from .controllers import ControllerUsuario
 
 controller = ControllerUsuario()
+
 def home(request):
 	return render(request, 'loja/home.html')
 
 def login_page(request):
-	
+
 	if request.method == 'POST':
 		form = FormLogin(request.POST)
 		if form.is_valid():
 			
 			if controller.logar(request,form):
-				 return redirect("/cardapio/")
+				 return redirect('/cardapio/')
 	else:
 		form = FormLogin()
 
@@ -43,3 +44,7 @@ def cardapio(request):
 
 def hamburguer(request):
 	return render(request, 'loja/hamburguer.html')
+
+def sair(request):
+	controller.logout(request)
+	return home()
