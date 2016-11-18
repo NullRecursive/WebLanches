@@ -1,13 +1,13 @@
 from .models import Usuario
 from django.db import IntegrityError
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 #contem as operacoes de usuario
 class ControllerUsuario:
     
     def cadastrar(self,request,form):
-
+	
             usuario = form.cleaned_data['username']
             email = form.cleaned_data['email']
             telefone = form.cleaned_data['telefone']
@@ -29,7 +29,7 @@ class ControllerUsuario:
             user.cep = cep
             Usuario.save(user)
         
-    def logar(self,request,form):
+    def logar(self, request, form):
         usuario = form.cleaned_data['usuario']
         senha = form.cleaned_data['senha']
         user = authenticate(username = usuario, password = senha)
@@ -39,8 +39,7 @@ class ControllerUsuario:
             return True
         return False
         
-    def logout(self,request):
-        if request.user.is_authenticated:
-            request.user.logout()
+    def logout(self, request):
+        logout(request)
 
 	

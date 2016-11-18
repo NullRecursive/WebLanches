@@ -64,8 +64,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Apos o login -->
                         {% if user.is_authenticated %}
-                		    <li>
-                                <a href="#" class="btn basic_link"> <!-- Fazer btn dropdown-->
+                            <div class="dropdown">
+                                <a href="#" class="btn basic_link" data-toggle="dropdown"> <!-- Fazer btn dropdown-->
                                     {% if user.is_superuser %}
                                         <b>{{ user.username | title | show_admin }}</b>
                                     {% else %}
@@ -73,7 +73,12 @@
                                     {% endif %}
                                     <span class="glyphicon glyphicon-user"></span>
                                 </a>
-                            </li>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url 'sair' %}">Sair</a></li>
+                                </ul>
+                            </div>
+
+                		    
 
 	        	        {% else %}
 
