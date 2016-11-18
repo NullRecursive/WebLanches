@@ -38,7 +38,6 @@ class ControllerUsuario:
             login(request,user)
             return True
         return False
-
         
     def logout(self,request):
         if request.user.is_authenticated:
