@@ -29,7 +29,7 @@ class ControllerUsuario:
             user.cep = cep
             Usuario.save(user)
         
-    def logar(self,request,form):
+    def logar(self, request, form):
         usuario = form.cleaned_data['usuario']
         senha = form.cleaned_data['senha']
         user = authenticate(username = usuario, password = senha)
@@ -40,7 +40,7 @@ class ControllerUsuario:
         return False
 
         
-    def logout(self,request):
+    def logout(self, request):
         if request.user.is_authenticated:
             request.user.logout()
 
