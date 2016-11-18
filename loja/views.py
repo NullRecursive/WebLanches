@@ -47,4 +47,4 @@ def hamburguer(request):
 
 def sair(request):
 	controller.logout(request)
-	return home()
+	return redirect(home)
