@@ -32,8 +32,7 @@ def cad_page(request):
 			try: 
 				controller.cadastrar(request,form)
 			except IntegrityError: #messages not running
-				 messages.success(request, 'Usuario ja existente!')
-
+				 messages.error(request, 'error')
 	else:
 		form = FormCadastro()
 
@@ -48,3 +47,22 @@ def hamburguer(request):
 def sair(request):
 	controller.logout(request)
 	return redirect(home)
+
+
+
+
+"""
+		MANDAR PRO BANCO
+		import simplejson as json # this would be just 'import json' in Python 2.7 and later
+	
+
+		myModel = MyModel()
+		listIWantToStore = [1,2,3,4,5,'hello']
+		myModel.myList = json.dumps(listIWantToStore)
+		myModel.save()
+		
+		ACESSAR ELEMENTO
+		jsonDec = json.decoder.JSONDecoder()
+		myPythonList = jsonDec.decode(myModel.myList)
+"""
+	
