@@ -31,6 +31,7 @@ class Item(models.Model):
 
 class Pedido(models.Model):
 	meus_itens = models.TextField(null=True) #JSON-serialized (text) 
-
-
-		
+	usuario=models.ForeignKey(
+		'Usuario',
+		on_delete = models.CASCADE,
+	)
