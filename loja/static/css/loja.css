@@ -33,3 +33,11 @@ a.basic_link {
 .padrao li {
     margin: 2px;
 }
+
+.carrinho {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    padding: 40px;
+    margin: 20px;
+}
