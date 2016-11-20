@@ -5,7 +5,6 @@ from django.contrib.auth import authenticate, login, logout
 class ControllerUsuario:
     
     def cadastrar(self,request,form):
-	
             usuario = form.cleaned_data['username']
             email = form.cleaned_data['email']
             telefone = form.cleaned_data['telefone']
