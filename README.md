@@ -63,11 +63,16 @@ Django é um framework gratuito e de código aberto para a criação de aplicaç
 - Para criar um superusuario (ou administrador)
 ``` python3.5 manage.py createsuperuser```
 	- Abaixo temos um exemplo de criação:  
-		``` 	Username: admin  
-			Email address: admin@admin.com  
-			Password:  
-			Password (again):  
-			Superuser created successfully.  
+		```
+		Username: admin  
+		
+		Email address: admin@admin.com  
+		
+		Password:  
+		
+		Password (again):  
+		
+		Superuser created successfully.  
 		```
 
 ### Implantacao(pythonanywhere)
