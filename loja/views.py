@@ -50,19 +50,3 @@ def sair(request):
 
 
 
-
-"""
-		MANDAR PRO BANCO
-		import simplejson as json # this would be just 'import json' in Python 2.7 and later
-	
-
-		myModel = MyModel()
-		listIWantToStore = [1,2,3,4,5,'hello']
-		myModel.myList = json.dumps(listIWantToStore)
-		myModel.save()
-		
-		ACESSAR ELEMENTO
-		jsonDec = json.decoder.JSONDecoder()
-		myPythonList = jsonDec.decode(myModel.myList)
-"""
-	

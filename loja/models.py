@@ -30,7 +30,8 @@ class Item(models.Model):
 	quantidade = models.IntegerField(default = 0)
 
 class Pedido(models.Model):
-	meus_itens = models.TextField(null = True) #JSON-serialized (text) 
+	meus_itens = models.TextField(
+		null = True) #JSON-serialized (text) 
 	usuario = models.ForeignKey(
 		'Usuario',
 		on_delete = models.CASCADE,
