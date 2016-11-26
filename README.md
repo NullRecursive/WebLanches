@@ -77,7 +77,7 @@ Django é um framework gratuito e de código aberto para a criação de aplicaç
 - Entre na pasta do repositorio:
 	``` cd NOME_REPOSITORIO ```
 - Instalar ambiente:  
-	``` virtualenv --python=python3.4 myvenv ```  
+	``` virtualenv --python=python3.5 myvenv ```  
 - Ative o ambiente:
 	```  source myvenv/bin/activate ```
 - Instale o whitenoise:
