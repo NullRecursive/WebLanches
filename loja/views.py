@@ -3,7 +3,6 @@ from django.db import IntegrityError
 from .forms import FormLogin, FormCadastro
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-
 from .controllers import ControllerUsuario
 
 controller = ControllerUsuario()
