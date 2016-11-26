@@ -47,7 +47,8 @@ class ControllerPedido(self, request):
     def salva_pedido():
 		try:
             meu_pedido = Pedido()
-            listIWantToStore = [1, 2, 3, 4, 5, 'hello']
+            listIWantToStore = get_all_pedidos()
+            #listIWantToStore.append() #add pedido na lista
 	    	myModel.myList = json.dumps(listIWantToStore)
             myModel.save()
             return True
