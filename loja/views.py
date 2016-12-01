@@ -65,4 +65,4 @@ def hamburguer(request):
 	return render(request, 'loja/hamburguer.html')
 
 def sair(request):
-	return render(request, 'loja/home.html')
+	return redirect(request, 'loja/home.html')
