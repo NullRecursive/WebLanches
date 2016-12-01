@@ -62,4 +62,4 @@ def cardapio(request):
 	return render(request, 'loja/cardapio.html')
 
 def cardapio(request):
-	return render(request, 'loja/hamburguer.html')
+	return render(request, 'loja/cardapio/hamburguer.html')
