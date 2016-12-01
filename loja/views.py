@@ -1,23 +1,24 @@
-from django.shortcuts import render, redirect
-from django.db import IntegrityError
+from .models import Usuario
 from .forms import FormLogin, FormCadastro
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from .controllers import ControllerUsuario
+from django.shortcuts import render, redirect
+from django.db import IntegrityError
 
-controller = ControllerUsuario()
-
-def home(request):
-	return render(request, 'loja/home.html')
+def home_page(request):
+	return render(request, 'loja/base.html')
 
 def login_page(request):
-
 	if request.method == 'POST':
 		form = FormLogin(request.POST)
 		if form.is_valid():
-			
-			if controller.logar(request,form):
-				 return redirect('/cardapio/')
+			usuario = form.cleaned_data['usuario']
+			senha = form.cleaned_data['senha']
+			user = authenticate(username = usuario, password = senha)
+
+			if user is not None:
+				login(request,user)
+				return redirect("/cardapio/")
 	else:
 		form = FormLogin()
 
@@ -28,10 +29,30 @@ def cad_page(request):
 	if request.method == 'POST':
 		form = FormCadastro(request.POST)
 		if form.is_valid():
-			try: 
-				controller.cadastrar(request,form)
-			except IntegrityError:
-				 messages.error(request, 'error')
+			usuario = form.cleaned_data['username']
+			email = form.cleaned_data['email']
+			telefone = form.cleaned_data['telefone']
+			nome = form.cleaned_data['nome']
+			endereco = form.cleaned_data['endereco']
+			senha = form.cleaned_data['senha']
+			csenha = form.cleaned_data['csenha']
+			cpf = form.cleaned_data['cpf']
+			cep = form.cleaned_data['cep']
+
+			try: #tentar levar esse tratamento para o model
+				user = Usuario()
+				user.password =  senha
+				user.email = email
+				user.telefone = telefone
+				user.endereco = endereco
+				user.first_name = nome
+				user.cpf = cpf
+				user.username = usuario
+				user.cep = cep
+				Usuario.save(user)
+			except IntegrityError: #messages not running
+				 messages.error(request, "Usuario ja existente!")
+
 	else:
 		form = FormCadastro()
 
@@ -39,13 +60,3 @@ def cad_page(request):
 
 def cardapio(request):
 	return render(request, 'loja/cardapio.html')
-
-def hamburguer(request):
-	return render(request, 'loja/hamburguer.html')
-
-def sair(request):
-	controller.logout(request)
-	return redirect(home)
-
-
-
