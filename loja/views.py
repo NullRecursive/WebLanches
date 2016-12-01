@@ -3,7 +3,6 @@ from django.db import IntegrityError
 from .forms import FormLogin, FormCadastro
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-
 from .controllers import ControllerUsuario
 
 controller = ControllerUsuario()
@@ -31,9 +30,8 @@ def cad_page(request):
 		if form.is_valid():
 			try: 
 				controller.cadastrar(request,form)
-			except IntegrityError: #messages not running
-				 messages.error(request, "Usuario ja existente!")
-
+			except IntegrityError:
+				 messages.error(request, 'error')
 	else:
 		form = FormCadastro()
 
@@ -48,3 +46,6 @@ def hamburguer(request):
 def sair(request):
 	controller.logout(request)
 	return redirect(home)
+
+
+

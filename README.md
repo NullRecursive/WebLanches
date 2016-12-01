@@ -62,10 +62,33 @@ Django é um framework gratuito e de código aberto para a criação de aplicaç
  ``` python3.5 manage.py makemigrations nome_app ```
 - Para criar um superusuario (ou administrador)
 ``` python3.5 manage.py createsuperuser```
-	- Abaixo temos um exemplo de criação:
-		``` Username: admin
-			Email address: admin@admin.com
-			Password: 
-			Password (again): 
-			Superuser created successfully.
+	- Abaixo temos um exemplo de criação:  
 		```
+		Username: admin  
+		
+		Email address: admin@admin.com  
+		
+		Password:  
+		
+		Password (again):  
+		
+		Superuser created successfully.  
+		```
+
+### Implantacao(pythonanywhere)
+
+- Baixe o repositorio:
+	```git clone LINK_DO_REPOSITORIO_NO_GITHUB```
+- Entre na pasta do repositorio:
+	``` cd NOME_REPOSITORIO ```
+- Instalar ambiente:  
+	``` virtualenv --python=python3.5 myvenv ```  
+- Ative o ambiente:
+	```  source myvenv/bin/activate ```
+- Instale o whitenoise:
+	``` pip install django whitenoise ```
+- Colete os arquivos estaticos:
+	``` python manage.py collectstatic ```
+- Crie o banco e um admin:
+	``` python manage.py migrate ```
+	``` python manage.py createsuperuser ```

@@ -77,9 +77,6 @@
                                     <li><a href="{% url 'sair' %}">Sair</a></li>
                                 </ul>
                             </div>
-
-                		    
-
 	        	        {% else %}
 
                             <!-- Antes de logar-->
@@ -106,34 +103,38 @@
 
             <div class="col-md-offset-1 col-md-10 col-md-offset-1 distance" >
                 <h1><a href="{% url 'home' %}" class="col-md-10 page_header_link">WebLanches</a></h1>
-
+                {% if not user.is_superuser %}
+                <!-- Carrinho -->
                 <div class="col-md-2 pull-right">
-                    <div class="dropdown btn-group">
-                        <button class="btn dropdown-toggle" type="button" id="menu_itens" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-shopping-cart"></span>
-                                Meu pedido <span class="caret"></span> <br />
-                                <strong>0</strong>itens</span>
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="menu_pedido" data-toggle="dropdown">
+                            <span style="font-size: 22px" class="glyphicon glyphicon-shopping-cart"></span>
+                            <div class="col-md-9 pull-right">Meu pedido <br />
+                                <strong class="quantidade">0</strong> Itens
+                            </div>
                         </button>
-
+                    
                         <!-- Lista com produtos -->
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu_itens">
-                                <!-- ITENS -->
-                                <li role="presentation">
-                                    <a role="menuitem" tabindex="-1" href="#">HTML</a></li>
-                                <li role="presentation">
-                                    <a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+                        <ul class="dropdown-menu pull-right carrinho" role="menu" aria-label="menu_pedido">
+                            <!-- ITENS -->
+                            {% for item in pedido %}
+                            <li role="presentation">
+                                <a role="menuitem" tabindex="-1" href="#">{{ item }}</a></li>
+                            {% endfor %}
+                            <!-- SEPARADOR -->
+                            <li role="presentation" class="divider"></li>
 
-                                <div role="presentation" class="divider"></div>
-
-
-                                <div>
-                                    <a href="#" class="btn btn-primary pull-right" data-loading-text="Avançando...">Fechar pedido</a>
-                                    <div>Total: R$ 0,00 </div>
+                            <!-- REFERENTE A COMPRA -->
+                            <li role="presentation">
+                                <div role="menuitem" tabindex="-1">
+                                    <a href="#" class="btn btn-default pull-right" data-loading-text="Avançando...">Fechar pedido</a>
+                                    <p > Total: R$ 0,00 </p>
                                 </div>
-                            </ul>
-
+                            </li>
+                        </ul>
                     </div>
                 </div>
+                {% endif %}
             </div>
 
          <!--
