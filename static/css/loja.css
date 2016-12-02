@@ -1,0 +1,43 @@
+
+.page_header_link{
+    color: orangered;
+    font-size: 36pt;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Lobster', cursive;
+}
+
+h1 a {
+    font-family: 'Lobster';
+}
+
+.page_header_link:hover {
+    color: darkred;
+    text-decoration: none;
+}
+
+a.basic_link {
+    color: #000;
+}
+
+.distance {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.pagamento{
+    margin-bottom: 5px;
+}
+
+.padrao li {
+    margin: 2px;
+}
+
+.carrinho {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    padding: 40px;
+    margin: 20px;
+}
