@@ -47,7 +47,7 @@ class ControllerUsuario:
 
 class ControllerPedido:
 
-    def salva_pedido(self):
+#    def salva_pedido(self):
 #    	try:
 #            meu_pedido = Pedido()
 #            listIWantToStore = get_all_pedidos()
