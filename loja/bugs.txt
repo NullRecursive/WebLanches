@@ -1,1 +1,0 @@
- 1 - sistema nao criptografa a senha do novo usuario criado assim precisando ser alterada para que a senha seja criptografada e aceita no sistema (eu acho que ta resolvido)

@@ -23,11 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'm5r_gz0w!8w!ji7y7nu%a2mcy_0g9trj%e=j8ybd_86g^x0qj2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-DEBUG = False
+DEBUG = True
+#DEBUG = False
 
-ALLOWED_HOSTS = ['weblanches.pythonanywhere.com', 'localhost', '127.0.0.1', '[::1]']
-
+#ALLOWED_HOSTS = ['weblanches.pythonanywhere.com', 'localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = []
 
 # Application definition
 
