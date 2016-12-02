@@ -8,7 +8,7 @@ from .controllers import ControllerUsuario
 controller = ControllerUsuario()
 
 def home(request):
-	return render(request, 'loja/home.html')
+	return redirect(cardapio)
 
 def login_page(request):
 
