@@ -6,7 +6,7 @@ import json
 
 #contem as operacoes de usuario
 class ControllerUsuario:
-    
+
     def cadastrar(self, request, form):
     	form = FormCadastro(request.POST)
     	if form.is_valid():
@@ -30,7 +30,7 @@ class ControllerUsuario:
 	        user.username = usuario
 	        user.cep = cep
 	        Usuario.save(user)
-        
+
     def logar(self, request, form):
     	if form.is_valid():
        		usuario = form.cleaned_data['usuario']
@@ -40,12 +40,12 @@ class ControllerUsuario:
 	        	login(request, user)
 	        	return True
 	   	return False
-        
+
     def logout(self, request):
         logout(request)
 
 
-class ControllerPedido(:
+class ControllerPedido:
 
     def salva_pedido(self):
     	try:
@@ -56,26 +56,25 @@ class ControllerPedido(:
             return True
         except Exception:
             return False
-    
-    
+
+
     def get_all_pedidos(self):
         json_dec = json.decoder.JSONDecoder()
 		lista_pedidos = jsonDec.decode(Pedido.json_dec)
         return lista_pedidos
-    
+
 
 """
 		MANDAR PRO BANCO
 		import simplejson as json # this would be just 'import json' in Python 2.7 and later
-	
+
 
 		myModel = MyModel()
 		listIWantToStore = [1,2,3,4,5,'hello']
 		myModel.myList = json.dumps(listIWantToStore)
 		myModel.save()
-		
+
 		ACESSAR ELEMENTO
 		jsonDec = json.decoder.JSONDecoder()
 		myPythonList = jsonDec.decode(myModel.myList)
 """
-	
