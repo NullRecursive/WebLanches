@@ -60,8 +60,8 @@ class ControllerPedido:
 
     def get_all_pedidos(self):
         json_dec = json.decoder.JSONDecoder()
-		      lista_pedidos = jsonDec.decode(Pedido.json_dec)
-        return lista_pedidos
+        lista_pedidos = jsonDec.decode(Pedido.json_dec)
+    return lista_pedidos
 
 
 """
