@@ -1,7 +1,7 @@
 from .models import Usuario, Pedido, Item, Produto
 from django.contrib.auth import authenticate, login, logout
 from django.db import models
-#import simplejson as json
+import json
 
 #contem as operacoes de usuario
 class ControllerUsuario:
@@ -41,14 +41,13 @@ class ControllerUsuario:
     def logout(self, request):
         logout(request)
 
-"""	
-class ControllerPedido(self, request):
+
+class ControllerPedido(:
 
     def salva_pedido(self):
     	try:
             meu_pedido = Pedido()
             listIWantToStore = get_all_pedidos()
-            #listIWantToStore.append() #add pedido na lista
 	    	myModel.myList = json.dumps(listIWantToStore)
             myModel.save()
             return True
@@ -61,7 +60,7 @@ class ControllerPedido(self, request):
 		lista_pedidos = jsonDec.decode(Pedido.json_dec)
         return lista_pedidos
     
-"""
+
 """
 		MANDAR PRO BANCO
 		import simplejson as json # this would be just 'import json' in Python 2.7 and later
