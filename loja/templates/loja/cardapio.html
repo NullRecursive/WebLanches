@@ -9,7 +9,7 @@
 
 <div class="row distance">
   <div class="row ">
-    <div class="col-lg-6 col-md-offset-6">
+    <div class="col-lg-4 col-md-offset-8">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="Search for...">
         <span class="input-group-btn">
@@ -19,19 +19,21 @@
     </div><!-- /.col-lg-6 -->
   </div><!-- /.row -->
 
-  <div class="btn-group btn-group-justified" role="group" aria-label="...">
-    <div class="btn-group" role="group">
-      <button type="button" class="btn btn-default"><a href="#" class="btn basic_link"><b>Tudo</b></a></button>
-    </div>
-    <div class="btn-group" role="group">
-      <button type="button" class="btn btn-default"><a href="{% url 'hamburguer' %}" class="btn basic_link"><b>Hambúrguer</b></a></button>
-    </div>
-    <div class="btn-group" role="group">
-      <button type="button" class="btn btn-default"><a href="#" class="btn basic_link"><b>Bebida</b></a></button>
-    </div>
-    <div class="btn-group" role="group">
-      <button type="button" class="btn btn-default"><a href="#" class="btn basic_link"><b>Pastel</b></a></button>
-    </div>
+  <div class="row distance">
+     <div class="btn-group btn-group-justified" role="group" aria-label="...">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default"><a href="#" class="btn basic_link"><b>Tudo</b></a></button>
+      </div>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default"><a href="{% url 'hamburguer' %}" class="btn basic_link"><b>Hambúrguer</b></a></button>
+      </div>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default"><a href="#" class="btn basic_link"><b>Bebida</b></a></button>
+      </div>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default"><a href="#" class="btn basic_link"><b>Pastel</b></a></button>
+      </div>
+    </div>'
   </div>
   <!--Conteudo -->
   {% block list %}
