@@ -48,14 +48,14 @@ class ControllerUsuario:
 class ControllerPedido:
 
     def salva_pedido(self):
-    	try:
+#    	try:
 #            meu_pedido = Pedido()
 #            listIWantToStore = get_all_pedidos()
 #	        myModel.myList = json.dumps(listIWantToStore)
 #            myModel.save()
-            return True
-        except Exception:
-            return False
+#            return True
+#        except Exception:
+#            return False
 
 
     def get_all_pedidos(self):
