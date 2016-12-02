@@ -32,14 +32,14 @@ class ControllerUsuario:
 	        Usuario.save(user)
         
     def logar(self, request, form):
-    	if form.is_valid():
-       		usuario = form.cleaned_data['usuario']
-       		senha = form.cleaned_data['senha']
-       		user = authenticate(username = usuario, password = senha)
-        	if user is not None:
-	        	login(request, user)
-	        	return True
-	   	return False
+        if form.is_valid():
+            usuario = form.cleaned_data['usuario']
+            senha = form.cleaned_data['senha']
+            user = authenticate(username = usuario, password = senha)
+            if user is not None:
+                login(request, user)
+                return True
+        return False
         
     def logout(self, request):
         logout(request)
@@ -50,17 +50,17 @@ class ControllerPedido(:
     def salva_pedido(self):
     	try:
             meu_pedido = Pedido()
-            listIWantToStore = get_all_pedidos()
-	    	myModel.myList = json.dumps(listIWantToStore)
-            myModel.save()
+            lista_de_pedidos = get_all_pedidos()
+	    	meu_pedido.meus_itens = json.dumps(lista_de_pedidos)
+            meu_pedido.save()
             return True
+
         except Exception:
             return False
     
     
-    def get_all_pedidos(self):
-        json_dec = json.decoder.JSONDecoder()
-		lista_pedidos = jsonDec.decode(Pedido.json_dec)
+    def get_all_pedidos(self, meus_pedidos):
+        lista_pedidos = json.loads(meus_pedidos)
         return lista_pedidos
     
 
@@ -73,7 +73,8 @@ class ControllerPedido(:
 		listIWantToStore = [1,2,3,4,5,'hello']
 		myModel.myList = json.dumps(listIWantToStore)
 		myModel.save()
-		
+
+
 		ACESSAR ELEMENTO
 		jsonDec = json.decoder.JSONDecoder()
 		myPythonList = jsonDec.decode(myModel.myList)
