@@ -49,10 +49,10 @@ class ControllerPedido:
 
     def salva_pedido(self):
     	try:
-            meu_pedido = Pedido()
-            listIWantToStore = get_all_pedidos()
-	    	myModel.myList = json.dumps(listIWantToStore)
-            myModel.save()
+#            meu_pedido = Pedido()
+#            listIWantToStore = get_all_pedidos()
+#	        myModel.myList = json.dumps(listIWantToStore)
+#            myModel.save()
             return True
         except Exception:
             return False
