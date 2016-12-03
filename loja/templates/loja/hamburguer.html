@@ -4,32 +4,15 @@
 
 <div class="row distance">
 
-{% for pro in Produto.all() %}
+{% for pro in Produto%}
 
 
   <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
       <img alt="Hamburguer" title="Hamburguer" src="{% static 'images/hamburguer.jpg' %}" height="171px" width="180px"/>
-      
       <div class="caption">
-<<<<<<< HEAD
         <h3>{%pro.nome  %}</h3>
         <p > {%pro.preco %}</p>
-=======
-        <h3>Humburguer Simples</h3>
-<<<<<<< HEAD
-      
-      <p><p style="margin-left: 8" > R$ 3,50</p> 
-      
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-      </button> </p>
-       
-        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-          <div class="modal-dialog modal-sm" role="document">
-=======
-        <p > R$ 3,50</p>
->>>>>>> 2fd3c2c98fffd7579dd635441763006d369eb0b6
 
         <button type="button" class="btn btn-primary btn-mini" data-toggle="modal" data-target="#myModal">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -37,7 +20,6 @@
 
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
->>>>>>> 530717294a0315bccdc8e971b07319e674e38168
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -53,7 +35,6 @@
             </div>
           </div>
         </div>
-        
       </div>
     </div>
   </div>
