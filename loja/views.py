@@ -6,9 +6,11 @@ from django.shortcuts import render, redirect
 from django.db import IntegrityError
 from .controllers import ControllerUsuario
 
-
 def home(request):
 	return redirect(cardapio)
+
+def cardapio(request):
+	return redirect(hamburguer)
 
 def login_page(request):
 	if request.method == 'POST':
@@ -26,24 +28,20 @@ def login_page(request):
 def cad_page(request):
 	if request.method == 'POST':
 		form = FormCadastro(request.POST)
-		try: #tentar levar esse tratamento para o model
-			controller =  ControllerUsuario()
-			controller.cadastro()
-		except IntegrityError: #messages not running
+		try: 
+			controller = ControllerUsuario()
+			controller.cadastrar(request, form)
+		except IntegrityError: 
 			messages.error(request, "Usuario ja existente!")
-
 	else:
 		form = FormCadastro()
 
 	return render(request, 'loja/cadastro.html', {'form': form})
 
-def cardapio(request):
-	return render(request, 'loja/cardapio.html')
-
 def hamburguer(request):
 	return render(request, 'loja/hamburguer.html')
 
 def sair(request):
-	controller =  ControllerUsuario()
+	controller = ControllerUsuario()
 	controller.logout(request)
 	return redirect(cardapio)
