@@ -6,7 +6,7 @@ import json
 
 #contem as operacoes de usuario
 class ControllerUsuario:
-    
+
     def cadastrar(self, request, form):
     	form = FormCadastro(request.POST)
     	if form.is_valid():
@@ -30,22 +30,28 @@ class ControllerUsuario:
 	        user.username = usuario
 	        user.cep = cep
 	        Usuario.save(user)
-        
+
     def logar(self, request, form):
         if form.is_valid():
             usuario = form.cleaned_data['usuario']
             senha = form.cleaned_data['senha']
-            user = authenticate(username = usuario, password = senha)
-            if user is not None:
-                login(request, user)
-                return True
-        return False
-        
+            user = authenticate(u
+    	if form.is_valid():
+       		usuario = form.cleaned_data['usuario']
+       		senha = form.cleaned_data['senha']
+       		user = authenticate(username = usuario, password = senha)
+        	if user is not None:
+	        	login(request, user)
+	        	return True
+	        return False
+
+>>>>>>> 530717294a0315bccdc8e971b07319e674e38168
     def logout(self, request):
         logout(request)
 
 
 class ControllerPedido:
+<<<<<<< HEAD
 	
 	def salva_pedido(self, request):
 		try:
@@ -57,20 +63,41 @@ class ControllerPedido:
 		except Exception:
 			return False
     
+=======
+
+#    def salva_pedido(self):
+#    	try:
+#            meu_pedido = Pedido()
+#            listIWantToStore = get_all_pedidos()
+#	        myModel.myList = json.dumps(listIWantToStore)
+#            myModel.save()
+#            return True
+#        except Exception:
+#            return False
+
+
+    def get_all_pedidos(self):
+        json_dec = json.decoder.JSONDecoder()
+        lista_pedidos = jsonDec.decode(Pedido.json_dec)
+        return lista_pedidos
+
+>>>>>>> 530717294a0315bccdc8e971b07319e674e38168
 
 """
 		MANDAR PRO BANCO
 		import simplejson as json # this would be just 'import json' in Python 2.7 and later
-	
+
 
 		myModel = MyModel()
 		listIWantToStore = [1,2,3,4,5,'hello']
 		myModel.myList = json.dumps(listIWantToStore)
 		myModel.save()
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 530717294a0315bccdc8e971b07319e674e38168
 		ACESSAR ELEMENTO
 		jsonDec = json.decoder.JSONDecoder()
 		myPythonList = jsonDec.decode(myModel.myList)
 """
-	
