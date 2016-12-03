@@ -31,15 +31,24 @@ class Item(models.Model):
 
 class Pedido(models.Model):
 	meus_itens = models.TextField(
-		null = True) #JSON-serialized (text) 
+		null = True) #JSON-serialized (text)
+
 	usuario = models.ForeignKey(
 		'Usuario',
 		on_delete = models.CASCADE,
 	)
 
+	def __str__(self):
+		return self.usuario.name
+
 	def get_all_pedidos(self):
-		lista_pedidos = json.loads(self.meus_pedidos)
+		lista_pedidos = json.loads(self.meus_itens)
 		return lista_pedidos
 	
+	def insert_item(self, Item):
+		pass
+
 	def get_user(self):
 		return '%s' % (self.usuario.name)
+
+

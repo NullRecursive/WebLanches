@@ -66,15 +66,16 @@
                         <!-- Apos o login -->
                         {% if user.is_authenticated %}
                             <div class="dropdown">
-                                <a href="#" class="btn basic_link" data-toggle="dropdown"> <!-- Fazer btn dropdown-->
+                                <a href="#" class="btn basic_link" data-toggle="dropdown"> 
                                     {% if user.is_superuser %}
                                         <b>{{ user.username | title | show_admin }}</b>
                                     {% else %}
-                                        <b>{{ user.first_name | title }}</b> <!-- Problemas de identificacao no banco-->
+                                        <b>{{ user.first_name | title }}</b> 
                                     {% endif %}
                                     <span class="glyphicon glyphicon-user"></span>
                                 </a>
                                 <ul class="dropdown-menu">
+                                    <li><a href="{% url 'admin:index' %}" >Gerenciamento</a></li>
                                     <li><a href="{% url 'sair' %}">Sair</a></li>
                                 </ul>
                             </div>
