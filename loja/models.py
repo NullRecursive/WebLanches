@@ -37,5 +37,9 @@ class Pedido(models.Model):
 		on_delete = models.CASCADE,
 	)
 
-	def calcularTotal():
-		pass
+	def get_all_pedidos(self):
+		lista_pedidos = json.loads(self.meus_pedidos)
+		return lista_pedidos
+	
+	def get_user(self):
+		return '%s' % (self.usuario.name)

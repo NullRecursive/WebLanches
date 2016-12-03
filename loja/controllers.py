@@ -45,23 +45,17 @@ class ControllerUsuario:
         logout(request)
 
 
-class ControllerPedido(:
-
-    def salva_pedido(self):
-    	try:
-            meu_pedido = Pedido()
-            lista_de_pedidos = get_all_pedidos()
-	    	meu_pedido.meus_itens = json.dumps(lista_de_pedidos)
-            meu_pedido.save()
-            return True
-
-        except Exception:
-            return False
-    
-    
-    def get_all_pedidos(self, meus_pedidos):
-        lista_pedidos = json.loads(meus_pedidos)
-        return lista_pedidos
+class ControllerPedido:
+	
+	def salva_pedido(self, request):
+		try:
+			meu_pedido = Pedido()
+			lista_de_pedidos = get_all_pedidos()
+			meu_pedido.meus_itens = json.dumps(lista_de_pedidos)
+			meu_pedido.save()
+			return True
+		except Exception:
+			return False
     
 
 """
