@@ -13,12 +13,24 @@ class Usuario(User):
 		self.set_password(self.password)
 		User.save(self)
 
+PRODUTOS =  (('hamburguer',u'Hambuguer'), 
+			('bebida',u'Bebida'), 
+			('pastel',u'Pastel'), 
+			('pizzas', u'Pizzas'))
+
 class Produto(models.Model):
-	nome = models.CharField(max_length = 250, primary_key = True)
+	nome = models.CharField(
+		max_length = 250, 
+		primary_key = True
+	)
 	preco = models.FloatField()
 	descricao = models.TextField(blank = True)
-	imagem = models.ImageField(upload_to = 'loja/static/product_images') #falta corrigir bug no GET
+	imagem = models.ImageField(upload_to = 'loja/static/product_images')
 	em_Falta = models.BooleanField()
+	categoria = models.CharField(
+		max_length = 10,
+		choices = PRODUTOS
+	)
 
 	def __str__(self):
 		return self.nome
