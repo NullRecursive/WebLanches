@@ -50,7 +50,7 @@ def pastel(request):
 	all_produtos = Produto.objects.all()
 	return render(request, 'loja/pastel.html', {'all_produtos': all_produtos})
 
-def todos_produtos(request):
+def todos(request):
 	all_produtos = Produto.objects.all()
 	return render(request, 'loja/todos.html', {'all_produtos': all_produtos})
 
