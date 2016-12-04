@@ -1,10 +1,11 @@
 {% extends 'admin/base.html' %}
-
+{% load staticfiles %}
 {% block title %}{{ title }} | {{ site_title|default:_('WebLanches') }}{% endblock %}
 
 {% block extrahead %}
-        <link rel="icon" href="{{STATIC_URL}}img/favicon.ico" sizes="48x48" />
+        <!-- Icone da pagina -->
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}" />
 {% endblock %}
 {% block branding %}
-        <h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('WebLanches administracao') }}</a></h1>
+        <h1 id="site-name"><a href="{% url 'admin:index' %}"> WebLanches </a></h1>
 {% endblock %}
