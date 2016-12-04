@@ -3,7 +3,20 @@
 {% block content %}
 
 <form action="{% url 'cadastrar' %}" data-toggle="validator" role="form" class="form-horizontal col-md-offset-1 col-md-10 my_form" method="POST">{% csrf_token %}
-   
+   {% for mensagem in messages %}
+        {% if mensagem.level == 40 %}
+            <ul>
+              <li>{{ mensagem }}</li>
+            </ul>
+        {% endif %}
+        {% if mensagem.level == 25 %}
+             <script type="text/javascript">
+                 alert("{{mensagem}}")
+                 window.location.href = "/entrar/"
+             </script>
+        {% endif %}
+    {% endfor %}
+
     <div class="form-group has-feedback">
         <label class="control-label col-sm-2" for="id_nome">Nome:</label>
        
@@ -101,18 +114,7 @@
             <button type="submit" class="btn btn-default">Cadastrar-se</button>
         </div>
     </div>
-     {% for mensagem in messages %}
-        	{% if mensagem.level == 40 %}
-        	<ul>
-        		<li>{{ mensagem }}</li>
-        	</ul>
-        	{% endif %}
-        	{% if mensagem.level == 25 %}
-        		<script type="text/javascript">
-        			alert("{{mensagem}}")
-        		</script>
-        	{% endif %}
-        {% endfor %}
+     
 
 </form>
 

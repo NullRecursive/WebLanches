@@ -28,7 +28,10 @@ def cad_page(request):
 	if request.method == 'POST':
 		form = FormCadastro(request.POST) 
 		controller = ControllerUsuario()
-		controller.cadastrar(request, form)
+		if controller.cadastrar(request, form):
+			messages.success(request, "Usuario criado com sucesso")
+		else:
+			messages.error(request, "Usuario ja existente!")
 	else:
 		form = FormCadastro()
 
