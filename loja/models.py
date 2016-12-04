@@ -53,11 +53,7 @@ class Item(models.Model):
 	
 
 class Pedido(models.Model):
-	usuario = models.ForeignKey(
-		'Usuario',
-		on_delete = models.CASCADE,
-		default = 0,
-	)
+	usuario = models.ForeignKey('auth.User')
 
 	data_do_pedido = models.DateTimeField(default = timezone.now)
 	concluido = models.BooleanField(default = False)
@@ -68,4 +64,7 @@ class Pedido(models.Model):
 
 	def __str__(self):
 		return '%s %d' % (self.usuario, self.pk)
+
+	
+
 
