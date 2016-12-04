@@ -10,11 +10,12 @@
 
   <div class="col-sm-6 col-md-3">
     <div class="thumbnail">
-      <img alt="Hamburguer" title="Hamburguer" src="{{pro.imagem}}" height="171px" width="180px"/>
-      <div class="caption">
-        <h3>{{pro.nome}}</h3>
-        <p > {{ pro.preco }}</p>
-
+      <img alt="Hamburguer" title="Hamburguer" src="{{pro.imagem|cut:'loja'}}" height="171px" width="170px"/>
+      <div class="caption ">
+        <hr>
+        <h4>{{pro.nome}}</h4>
+        <hr>
+        <p >R$ {{ pro.preco }}</p>
         <button type="button" class="btn btn-primary btn-mini" data-toggle="modal" data-target="#myModal">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </button>
@@ -27,7 +28,7 @@
                 <h4 class="modal-title" id="myModalLabel">{{pro.nome}}</h4>
               </div>
               <div class="modal-body">
-                <h4 class="modal-title" id="myModalLabel">{{ pro.descricao  }}</h4>
+                <h5 class="modal-title" id="myModalLabel">{{ pro.descricao }}</h5>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
