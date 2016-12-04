@@ -42,7 +42,7 @@ def hamburguer(request):
 	all_produtos = Produto.objects.all()
 	template = loader.get_templates('template/hamburguer.html')
 	context = {
-		'all_produto' = all_produtos
+		'all_produtos' : all_produtos,
 	}
 	return template.render(context,request, 'loja/hamburguer.html')
 
