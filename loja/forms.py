@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from .models import Usuario
 
 class FormCadastro(forms.Form):
 	nome = forms.CharField(
@@ -27,12 +28,23 @@ class FormCadastro(forms.Form):
 			attrs={'required': 'required'}))
 	telefone = forms.CharField(
 		widget = forms.TextInput(
-			attrs={'required': 'required'}))
+			attrs = {'required': 'required'}))
 	cep = forms.CharField(
 		widget = forms.TextInput(
 			attrs={'required': 'required'}))
 
-	
+	class Meta:
+		model = Usuario
+		exclude = ['csenha']
+		fields = ['nome', 'email', 'senha', 'username', 'telefone', 'cpf', 'endereco', 'cep']
+		
+
+	def clean_usuario(self):
+		usuario_novo = self.cleaned_data['username']
+		if User.objects.get_by_natural_key(username = usuario_novo) != None:
+			raise forms.ValidationError(u'Usuário já existe!')
+		else:
+			return self.cleaned_data['username']
 
 class FormLogin(forms.Form):
 	usuario = forms.CharField(

@@ -3,7 +3,6 @@ from .forms import FormLogin, FormCadastro
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.db import IntegrityError
 from .controllers import ControllerUsuario
 
 def home(request):
@@ -17,7 +16,7 @@ def login_page(request):
 		form = FormLogin(request.POST)
 		controller =  ControllerUsuario()
 		if controller.logar(request,form):
-			return redirect("/cardapio/")
+			return redirect(cadapio)
 		
 	else:
 		form = FormLogin()
@@ -27,12 +26,9 @@ def login_page(request):
 
 def cad_page(request):
 	if request.method == 'POST':
-		form = FormCadastro(request.POST)
-		try: 
-			controller = ControllerUsuario()
-			controller.cadastrar(request, form)
-		except IntegrityError: 
-			messages.error(request, "Usuario ja existente!")
+		form = FormCadastro(request.POST) 
+		controller = ControllerUsuario()
+		controller.cadastrar(request, form)
 	else:
 		form = FormCadastro()
 

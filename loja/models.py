@@ -44,3 +44,10 @@ class Pedido(models.Model):
 
 	data_do_pedido = models.DateTimeField()
 
+	def salvar_pedido(self):
+		self.data_do_pedido = timezone.now()
+		self.save
+
+	def __str__(self):
+		return '%s %d' % (self.usuario, self.pk)
+
