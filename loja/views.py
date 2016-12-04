@@ -1,4 +1,5 @@
 from .models import Usuario
+from .models import Produto
 from .forms import FormLogin, FormCadastro
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
