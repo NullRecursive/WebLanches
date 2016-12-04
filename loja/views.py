@@ -42,6 +42,18 @@ def hamburguer(request):
 	all_produtos = Produto.objects.all()
 	return render(request, 'loja/hamburguer.html',{'all_produtos': all_produtos})
 
+def bebida(request):
+	all_produtos = Produto.objects.all()
+	return render(request, 'loja/bebida.html',{'all_produtos': all_produtos})
+
+def pastel(request):
+	all_produtos = Produto.objects.all()
+	return render(request, 'loja/pastel.html',{'all_produtos': all_produtos})
+
+def todos(request):
+	all_produtos = Produto.objects.all()
+	return render(request, 'loja/todos-produtos.html',{'all_produtos': all_produtos})
+
 def sair(request):
 	controller = ControllerUsuario()
 	controller.logout(request)
