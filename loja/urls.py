@@ -9,6 +9,6 @@ urlpatterns = [
     url(r'^cardapio/hamburguer/$', views.hamburguer, name = 'hamburguer'),
     url(r'^cardapio/bebida/$', views.bebida, name = 'bebida'),
     url(r'^cardapio/pastel/$', views.pastel, name = 'pastel'),
-    url(r'^cardapio/todos_produtos/$', views.todos_produtos, name = 'todos_produtos'),
+    url(r'^cardapio/todos/$', views.todos, name = 'todos'),
     url(r'^sair$', views.sair, name = 'sair'),
 ]
