@@ -2,8 +2,21 @@
 {% load widget_tweaks %}
 {% block content %}
 
-<form action="/cadastrar/" data-toggle="validator" role="form" class="form-horizontal col-md-offset-1 col-md-10 my_form" method="POST">{% csrf_token %}
-   
+<form action="{% url 'cadastrar' %}" data-toggle="validator" role="form" class="form-horizontal col-md-offset-1 col-md-10 my_form" method="POST">{% csrf_token %}
+   {% for mensagem in messages %}
+        {% if mensagem.level == 40 %}
+            <ul>
+              <li>{{ mensagem }}</li>
+            </ul>
+        {% endif %}
+        {% if mensagem.level == 25 %}
+             <script type="text/javascript">
+                 alert("{{mensagem}}")
+                 window.location.href = "/entrar/"
+             </script>
+        {% endif %}
+    {% endfor %}
+
     <div class="form-group has-feedback">
         <label class="control-label col-sm-2" for="id_nome">Nome:</label>
        
@@ -16,14 +29,19 @@
         <label class="control-label col-sm-2" for="id_username">Usuário:</label>
        
         <div class="col-sm-10">
-            {% render_field form.username class="form-control" placeholder="digite seu nome de usuario" %}
-            
-            {% if messages %}
+            {% render_field form.username class="form-control" placeholder="digite seu nome de usuario"  %}
+
+            <!--{% if messages %}
                 <script type="text/javascript">
                     nome_usuario = document.getElementById("id_username");
                     nome_usuario.setCustomValidity("Este usuario ja existe!");
+                    setTimeout(function() { 
+                            nome_usuario.setCustomValidity('');
+                            nome_usuario.value = '';
+                        }, 
+                        2000);
                 </script>
-            {% endif %}
+            {% endif %}-->
             
         </div>
 
@@ -96,6 +114,7 @@
             <button type="submit" class="btn btn-default">Cadastrar-se</button>
         </div>
     </div>
+     
 
 </form>
 
