@@ -2,7 +2,7 @@
 {% load widget_tweaks %}
 {% block content %}
 
-<form action="/cadastrar/" data-toggle="validator" role="form" class="form-horizontal col-md-offset-1 col-md-10 my_form" method="POST">{% csrf_token %}
+<form action="{% url 'cadastrar' %}" data-toggle="validator" role="form" class="form-horizontal col-md-offset-1 col-md-10 my_form" method="POST">{% csrf_token %}
    
     <div class="form-group has-feedback">
         <label class="control-label col-sm-2" for="id_nome">Nome:</label>
