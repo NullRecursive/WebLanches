@@ -22,7 +22,7 @@ class ControllerUsuario:
                 csenha = form.cleaned_data['csenha']
                 cpf = form.cleaned_data['cpf']	
                 cep = form.cleaned_data['cep']
-			
+
                 user = Usuario()
                 user.password =  senha
                 user.email = email
@@ -47,7 +47,7 @@ class ControllerUsuario:
         	if user is not None:
 	        	login(request, user)
 	        	return True
-	        return False
+	    return False
 
     def logout(self, request):
         logout(request)

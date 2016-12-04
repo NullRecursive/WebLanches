@@ -29,7 +29,8 @@ class Produto(models.Model):
 	em_Falta = models.BooleanField()
 	categoria = models.CharField(
 		max_length = 10,
-		choices = PRODUTOS
+		choices = PRODUTOS,
+		default = PRODUTOS[0]
 	)
 
 	def __str__(self):
