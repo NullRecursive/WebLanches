@@ -3,6 +3,7 @@ from .forms import FormLogin, FormCadastro
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.template import loader
 from .controllers import ControllerUsuario
 
 
@@ -15,7 +16,7 @@ def login_page(request):
 		controller =  ControllerUsuario()
 		if controller.logar(request,form):
 			return redirect(cardapio)
-		
+
 	else:
 		form = FormLogin()
 
@@ -26,7 +27,7 @@ def cardapio(request):
 
 def cad_page(request):
 	if request.method == 'POST':
-		form = FormCadastro(request.POST) 
+		form = FormCadastro(request.POST)
 		controller = ControllerUsuario()
 		if controller.cadastrar(request, form):
 			messages.success(request, "Usuario criado com sucesso")
@@ -38,7 +39,12 @@ def cad_page(request):
 	return render(request, 'loja/cadastro.html', {'form': form})
 
 def hamburguer(request):
-	return render(request, 'loja/hamburguer.html')
+	all_produtos = Produto.objects.all()
+	template = loader.get_templates('template/hamburguer.html')
+	context = {
+		'all_produto' = all_produtos
+	}
+	return template.render(context,request, 'loja/hamburguer.html')
 
 def sair(request):
 	controller = ControllerUsuario()
