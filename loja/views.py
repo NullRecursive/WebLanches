@@ -39,16 +39,20 @@ def cad_page(request):
 	return render(request, 'loja/cadastro.html', {'form': form})
 
 def hamburguer(request):
-	all_produtos = Produto.objects.all()
-	return render(request, 'loja/hamburguer.html', {'all_produtos': all_produtos})
+	produtos_hamburguer = Produto.objects.filter(categoria = 'hamburguer')
+	return render(request, 'loja/hamburguer.html', {'produtos_hamburguer': produtos_hamburguer})
 
 def bebida(request):
-	all_produtos = Produto.objects.all()
-	return render(request, 'loja/bebida.html', {'all_produtos': all_produtos})
+	produtos_bebida = Produto.objects.filter(categoria = 'bebida')
+	return render(request, 'loja/bebida.html', {'produtos_bebida': produtos_bebida})
 
 def pastel(request):
-	all_produtos = Produto.objects.all()
-	return render(request, 'loja/pastel.html', {'all_produtos': all_produtos})
+	produtos_pastel = Produto.objects.filter(categoria = 'pastel')
+	return render(request, 'loja/pastel.html', {'produtos_pastel': produtos_pastel})
+
+def pizza(request):
+	produtos_pizza = Produto.objects.filter(categoria = 'pizzas')
+	return render(request, 'loja/pizza.html', {'produtos_pizza': produtos_pizza})
 
 def todos(request):
 	all_produtos = Produto.objects.all()
