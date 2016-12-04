@@ -1,4 +1,5 @@
 from .models import Usuario
+from .models import Produto
 from .forms import FormLogin, FormCadastro
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -15,7 +16,7 @@ def login_page(request):
 		controller =  ControllerUsuario()
 		if controller.logar(request,form):
 			return redirect(cardapio)
-		
+
 	else:
 		form = FormLogin()
 
@@ -26,16 +27,20 @@ def cardapio(request):
 
 def cad_page(request):
 	if request.method == 'POST':
-		form = FormCadastro(request.POST) 
+		form = FormCadastro(request.POST)
 		controller = ControllerUsuario()
-		controller.cadastrar(request, form)
+		if controller.cadastrar(request, form):
+			messages.success(request, "Usuario criado com sucesso")
+		else:
+			messages.error(request, "Usuario ja existente!")
 	else:
 		form = FormCadastro()
 
 	return render(request, 'loja/cadastro.html', {'form': form})
 
 def hamburguer(request):
-	return render(request, 'loja/hamburguer.html')
+	all_produtos = Produto.objects.all()
+	return render(request, 'loja/hamburguer.html',{'all_produtos': all_produtos})
 
 def sair(request):
 	controller = ControllerUsuario()

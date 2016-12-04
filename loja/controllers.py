@@ -4,7 +4,7 @@ from django.db import models
 from .forms import FormLogin, FormCadastro
 from django.db import IntegrityError
 from django.contrib import messages
-
+from django.shortcuts import render, redirect
 #contem as operacoes de usuario
 
 class ControllerUsuario:
@@ -34,9 +34,10 @@ class ControllerUsuario:
                 user.cep = cep
                 Usuario.save(user)
             except IntegrityError: 
-            	messages.error(request, "Usuario ja existente!")
+                return False
             else:
-                messages.success(request, "Usuario criado com sucesso")
+                return True
+        return False
 
     def logar(self, request, form):
     	if form.is_valid():
