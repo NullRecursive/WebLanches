@@ -4,7 +4,6 @@ from .forms import FormLogin, FormCadastro
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.template import loader
 from .controllers import ControllerUsuario
 
 
@@ -41,11 +40,7 @@ def cad_page(request):
 
 def hamburguer(request):
 	all_produtos = Produto.objects.all()
-	template = loader.get_templates('template/hamburguer.html')
-	context = {
-		'all_produtos' : all_produtos,
-	}
-	return template.render(context,request, 'loja/hamburguer.html')
+	return render(request, 'loja/hamburguer.html',{'all_produtos': all_produtos})
 
 def sair(request):
 	controller = ControllerUsuario()
