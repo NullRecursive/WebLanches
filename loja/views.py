@@ -50,9 +50,9 @@ def pastel(request):
 	all_produtos = Produto.objects.all()
 	return render(request, 'loja/pastel.html',{'all_produtos': all_produtos})
 
-def todos(request):
+def todos_produtos(request):
 	all_produtos = Produto.objects.all()
-	return render(request, 'loja/todos-produtos.html',{'all_produtos': all_produtos})
+	return render(request, 'loja/todos_produtos.html',{'all_produtos': all_produtos})
 
 def sair(request):
 	controller = ControllerUsuario()
