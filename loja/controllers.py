@@ -11,6 +11,7 @@ class ControllerUsuario:
 
     def cadastrar(self, request, form):
     	form = FormCadastro(request.POST)
+
     	if form.is_valid():
             try: 
                	usuario = form.cleaned_data['username']
@@ -33,22 +34,24 @@ class ControllerUsuario:
                 user.username = usuario
                 user.cep = cep
                 Usuario.save(user)
+        
             except IntegrityError: 
                 return False
             else:
-                return True
-        return False
+                return True 
+        #return False # Ta com um erro FDP que nao reconhece
 
     def logar(self, request, form):
-    	if form.is_valid():
+    	if not form.is_valid():
        		usuario = form.cleaned_data['usuario']
        		senha = form.cleaned_data['senha']
        		user = authenticate(username = usuario, password = senha)
         	if user is not None:
 	        	login(request, user)
 	        	return True
-	    return False
-
+	        return False
+        #return False # Mesmo Erro FDP
+        
     def logout(self, request):
         logout(request)
 

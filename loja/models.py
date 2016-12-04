@@ -60,6 +60,7 @@ class Pedido(models.Model):
 	)
 
 	data_do_pedido = models.DateTimeField(default = timezone.now)
+	concluido = models.BooleanField(default = False)
 
 	def salvar_pedido(self):
 		self.data_do_pedido = timezone.now()
