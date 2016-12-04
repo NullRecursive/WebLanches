@@ -32,6 +32,8 @@ class FormCadastro(forms.Form):
 		widget = forms.TextInput(
 			attrs={'required': 'required'}))
 
+	
+
 class FormLogin(forms.Form):
 	usuario = forms.CharField(
 		max_length = 40)
