@@ -50,10 +50,6 @@ class Item(models.Model):
 
 	quantidade = models.IntegerField(default = 0)
 
-	def __init__(self, id_pedido, id_produto, quantidade):
-		self.id_pedido = id_pedido
-		self.id_produto = id_produto
-		self.quantidade = quantidade
 
 # Em Andamento quando ainda esta na fase de insercao
 # Concluido quando o cliente cncluir suas escolhas

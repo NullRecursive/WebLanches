@@ -1,4 +1,4 @@
-from .models import Usuario, Produto, Pedido, Item
+from .models import Usuario, Produto, Pedido, Item, ESTADO_PEDIDO
 from .forms import FormLogin, FormCadastro
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -64,6 +64,15 @@ def sair(request):
 
 def add_produto_pedido(request, id_produto, quantidade):
 	usuario = request.Usuario #pega usuario da requisicao
-	pedido = Pedido.objects.filter(usuario = usuario, ) #pega TODOS pedidos do usuario
-	item = Item(pedido.pk, id_produto, quantidade)
-	return render(request, 'loja/pedido.html')
+	pedido = Pedido.objects.filter(usuario = usuario, estado_do_pedido = ESTADO_PEDIDO[0]) #pega TODOS pedidos do usuario
+	item = Item()
+	item.id_pedido = pedido.pk
+	item.id_produto = id_produto
+	item.quantidade = quantidade
+	item.save
+	return render(request, 'loja/pedidos.html')
+
+def listar_pedidos(request):
+	usuario = request.usuario
+	pedidos = Pedido.objects.filter(estado_do_pedido = ESTADO_PEDIDO[:-1])
+	return render(request, 'loja/pedidos.html', { 'pedidos' : pedidos })
