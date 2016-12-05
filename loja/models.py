@@ -60,7 +60,11 @@ class Item(models.Model):
 # Finalizado quando o atendente concluir a producao
 # Em Entrega quando esta a caminho do solicitante
 # Encerrado foi entregue e encerrado 
-ESTADO_PEDIDO = (('em_andamento'), ('concluido'), ('finalizado'), ('em_entrega'), ('encerrado'))
+ESTADO_PEDIDO = (('em_andamento', u'Em Andamento'), 
+				('concluido', u'Concluido'),
+				('finalizado', u'Finalizado'), 
+				('em_entrega', u'Em Entrega'), 
+				('encerrado', u'Encerrado'))
 
 class Pedido(models.Model):
 	usuario = models.ForeignKey('auth.User')
@@ -68,7 +72,7 @@ class Pedido(models.Model):
 	data_do_pedido = models.DateTimeField(default = timezone.now)
 
 	estado_do_pedido = models.CharField(
-		max_lenght = 15, 
+		max_length = 12,
 		choices = ESTADO_PEDIDO, 
 		default = ESTADO_PEDIDO[0])
 	
