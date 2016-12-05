@@ -42,7 +42,7 @@ class ControllerUsuario:
         #return False # Ta com um erro FDP que nao reconhece
 
     def logar(self, request, form):
-    	if not form.is_valid():
+    	if form.is_valid():
        		usuario = form.cleaned_data['usuario']
        		senha = form.cleaned_data['senha']
        		user = authenticate(username = usuario, password = senha)
