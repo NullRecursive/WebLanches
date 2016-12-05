@@ -50,16 +50,44 @@ class Item(models.Model):
 
 	quantidade = models.IntegerField(default = 0)
 
-	
+	def __init__(self, id_pedido, id_produto, quantidade):
+		self.id_pedido = id_pedido
+		self.id_produto = id_produto
+		self.quantidade = quantidade
+
+# Em Andamento quando ainda esta na fase de insercao
+# Concluido quando o cliente cncluir suas escolhas
+# Finalizado quando o atendente concluir a producao
+# Em Entrega quando esta a caminho do solicitante
+# Encerrado foi entregue e encerrado 
+ESTADO_PEDIDO = (('em_andamento'), ('concluido'), ('finalizado'), ('em_entrega'), ('encerrado'))
 
 class Pedido(models.Model):
 	usuario = models.ForeignKey('auth.User')
 
 	data_do_pedido = models.DateTimeField(default = timezone.now)
-	concluido = models.BooleanField(default = False)
 
-	def salvar_pedido(self):
+	estado_do_pedido = models.CharField(
+		max_lenght = 15, 
+		choices = ESTADO_PEDIDO, 
+		default = ESTADO_PEDIDO[0])
+	
+	def concluir_pedido(self):
 		self.data_do_pedido = timezone.now()
+		self.estado_do_pedido = ESTADO_PEDIDO[1]
+		self.save
+
+	
+	def finalizar_pedido(self):
+		self.estado_do_pedido = ESTADO_PEDIDO[2]
+		self.save
+
+	def entregar_pedido(self):
+		self.estado_do_pedido = ESTADO_PEDIDO[3]
+		self.save
+	
+	def encerrar_pedido(self):
+		self.estado_do_pedido = ESTADO_PEDIDO[4]
 		self.save
 
 	def __str__(self):

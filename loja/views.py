@@ -1,5 +1,4 @@
-from .models import Usuario
-from .models import Produto
+from .models import Usuario, Produto, Pedido, Item
 from .forms import FormLogin, FormCadastro
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -62,3 +61,9 @@ def sair(request):
 	controller = ControllerUsuario()
 	controller.logout(request)
 	return redirect(cardapio)
+
+def add_produto_pedido(request, id_produto, quantidade):
+	usuario = request.Usuario #pega usuario da requisicao
+	pedido = Pedido.objects.filter(usuario = usuario, ) #pega TODOS pedidos do usuario
+	item = Item(pedido.pk, id_produto, quantidade)
+	return render(request, 'loja/pedido.html')
