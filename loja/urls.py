@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^cardapio/todos/$', views.todos, name = 'todos'),
     url(r'^sair$', views.sair, name = 'sair'),
     url(r'^add_produto_pedido/$', views.add_produto_pedido, name = 'add_produto_pedido'),
+    url(r'^pedidos/$', views.pedidos_usuario, name = 'pedidos_usuario'),
 ]

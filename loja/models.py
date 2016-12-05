@@ -56,11 +56,11 @@ class Item(models.Model):
 # Finalizado quando o atendente concluir a producao
 # Em Entrega quando esta a caminho do solicitante
 # Encerrado foi entregue e encerrado 
-ESTADO_PEDIDO = (('em_andamento', u'Em Andamento'), 
-				('concluido', u'Concluido'),
-				('finalizado', u'Finalizado'), 
-				('em_entrega', u'Em Entrega'), 
-				('encerrado', u'Encerrado'))
+ESTADO_PEDIDO = (('em_andamento', 'Em Andamento'), 
+				('concluido', 'Concluido'),
+				('finalizado', 'Finalizado'), 
+				('em_entrega', 'Em Entrega'), 
+				('encerrado', 'Encerrado'))
 
 class Pedido(models.Model):
 	usuario = models.ForeignKey('auth.User')

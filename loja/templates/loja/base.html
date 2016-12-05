@@ -49,7 +49,7 @@
             <div class="col-md-offset-1 col-md-10 col-md-offset-1">
 
                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="glyphicon glyphicon-th-list"></span>
+                    Menu <span class="glyphicon glyphicon-th-list"></span>
                   </button>
 
                 <div class="collapse navbar-collapse" id="myNavbar">
@@ -75,7 +75,9 @@
                                     <span class="glyphicon glyphicon-user"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{% url 'admin:index' %}" >Gerenciamento</a></li>
+                                    {% if user.is_superuser %}
+                                        <li><a href="{% url 'admin:index' %}" >Gerenciamento</a></li>
+                                    {% endif %}
                                     <li><a href="{% url 'sair' %}">Sair</a></li>
                                 </ul>
                             </div>
@@ -130,7 +132,7 @@
                             <li role="presentation">
                                 <div role="menuitem" tabindex="-1">
                                     <a href="#" class="btn btn-default pull-right" data-loading-text="Avançando...">Fechar pedido</a>
-                                    <p > Total: R$ 0,00 </p>
+                                    <p> Total: R$ 0,00 </p>
                                 </div>
                             </li>
                         </ul>
@@ -153,12 +155,10 @@
         <!-- CONTEUDO -->
 
         <div class="content container distance">
-            <div class="row">
-                <div class="col-md-offset-1 col-md-10">
+            <div class="row">>
                     {% block content %}
 
                     {% endblock %}
-                </div>
             </div>
         </div>
 

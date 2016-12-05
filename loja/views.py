@@ -19,7 +19,7 @@ def login_page(request):
 	else:
 		form = FormLogin()
 
-	return render(request,'loja/login.html',{'form': form})
+	return render(request,'loja/login.html', {'form': form})
 
 def cardapio(request):
 	return redirect(hamburguer)
@@ -65,14 +65,11 @@ def sair(request):
 def add_produto_pedido(request, id_produto, quantidade):
 	usuario = request.Usuario #pega usuario da requisicao
 	pedido = Pedido.objects.filter(usuario = usuario, estado_do_pedido = ESTADO_PEDIDO[0]) #pega TODOS pedidos do usuario
-	item = Item()
-	item.id_pedido = pedido.pk
-	item.id_produto = id_produto
-	item.quantidade = quantidade
+	item = Item(id_pedido = pedido.pk, id_produto = id_produto, quantidade = quantidade)
 	item.save
 	return render(request, 'loja/pedidos.html')
 
-def listar_pedidos(request):
-	usuario = request.usuario
-	pedidos = Pedido.objects.filter(estado_do_pedido = ESTADO_PEDIDO[:-1])
-	return render(request, 'loja/pedidos.html', { 'pedidos' : pedidos })
+def pedidos_usuario(request):
+	usuario = request.user
+	pedidos = Pedido.objects.filter(usuario = usuario.pk)
+	return render(request, 'loja/pedidos.html', { 'pedidos' : pedidos})
