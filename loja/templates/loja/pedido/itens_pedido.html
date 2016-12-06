@@ -9,17 +9,13 @@
   
     <ul class="list-group">
         {% for item in itens %}
-            {% for produto in produtos %}
             <a href="#" class="basic_link" style="text-decoration:none;">    
                 <li class="list-group-item btn">
-                    {% if item.pk == produto.pk %}
-                        {{ produto.nome }} <br />
-                        {{ item.quantidade }}
-                    {% endif %}
+                    {{ item.id_produto }} <br />
+                    {{ item.quantidade }}
                     <span class="list-group-progress" style="width: 75%;"></span>
                 </li>
             </a>
-            {% endfor %}   
         {% endfor %}
     </ul>
 </div>
