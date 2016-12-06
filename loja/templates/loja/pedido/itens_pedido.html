@@ -11,7 +11,7 @@
         {% for item in itens %}
             <a href="#" class="basic_link" style="text-decoration:none;">    
                 <li class="list-group-item btn">
-                    {{ item.id_produto }} <br />
+                    {{ item.id_produto }} <!-- id_produto == eh o nome do produto --><br />
                     {{ item.quantidade }}
                     <span class="list-group-progress" style="width: 75%;"></span>
                 </li>
