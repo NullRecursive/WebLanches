@@ -3,6 +3,11 @@
 {% block content %}
 <div id = "formulario">
 	
-
+		<ol>
+			{%for item in itens%}
+			<li>{{item.nome}}</li>
+			{%endfor%}
+		</ol>
+	
 </div>
 {% endblock %}

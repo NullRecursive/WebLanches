@@ -78,3 +78,7 @@ def itens_pedido(request, id_pedido):
 	itens = Item.objects.filter(id_pedido = id_pedido)
 	produtos = Produto.objects.all()
 	return render(request, 'loja/pedido/itens_pedido.html', {'itens': itens, 'produtos' : produtos})
+
+def ver_comprovante(request,id_pedido):
+	itens =  Item.objects.filter(id_pedido = id_pedido)
+	return render(request,'loja/comprovante.html',{'itens': itens})
