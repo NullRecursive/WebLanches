@@ -1,4 +1,4 @@
-from .models import Usuario, Produto, Pedido, Item, ESTADO_PEDIDO
+from .models import Usuario, Produto, Pedido, Item
 from .forms import FormLogin, FormCadastro
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -73,3 +73,7 @@ def pedidos_usuario(request):
 	usuario = request.user
 	pedidos = Pedido.objects.filter(usuario = usuario.pk)
 	return render(request, 'loja/pedidos.html', { 'pedidos' : pedidos})
+
+def itens_pedido(request, id_pedido):
+	itens = Item.objects.filter(id_pedido = id_pedido)
+	return render(request, 'loja/itens_pedido.html', {'itens': itens})

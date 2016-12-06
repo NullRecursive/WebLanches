@@ -13,10 +13,6 @@ class Usuario(User):
 		self.set_password(self.password)
 		User.save(self)
 
-PRODUTOS =  (('hamburguer',u'Hambuguer'), 
-			('bebida',u'Bebida'), 
-			('pastel',u'Pastel'), 
-			('pizzas', u'Pizzas'))
 
 class Produto(models.Model):
 	nome = models.CharField(
@@ -27,6 +23,13 @@ class Produto(models.Model):
 	descricao = models.TextField(blank = True)
 	imagem = models.ImageField(upload_to = 'loja/static/product_images')
 	em_Falta = models.BooleanField()
+
+	PRODUTOS =  (('hamburguer',u'Hambuguer'), 
+			('bebida',u'Bebida'), 
+			('pastel',u'Pastel'), 
+			('pizzas', u'Pizzas'))
+
+
 	categoria = models.CharField(
 		max_length = 10,
 		choices = PRODUTOS,
@@ -51,21 +54,22 @@ class Item(models.Model):
 	quantidade = models.IntegerField(default = 0)
 
 
-# Em Andamento quando ainda esta na fase de insercao
-# Concluido quando o cliente cncluir suas escolhas
-# Finalizado quando o atendente concluir a producao
-# Em Entrega quando esta a caminho do solicitante
-# Encerrado foi entregue e encerrado 
-ESTADO_PEDIDO = (('em_andamento', 'Em Andamento'), 
-				('concluido', 'Concluido'),
-				('finalizado', 'Finalizado'), 
-				('em_entrega', 'Em Entrega'), 
-				('encerrado', 'Encerrado'))
-
 class Pedido(models.Model):
 	usuario = models.ForeignKey('auth.User')
 
 	data_do_pedido = models.DateTimeField(default = timezone.now)
+
+	# Em Andamento quando ainda esta na fase de insercao
+	# Concluido quando o cliente cncluir suas escolhas
+	# Finalizado quando o atendente concluir a producao
+	# Em Entrega quando esta a caminho do solicitante
+	# Encerrado foi entregue e encerrado 
+	ESTADO_PEDIDO = (('em_andamento', 'Em Andamento'), 
+					('concluido', 'Concluido'),
+					('finalizado', 'Finalizado'), 
+					('em_entrega', 'Em Entrega'), 
+					('encerrado', 'Encerrado'))
+
 
 	estado_do_pedido = models.CharField(
 		max_length = 12,
