@@ -19,7 +19,7 @@ def login_page(request):
 	else:
 		form = FormLogin()
 
-	return render(request,'loja/login.html', {'form': form})
+	return render(request,'loja/login/login.html', {'form': form})
 
 def cardapio(request):
 	return redirect(hamburguer)
@@ -35,27 +35,27 @@ def cad_page(request):
 	else:
 		form = FormCadastro()
 
-	return render(request, 'loja/cadastro.html', {'form': form})
+	return render(request, 'loja/login/cadastro.html', {'form': form})
 
 def hamburguer(request):
 	produtos_hamburguer = Produto.objects.filter(categoria = 'hamburguer')
-	return render(request, 'loja/hamburguer.html', {'produtos_hamburguer': produtos_hamburguer})
+	return render(request, 'loja/cardapio/hamburguer.html', {'produtos_hamburguer': produtos_hamburguer})
 
 def bebida(request):
 	produtos_bebida = Produto.objects.filter(categoria = 'bebida')
-	return render(request, 'loja/bebida.html', {'produtos_bebida': produtos_bebida})
+	return render(request, 'loja/cardapio/bebida.html', {'produtos_bebida': produtos_bebida})
 
 def pastel(request):
 	produtos_pastel = Produto.objects.filter(categoria = 'pastel')
-	return render(request, 'loja/pastel.html', {'produtos_pastel': produtos_pastel})
+	return render(request, 'loja/cardapio/pastel.html', {'produtos_pastel': produtos_pastel})
 
 def pizza(request):
 	produtos_pizza = Produto.objects.filter(categoria = 'pizzas')
-	return render(request, 'loja/pizza.html', {'produtos_pizza': produtos_pizza})
+	return render(request, 'loja/cardapio/pizza.html', {'produtos_pizza': produtos_pizza})
 
 def todos(request):
 	all_produtos = Produto.objects.all()
-	return render(request, 'loja/todos.html', {'all_produtos': all_produtos})
+	return render(request, 'loja/cardapio/todos.html', {'all_produtos': all_produtos})
 
 def sair(request):
 	controller = ControllerUsuario()
@@ -67,13 +67,14 @@ def add_produto_pedido(request, id_produto, quantidade):
 	pedido = Pedido.objects.filter(usuario = usuario, estado_do_pedido = ESTADO_PEDIDO[0]) #pega TODOS pedidos do usuario
 	item = Item(id_pedido = pedido.pk, id_produto = id_produto, quantidade = quantidade)
 	item.save
-	return render(request, 'loja/pedidos.html')
+	return render(request, 'loja/pedido/pedidos.html')
 
 def pedidos_usuario(request):
 	usuario = request.user
 	pedidos = Pedido.objects.filter(usuario = usuario.pk)
-	return render(request, 'loja/pedidos.html', { 'pedidos' : pedidos})
+	return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos})
 
 def itens_pedido(request, id_pedido):
 	itens = Item.objects.filter(id_pedido = id_pedido)
-	return render(request, 'loja/itens_pedido.html', {'itens': itens})
+	produtos = Produto.objects.all()
+	return render(request, 'loja/pedido/itens_pedido.html', {'itens': itens, 'produtos' : produtos})

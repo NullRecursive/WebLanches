@@ -47,7 +47,7 @@ class Item(models.Model):
 	)
 	id_pedido = models.ForeignKey(
 		'Pedido',
-		on_delete=models.CASCADE,
+		on_delete = models.CASCADE,
 		default = 0,
 	)
 

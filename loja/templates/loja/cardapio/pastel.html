@@ -1,11 +1,11 @@
-{% extends 'loja/cardapio.html' %}
+{% extends 'loja/cardapio/cardapio.html' %}
 {% block list %}
 {% load staticfiles %}
 
 
 <div class="row distance">
 
-{% for pro in all_produtos %}
+{% for pro in produtos_pastel %}
 
 
   <div class="col-sm-6 col-md-3">
@@ -42,5 +42,7 @@
   </div>
 {% endfor %}
 </div>
+
+
 
 {% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'loja/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<div class="dashhead">
+    <div class="dashhead-titles">
+        <h3 class="dashhead-title">Itens</h3>
+    </div>
+  
+    <ul class="list-group">
+        {% for item in itens %}
+            {% for produto in produtos %}
+            <a href="#" class="basic_link" style="text-decoration:none;">    
+                <li class="list-group-item btn">
+                    {% if item.pk == produto.pk %}
+                        {{ produto.nome }} <br />
+                        {{ item.quantidade }}
+                    {% endif %}
+                    <span class="list-group-progress" style="width: 75%;"></span>
+                </li>
+            </a>
+            {% endfor %}   
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
