@@ -1,5 +1,5 @@
 from .models import Usuario, Produto, Pedido, Item
-from .forms import FormLogin, FormCadastro
+from .forms import FormLogin, FormCadastro, FormStatus
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -91,5 +91,9 @@ def all_pedidos(request):
 		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos })
 	return redirect(home)
 
-def salvar_modificacao_pedido(request):
-	pass
+def alter_status(request):
+	form = FormStatus(request.POST or None)
+	if form.is_valid():
+		answer = form.cleaned_data.get('status') 
+		
+

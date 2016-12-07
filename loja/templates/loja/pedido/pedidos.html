@@ -16,15 +16,36 @@
                     {{ pedido.get_estado_do_pedido_display }}
                     <span class="list-group-progress" style="width: 75%;"></span>
                 </button>
-
+                <!--
                 <select class="selectpicker show-tick">
                     <option>Em andamento</option>
                     <option>Concuido</option>
                     <option>Finalizado</option>
                     <option>Encerrado</option>
-                </select>
+                </select> -->
+
+                </li>
+                
+                <tr>
+                    <th>
+                        <label for="id_status">Status Pedido:</label>
+                    </th>
+
+                    <td>
+                        <select id="id_status" name="status" required>
+                            <!--<option value="{{  }}">{{  }}</option>-->
+                            <option value="em_andamento" >Em andamento</option>
+                            <option value="concluido" >Concuido</option>
+                            <option value="finalizado" >Finalizado</option>
+                            <option value="em_entrega" >Em Entrega</option>
+                            <option value="encerrado" >Encerrado</option>
+                        </select>
+                    </td>
+                </tr>
+                
             </a>
         {% endfor %}
     </ul>
 </div>
+
 {% endblock %}
