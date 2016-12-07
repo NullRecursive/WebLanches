@@ -1,5 +1,5 @@
 from .models import Usuario, Produto, Pedido, Item
-from .forms import FormLogin, FormCadastro
+from .forms import FormLogin, FormCadastro, FormStatus
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -82,3 +82,9 @@ def itens_pedido(request, id_pedido):
 def ver_comprovante(request,id_pedido):
 	itens =  Item.objects.filter(id_pedido = id_pedido)
 	return render(request,'loja/comprovante.html',{'itens': itens})
+
+def alter_status(request):
+	form = FormStatus(request.POST or None)
+	if form.is_valid():
+		answer = form.cleaned_data.get('status') 
+	
