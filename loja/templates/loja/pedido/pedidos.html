@@ -15,6 +15,18 @@
                     {{ pedido.get_estado_do_pedido_display }}
                     <span class="list-group-progress" style="width: 75%;"></span>
                 </li>
+                
+                <tr>
+                    <th>
+                        <label for="id_status">Filter by:</label>
+                    </th>
+                    <td>
+                        <select id="id_status" name="status" required>
+                            <option value="{{  }}">{{  }}</option>
+                        </select>
+                    </td>
+                </tr>
+                
             </a>
         {% endfor %}
     </ul>
