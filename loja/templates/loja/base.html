@@ -77,6 +77,9 @@
                                 <ul class="dropdown-menu">
                                     {% if user.is_superuser %}
                                         <li><a href="{% url 'admin:index' %}" >Gerenciamento</a></li>
+                                        <li><a href="{% url 'all_pedidos' %}" >Ver pedidos</a></li>
+                                    {% else %}
+                                    <li><a href="{% url 'pedidos_usuario' %}" >Ver pedidos</a></li>
                                     {% endif %}
                                     <li><a href="{% url 'sair' %}">Sair</a></li>
                                 </ul>
@@ -87,20 +90,20 @@
                             <li>
                                 <a href="{% url 'cadastrar' %}" class="btn basic_link">
                                     <span class="glyphicon glyphicon-user"></span>
-                                    <b>Cadastrar-se</b> </a>
+                                    <b>Cadastrar-se</b> 
+                                </a>
                             </li>
                             <li>
                                 <a href="{% url 'login' %}" class="btn basic_link">
                                     <span class="glyphicon glyphicon-log-in"></span>
-                                    <b>Entrar</b> </a>
+                                    <b>Entrar</b>
+                                </a>
                             </li>
                         {% endif %}
                     </ul>
 
                 </div>
             </div>
-
-
         </nav>
 
         <!-- MAIN -->
@@ -108,6 +111,7 @@
             <div class="col-md-offset-1 col-md-10 col-md-offset-1 distance" >
                 <h1><a href="{% url 'home' %}" class="col-md-10 page_header_link">WebLanches</a></h1>
                 {% if not user.is_superuser %}
+
                 <!-- Carrinho -->
                     <div class="col-md-2 pull-right">
                         <div class="dropdown">
@@ -145,7 +149,7 @@
         <!-- CONTEUDO -->
 
         <div class="content container distance">
-            <div class="row">>
+            <div class="row">
                     {% block content %}
 
                     {% endblock %}

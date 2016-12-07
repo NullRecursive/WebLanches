@@ -22,7 +22,7 @@ def login_page(request):
 	return render(request,'loja/login/login.html', {'form': form})
 
 def cardapio(request):
-	return redirect(hamburguer)
+	return redirect(todos)
 
 def cad_page(request):
 	if request.method == 'POST':
@@ -70,9 +70,11 @@ def add_produto_pedido(request, id_produto, quantidade):
 	return render(request, 'loja/pedido/pedidos.html')
 
 def pedidos_usuario(request):
-	usuario = request.user
-	pedidos = Pedido.objects.filter(usuario = usuario.pk)
-	return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos})
+	if not request.user.is_superuser:
+		usuario = request.user
+		pedidos = Pedido.objects.filter(usuario = usuario.pk)
+		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos})
+	return redirect(home)
 
 def itens_pedido(request, id_pedido):
 	itens = Item.objects.filter(id_pedido = id_pedido)
@@ -82,3 +84,12 @@ def itens_pedido(request, id_pedido):
 def ver_comprovante(request,id_pedido):
 	itens =  Item.objects.filter(id_pedido = id_pedido)
 	return render(request,'loja/comprovante.html',{'itens': itens})
+
+def all_pedidos(request):
+	if request.user.is_superuser:
+		pedidos = Pedido.objects.all()
+		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos })
+	return redirect(home)
+
+def salvar_modificacao_pedido(request):
+	pass

@@ -1,7 +1,7 @@
 # -*- coding=utf-8 -*-
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Usuario
+from .models import Usuario, Pedido
 
 class FormCadastro(forms.Form):
 	nome = forms.CharField(
@@ -52,3 +52,10 @@ class FormLogin(forms.Form):
 		max_length = 40)
 	senha = forms.CharField(
 		widget = forms.PasswordInput)
+
+class FormStatus(forms.Form):
+	status = forms.ChoiceField( 
+		choices = Pedido.ESTADO_PEDIDO, 
+		required = True, 
+		initial = Pedido.ESTADO_PEDIDO[0]
+	) 
