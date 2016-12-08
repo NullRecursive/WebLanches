@@ -9,11 +9,13 @@
   
     <ul class="list-group">
         {% for pedido in pedidos %}
-            <a href="{% url 'itens_pedido' id_pedido=pedido.pk %}" class="basic_link" style="text-decoration:none;">    
-                <li class="list-group-item btn">
+                <a href="{% url 'itens_pedido' id_pedido=pedido.pk %}" class="basic_link" style="text-decoration:none;">
+
+                <button type="button" class="list-group-item">
                     Pedido {{ pedido.pk }} <br />
                     {{ pedido.get_estado_do_pedido_display }}
-                    <span class="list-group-progress" style="width: 75%;"></span>
+                </button>
+
                 </li>
             </a>
         {% endfor %}
