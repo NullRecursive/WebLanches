@@ -1,0 +1,43 @@
+{% extends 'loja/base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+
+<div class="dashhead">
+    {% if user.is_superuser %}
+    <div class="dashhead-titles">
+        <h3 class="dashhead-title">Status do Pedido</h3>
+
+        <form action="{% url 'alter_status' id_pedido=id_pedido %}" method="POST">{% csrf_token %}
+            <select class="form-control" name="pedido_status" id="pedido_status">
+                {% for key, value in status %} 
+                        <option value="{{ key }}" {% if state_pedido == key %}selected="selected"{% endif %}>
+                            {{ value }}</option>
+                {% endfor %}
+            </select>
+            <br />
+            <button class="btn btn-default" type="submit" value="Select">Salvar</button>
+        </form> 
+
+    </div>
+    {% endif %}
+
+    <div class="dashhead-titles">
+        <h3 class="dashhead-title">Itens</h3>
+    </div>
+  
+    <ul class="list-group">
+        {% for item in itens %}
+
+            <a href="#" class="basic_link" style="text-decoration:none;">    
+                <li class="list-group-item">
+                    {{ item.id_produto }} <!-- id_produto == eh o nome do produto --><br />
+                    Quantidade: {{ item.quantidade }}
+                    <span class="list-group-progress" style="width: 75%;"></span>
+                </li>
+            </a>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}
