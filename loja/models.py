@@ -76,23 +76,12 @@ class Pedido(models.Model):
 		choices = ESTADO_PEDIDO, 
 		default = ESTADO_PEDIDO[0])
 	
-	def concluir_pedido(self):
-		self.data_do_pedido = timezone.now()
-		self.estado_do_pedido = ESTADO_PEDIDO[1]
-		self.save
+	@classmethod
+	def get_state(self, status_key):
+		for k, v in self.ESTADO_PEDIDO:
+			if k == status_key:
+				return (k, v)	
 
-	
-	def finalizar_pedido(self):
-		self.estado_do_pedido = ESTADO_PEDIDO[2]
-		self.save
-
-	def entregar_pedido(self):
-		self.estado_do_pedido = ESTADO_PEDIDO[3]
-		self.save
-	
-	def encerrar_pedido(self):
-		self.estado_do_pedido = ESTADO_PEDIDO[4]
-		self.save
 
 	def __str__(self):
 		return '%s %d' % (self.usuario, self.pk)

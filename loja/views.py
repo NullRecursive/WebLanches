@@ -2,9 +2,9 @@ from .models import Usuario, Produto, Pedido, Item
 from .forms import FormLogin, FormCadastro, FormStatus
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from .controllers import ControllerUsuario
-
+from django.http import HttpResponse
 
 def home(request):
 	return redirect(cardapio)
@@ -79,7 +79,9 @@ def pedidos_usuario(request):
 def itens_pedido(request, id_pedido):
 	itens = Item.objects.filter(id_pedido = id_pedido)
 	produtos = Produto.objects.all()
-	return render(request, 'loja/pedido/itens_pedido.html', {'itens': itens, 'produtos' : produtos})
+	state_pedido = get_object_or_404(Pedido, pk = id_pedido).estado_do_pedido
+	return render(request, 'loja/pedido/itens_pedido.html', 
+		{'itens': itens, 'id_pedido' : id_pedido, 'status' : Pedido.ESTADO_PEDIDO, 'state_pedido' : state_pedido})
 
 def ver_comprovante(request,id_pedido):
 	itens =  Item.objects.filter(id_pedido = id_pedido)
@@ -88,12 +90,23 @@ def ver_comprovante(request,id_pedido):
 def all_pedidos(request):
 	if request.user.is_superuser:
 		pedidos = Pedido.objects.all()
-		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos })
+		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos})
 	return redirect(home)
 
-def alter_status(request):
-	form = FormStatus(request.POST or None)
-	if form.is_valid():
-		answer = form.cleaned_data.get('status') 
-		
+def alter_status(request, id_pedido):
+	if request.POST:
+		status_key = request.POST.getlist('pedido_status')
+		new_status = str(status_key[0])
+	
+		pedido = get_object_or_404(Pedido, pk = id_pedido, usuario_id = request.user.pk)
+		pedido.estado_do_pedido = Pedido.get_state(new_status)
+		pedido.save()
+
+	return redirect(itens_pedido, id_pedido = id_pedido)
+	
+	
+
+
+
+
 

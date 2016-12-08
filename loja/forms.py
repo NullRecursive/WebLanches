@@ -54,11 +54,5 @@ class FormLogin(forms.Form):
 		widget = forms.PasswordInput)
 
 class FormStatus(forms.Form):
-	ESTADO_PEDIDO = (('em_andamento', 'Em Andamento'), 
-			('concluido', 'Concluido'),
-			('finalizado', 'Finalizado'), 
-			('em_entrega', 'Em Entrega'), 
-			('encerrado', 'Encerrado'))
-
-	status = forms.ChoiceField(choices = ESTADO_PEDIDO)
+	status = forms.ChoiceField(choices = Pedido.ESTADO_PEDIDO)
 

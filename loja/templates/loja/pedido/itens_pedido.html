@@ -4,6 +4,26 @@
 
 
 <div class="dashhead">
+    
+    <div class="dashhead-titles">
+        <h3 class="dashhead-title">Status do Pedido</h3>
+
+        <form action="{% url 'alter_status' id_pedido=id_pedido %}" method="POST">{% csrf_token %}
+            <select class="form-control" name="pedido_status" id="pedido_status">
+                {% for key, value in status %} 
+            <!-- COMPARACAO AINDA NAO TA FUNCIOONANDO -->
+                    {% if key == state_pedido.0 %}
+                        <option value="{{ key }}" selected>{{ value }}</option>
+                    {% else %}
+                        <option value="{{ key }}">{{ value }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <br />
+            <button class="btn btn-default" type="submit" value="Select">Salvar</button>
+        </form> 
+
+    </div>
 
     <div class="dashhead-titles">
         <h3 class="dashhead-title">Itens</h3>
@@ -11,10 +31,11 @@
   
     <ul class="list-group">
         {% for item in itens %}
+
             <a href="#" class="basic_link" style="text-decoration:none;">    
                 <li class="list-group-item">
                     {{ item.id_produto }} <!-- id_produto == eh o nome do produto --><br />
-                    {{ item.quantidade }}
+                    Quantidade: {{ item.quantidade }}
                     <span class="list-group-progress" style="width: 75%;"></span>
                 </li>
             </a>

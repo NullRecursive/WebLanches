@@ -18,5 +18,5 @@ urlpatterns = [
     url(r'^pedidos/$', views.pedidos_usuario, name = 'pedidos_usuario'),
     url(r'^pedido/(?P<id_pedido>[0-9]+)/itens/$', views.itens_pedido, name = 'itens_pedido'),
     url(r'^pedidos-gerenciamento/$', views.all_pedidos, name = 'all_pedidos'),
-    url(r'^salvar_modificacao_pedido$', views.salvar_modificacao_pedido, name = 'salvar_modificacao_pedido'),
+    url(r'^alter_status/(?P<id_pedido>[0-9]+)$', views.alter_status, name = 'alter_status'),
 ]
