@@ -76,12 +76,6 @@ class Pedido(models.Model):
 		choices = ESTADO_PEDIDO, 
 		default = ESTADO_PEDIDO[0])
 	
-	@classmethod
-	def get_state(self, status_key):
-		for k, v in self.ESTADO_PEDIDO:
-			if k == status_key:
-				return (k, v)	
-
 
 	def __str__(self):
 		return '%s %d' % (self.usuario, self.pk)

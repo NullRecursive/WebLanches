@@ -4,7 +4,7 @@
 
 
 <div class="dashhead">
-    
+    {% if user.is_superuser %}
     <div class="dashhead-titles">
         <h3 class="dashhead-title">Status do Pedido</h3>
 
@@ -12,11 +12,8 @@
             <select class="form-control" name="pedido_status" id="pedido_status">
                 {% for key, value in status %} 
             <!-- COMPARACAO AINDA NAO TA FUNCIOONANDO -->
-                    {% if key == state_pedido.0 %}
-                        <option value="{{ key }}" selected>{{ value }}</option>
-                    {% else %}
-                        <option value="{{ key }}">{{ value }}</option>
-                    {% endif %}
+                        <option value="{{ key }}" {% if state_pedido == key %}selected="selected"{% endif %}>
+                            {{ value }}</option>
                 {% endfor %}
             </select>
             <br />
@@ -24,6 +21,7 @@
         </form> 
 
     </div>
+    {% endif %}
 
     <div class="dashhead-titles">
         <h3 class="dashhead-title">Itens</h3>

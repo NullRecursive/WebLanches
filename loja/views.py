@@ -94,12 +94,12 @@ def all_pedidos(request):
 	return redirect(home)
 
 def alter_status(request, id_pedido):
-	if request.POST:
+	if request.POST and request.user.is_superuser:
 		status_key = request.POST.getlist('pedido_status')
 		new_status = str(status_key[0])
 	
-		pedido = get_object_or_404(Pedido, pk = id_pedido, usuario_id = request.user.pk)
-		pedido.estado_do_pedido = Pedido.get_state(new_status)
+		pedido = get_object_or_404(Pedido, pk = id_pedido)
+		pedido.estado_do_pedido = new_status
 		pedido.save()
 
 	return redirect(itens_pedido, id_pedido = id_pedido)
