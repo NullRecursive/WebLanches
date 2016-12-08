@@ -66,11 +66,11 @@
                         <!-- Apos o login -->
                         {% if user.is_authenticated %}
                             <div class="dropdown">
-                                <a href="#" class="btn basic_link" data-toggle="dropdown"> 
+                                <a href="#" class="btn basic_link" data-toggle="dropdown">
                                     {% if user.is_superuser %}
                                         <b>{{ user.username | title | show_admin }}</b>
                                     {% else %}
-                                        <b>{{ user.first_name | title }}</b> 
+                                        <b>{{ user.first_name | title }}</b>
                                     {% endif %}
                                     <span class="glyphicon glyphicon-user"></span>
                                 </a>
@@ -148,9 +148,10 @@
                     <li class="active">
                         <a href="{% url 'cardapio' %}" class="btn basic_link"><b>Cardápio</b></a>
                     </li>
-                </ul>
+                </ul>                
             </div>
         <!-- CONTEUDO -->
+
 
         <div class="content container distance">
             <div class="row">
