@@ -81,4 +81,8 @@ def itens_pedido(request, id_pedido):
 
 def ver_comprovante(request,id_pedido):
 	itens =  Item.objects.filter(id_pedido = id_pedido)
-	return render(request,'loja/comprovante.html',{'itens': itens})
+	dicionario={}
+	for item in itens:
+		dicionario[item.id_produto] = Produto.objects.filter(nome = item.id_produto)
+
+	return render(request,'loja/comprovante.html',{'dicionario': dicionario})

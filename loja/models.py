@@ -53,6 +53,8 @@ class Item(models.Model):
 
 	quantidade = models.IntegerField(default = 0)
 
+	def get_produto():
+		produto = Produto.objects.filter()
 
 class Pedido(models.Model):
 	usuario = models.ForeignKey('auth.User')
