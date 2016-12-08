@@ -11,7 +11,6 @@
         <form action="{% url 'alter_status' id_pedido=id_pedido %}" method="POST">{% csrf_token %}
             <select class="form-control" name="pedido_status" id="pedido_status">
                 {% for key, value in status %} 
-            <!-- COMPARACAO AINDA NAO TA FUNCIOONANDO -->
                         <option value="{{ key }}" {% if state_pedido == key %}selected="selected"{% endif %}>
                             {{ value }}</option>
                 {% endfor %}
