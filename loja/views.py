@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from .controllers import ControllerUsuario
 from django.http import HttpResponse
-
+# -*- coding: utf-8 -*-
 def home(request):
 	return redirect(cardapio)
 
@@ -14,8 +14,7 @@ def login_page(request):
 		form = FormLogin(request.POST)
 		controller =  ControllerUsuario()
 		if controller.logar(request,form):
-			return redirect(cardapio)
-
+			return redirect("/cardapio/")
 	else:
 		form = FormLogin()
 
@@ -85,11 +84,10 @@ def itens_pedido(request, id_pedido):
 
 def ver_comprovante(request,id_pedido):
 	itens =  Item.objects.filter(id_pedido = id_pedido)
-	dicionario={}
+	dicionario = {}
 	for item in itens:
 		dicionario[item.id_produto] = Produto.objects.filter(nome = item.id_produto)
-	return render(request,'loja/comprovante.html',{'dicionario': dicionario})
-
+	return render(request,'loja/pedido/comprovante.html',{'dicionario': dicionario})
 
 def all_pedidos(request):
 	if request.user.is_superuser:
@@ -108,3 +106,5 @@ def alter_status(request, id_pedido):
 
 	return redirect(itens_pedido, id_pedido = id_pedido)
 	
+	
+
