@@ -40,6 +40,13 @@ def hamburguer(request):
 	produtos_hamburguer = Produto.objects.filter(categoria = 'hamburguer')
 	return render(request, 'loja/cardapio/hamburguer.html', {'produtos_hamburguer': produtos_hamburguer})
 
+def add_pedido(request, id_produto, quantidade):
+	usuario = request.Usuario #pega usuario da requisicao
+	pedido = Pedido.objects.filter(usuario = usuario, estado_do_pedido = ESTADO_PEDIDO[0]) #pega TODOS pedidos do usuario
+	item = Item(id_pedido = pedido.pk, id_produto = id_produto, quantidade = quantidade)
+	item.save
+	return render(request, 'loja/pedido/pedidos.html')
+
 def bebida(request):
 	produtos_bebida = Produto.objects.filter(categoria = 'bebida')
 	return render(request, 'loja/cardapio/bebida.html', {'produtos_bebida': produtos_bebida})
@@ -79,7 +86,7 @@ def itens_pedido(request, id_pedido):
 	itens = Item.objects.filter(id_pedido = id_pedido)
 	produtos = Produto.objects.all()
 	state_pedido = get_object_or_404(Pedido, pk = id_pedido).estado_do_pedido
-	return render(request, 'loja/pedido/itens_pedido.html', 
+	return render(request, 'loja/pedido/itens_pedido.html',
 		{'itens': itens, 'id_pedido' : id_pedido, 'status' : Pedido.ESTADO_PEDIDO, 'state_pedido' : state_pedido})
 
 def ver_comprovante(request,id_pedido):
@@ -99,12 +106,9 @@ def alter_status(request, id_pedido):
 	if request.POST and request.user.is_superuser:
 		status_key = request.POST.getlist('pedido_status')
 		new_status = str(status_key[0])
-	
+
 		pedido = get_object_or_404(Pedido, pk = id_pedido)
 		pedido.estado_do_pedido = new_status
 		pedido.save()
 
 	return redirect(itens_pedido, id_pedido = id_pedido)
-	
-	
-
