@@ -13,7 +13,7 @@
       <div class="caption ">
         <hr>
         <h4>{{ pro.nome }}</h4>
-        <hr> 
+        <hr>
         <p >R$ {{ pro.preco }}</p>
         <button type="button" class="btn btn-primary btn-mini" data-toggle="modal" data-target="#myModal">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -28,6 +28,9 @@
               </div>
               <div class="modal-body">
                 <h5 class="modal-title" id="myModalLabel">{{ pro.descricao }}</h5>
+                <div class="input-group">                  
+                  <input type="text" class="form-control" aria-label="...">
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
