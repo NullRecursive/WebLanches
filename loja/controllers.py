@@ -1,7 +1,7 @@
 from .models import Usuario, Pedido, Item, Produto
 from django.contrib.auth import authenticate, login, logout
 from django.db import models
-from .forms import FormLogin, FormCadastro
+from .forms import FormLogin, FormCadastro, FormAddProdutoItem
 from django.db import IntegrityError
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -13,15 +13,15 @@ class ControllerUsuario:
     	form = FormCadastro(request.POST)
 
     	if form.is_valid():
-            try: 
+            try:
                	usuario = form.cleaned_data['username']
-                email = form.cleaned_data['email']    
+                email = form.cleaned_data['email']
                 telefone = form.cleaned_data['telefone']
                 nome = form.cleaned_data['nome']
                 endereco = form.cleaned_data['endereco']
                 senha = form.cleaned_data['senha']
                 csenha = form.cleaned_data['csenha']
-                cpf = form.cleaned_data['cpf']	
+                cpf = form.cleaned_data['cpf']
                 cep = form.cleaned_data['cep']
 
                 user = Usuario()
@@ -34,11 +34,11 @@ class ControllerUsuario:
                 user.username = usuario
                 user.cep = cep
                 Usuario.save(user)
-        
-            except IntegrityError: 
+
+            except IntegrityError:
                 return False
             else:
-                return True 
+                return True
         #return False # Ta com um erro FDP que nao reconhece
 
     def logar(self, request, form):
@@ -51,8 +51,14 @@ class ControllerUsuario:
 	        	return True
 	        return False
         #return False # Mesmo Erro FDP
-        
+
     def logout(self, request):
         logout(request)
 
-
+    def pedido(self, request, form):
+        if form.is_valid():
+            quantidade = form.cleaned_data['quantidade']
+            if user is not None:
+                add_pedido(request, quantidade)
+                return True
+            return False
