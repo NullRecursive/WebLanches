@@ -21,7 +21,7 @@ def login_page(request):
 	return render(request,'loja/login/login.html', {'form': form})
 
 def cardapio(request):
-	return redirect(todos)
+	return redirect(produto_tipo, tipo = 'todos')
 
 def cad_page(request):
 	if request.method == 'POST':
@@ -36,33 +36,20 @@ def cad_page(request):
 
 	return render(request, 'loja/login/cadastro.html', {'form': form})
 
-def hamburguer(request):
-	produtos_hamburguer = Produto.objects.filter(categoria = 'hamburguer')
-	return render(request, 'loja/cardapio/hamburguer.html', {'produtos_hamburguer': produtos_hamburguer})
-
 def add_pedido(request, id_produto, quantidade):
 	usuario = request.Usuario #pega usuario da requisicao
 	pedido = Pedido.objects.filter(usuario = usuario, estado_do_pedido = ESTADO_PEDIDO[0]) #pega TODOS pedidos do usuario
 	item = Item(id_pedido = pedido.pk, id_produto = id_produto, quantidade = quantidade)
-	item.save
+	item.save()
 	return render(request, 'loja/pedido/pedidos.html')
 
-def bebida(request):
-	produtos_bebida = Produto.objects.filter(categoria = 'bebida')
-	return render(request, 'loja/cardapio/bebida.html', {'produtos_bebida': produtos_bebida})
-
-def pastel(request):
-	produtos_pastel = Produto.objects.filter(categoria = 'pastel')
-	return render(request, 'loja/cardapio/pastel.html', {'produtos_pastel': produtos_pastel})
-
-def pizza(request):
-	produtos_pizza = Produto.objects.filter(categoria = 'pizzas')
-	return render(request, 'loja/cardapio/pizza.html', {'produtos_pizza': produtos_pizza})
-
-def todos(request):
-	all_produtos = Produto.objects.all()
-
-	return render(request, 'loja/cardapio/todos.html', {'all_produtos': all_produtos})
+def produto_tipo(request, tipo):
+	tipo_produtos = []
+	if tipo == 'todos':
+		tipo_produtos = Produto.objects.all() 
+	else:			
+		tipo_produtos = Produto.objects.filter(categoria = tipo)
+	return render(request, 'loja/cardapio/tipo_produtos.html', {'produtos': tipo_produtos})
 
 def sair(request):
 	controller = ControllerUsuario()
