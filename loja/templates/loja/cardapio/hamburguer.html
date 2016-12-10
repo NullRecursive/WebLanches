@@ -13,7 +13,7 @@
       <div class="caption ">
         <hr>
         <h4>{{ pro.nome }}</h4>
-        <hr> 
+        <hr>
         <p >R$ {{ pro.preco }}</p>
         <button type="button" class="btn btn-primary btn-mini" data-toggle="modal" data-target="#myModal">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -28,7 +28,16 @@
               </div>
               <div class="modal-body">
                 <h5 class="modal-title" id="myModalLabel">{{ pro.descricao }}</h5>
+                <br/>
+                <!--Formulario de quantidade-->
+                <form class="form-inline">
+                  <div class="form-group form-group-sm">
+                    <label for="exampleInputName2">Quantidade:</label>
+                    <input type="text" class="form-control" id="exampleInputName2" placeholder="">
+                  </div>
+                </form>
               </div>
+
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-primary">Salvar</button>

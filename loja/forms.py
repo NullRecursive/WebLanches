@@ -1,7 +1,7 @@
 # -*- coding=utf-8 -*-
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Usuario, Pedido
+from .models import Usuario, Pedido, Produto
 
 class FormCadastro(forms.Form):
 	nome = forms.CharField(
@@ -38,7 +38,26 @@ class FormCadastro(forms.Form):
 		model = Usuario
 		exclude = ['csenha']
 		fields = ['nome', 'email', 'senha', 'username', 'telefone', 'cpf', 'endereco', 'cep']
-		
+
+class FormProduto(forms.Form):
+	nome = forms.CharField(
+		widget = forms.TextInput(
+			attrs={'autofocus': 'autofocus', 'required': 'required'}),
+		max_length = 40)
+	preco = forms.FloatField(
+		widget = forms.TextInput(
+			attrs={'required': 'required'}))
+	descricao = forms.CharField(
+		widget = forms.TextInput(
+			attrs={'required' : 'required'}))
+	em_Falta = forms.BooleanField(
+		widget = forms.TextInput(
+			attrs={'required' : 'required'}))
+	class Meta:
+		model = Produto
+		fields = ['nome', 'preco', 'descricao','em_Falta']
+
+
 
 	def clean_usuario(self):
 		usuario_novo = self.cleaned_data['username']
@@ -55,4 +74,3 @@ class FormLogin(forms.Form):
 
 class FormStatus(forms.Form):
 	status = forms.ChoiceField(choices = Pedido.ESTADO_PEDIDO)
-
