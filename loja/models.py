@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 class Usuario(User):
 	telefone = models.CharField(max_length = 20)
@@ -56,6 +58,7 @@ class Item(models.Model):
 	def get_produto():
 		produto = Produto.objects.filter()
 
+
 class Pedido(models.Model):
 	usuario = models.ForeignKey('auth.User')
 
@@ -82,6 +85,10 @@ class Pedido(models.Model):
 	def __str__(self):
 		return '%s %d' % (self.usuario, self.pk)
 
-	
+# SIGNAL
+@receiver(post_save, sender = Pedido)
+def create_info(sender, instance, created, **kwargs):
+    print ('O Pedido foi salvo') 
 
 
+post_save.connect(create_info, sender = Pedido)

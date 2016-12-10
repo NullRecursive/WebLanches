@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from .controllers import ControllerUsuario
-from django.http import HttpResponse
+
 # -*- coding: utf-8 -*-
 def home(request):
 	return redirect(cardapio)
@@ -54,6 +54,7 @@ def pizza(request):
 
 def todos(request):
 	all_produtos = Produto.objects.all()
+
 	return render(request, 'loja/cardapio/todos.html', {'all_produtos': all_produtos})
 
 def sair(request):
