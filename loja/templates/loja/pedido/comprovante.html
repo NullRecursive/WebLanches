@@ -2,14 +2,26 @@
 {% load widget_tweaks %}
 {% block content %}
 
-<div id = "formulario">
-		<ol>
-			{% for itemk,itemv in dicionario.items %}
-				<li>{{itemk}} -------------------------------- {{itemv.preco}}</li>
-			{% endfor %}
-		</ol>
+	<!-- Table -->
+	<table class="table">
+	  <thead>
+	    <tr>
+	     <th>Quantidade</th>
+	      <th>Nome</th>
+	      <th>Preco total</th>
+	      
+	    </tr>
+	  </thead>
+	  <tbody>
 
-		<button> imprimir comprovante</button>
-</div>
+	 {%for item in itens%}
+	    <tr>
+	    	<td>{{item.quantidade}}</td>
+	      	<td>{{item.id_produto}}</td>
+	    </tr>
+	 {%endfor%}
 
-{% endblock %}
+	</table>
+	<button type="button" class="btn btn-default">Salvar comprovante</button>
+	{% endblock %}
+	

@@ -13,7 +13,7 @@ def home(request):
 def login_page(request):
 	if request.user.is_authenticated():
 		return redirect(home)
-		
+
 	if request.method == 'POST':
 		form = FormLogin(request.POST)
 		controller =  ControllerUsuario()
@@ -78,10 +78,7 @@ def itens_pedido(request, id_pedido):
 
 def ver_comprovante(request, id_pedido):
 	itens =  Item.objects.filter(id_pedido = id_pedido)
-	dicionario = {}
-	for item in itens:
-		dicionario[item.id_produto] = Produto.objects.get(pk=item.id_produto)
-	return render(request,'loja/pedido/comprovante.html',{'dicionario': dicionario})
+	return render(request,'loja/pedido/comprovante.html',{'itens': itens})
 
 
 def all_pedidos(request):
