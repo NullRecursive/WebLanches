@@ -37,7 +37,7 @@ def cad_page(request):
 
 	return render(request, 'loja/login/cadastro.html', {'form': form})
 
-def add_pedido(request, id_produto):
+def add_pedido(request, tipo, id_produto):
 	if request.POST:
 		quantidade = request.POST.get('quantidade_pedido')
 		quant = int(quantidade)
