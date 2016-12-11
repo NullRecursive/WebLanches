@@ -1,11 +1,13 @@
 {% extends 'loja/base.html' %}
 {% load widget_tweaks %}
 {% block content %}
+
 <div id = "formulario">
 		<ol>
-			{%for itemk,itemv in dicionario.iteritems%}
-			<li>"{{itemk}}"---------"{{str(itemv.preco)}}"</li>
-			{%endfor%}
+			{% for item_key, item_value in dicionario.iteritems %}
+				<li>"{{ item_key }}"---------"{{ item_value.preco  }}"</li>
+			{% endfor %}
 		</ol>
 </div>
+
 {% endblock %}
