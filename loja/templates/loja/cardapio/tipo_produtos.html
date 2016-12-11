@@ -28,7 +28,7 @@
                 <h4 class="modal-title" id="myModalLabel">{{ produto.nome }}</h4>
               </div>
 
-              <form action="{% url 'add_pedido' tipo=produto.categoria id_produto=produto.nome %}" data-toggle="validator" role="form" class="form-inline" method="POST">{% csrf_token %}
+              <form action="{% url 'add_pedido' id_produto=produto.nome %}" data-toggle="validator" role="form" class="form-inline" method="POST">{% csrf_token %}
                   <div class="modal-body">
                     <h5 class="modal-title" id="myModalLabel">{{ produto.descricao }}</h5>
                     <br/>
