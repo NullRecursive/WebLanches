@@ -44,9 +44,9 @@ def add_pedido(request, id_produto):
 		quant = int(quantidade)
 		pedido = Pedido.objects.filter(usuario = usuario.pk)
 		if pedido is False:
-				pedido = Pedido(usuario = usuario.pk, estado_do_pedido = 0)
+				pedido = Pedido(usuario = usuario.pk)
 				pedido.save()
-		pedido = Pedido.objects.filter(usuario = usuario.pk, estado_do_pedido = 0)
+		pedido = Pedido.objects.filter(usuario = usuario.pk)
 
 		item = Item(id_pedido = pedido.id, id_produto = id_produto, quantidade = quant)
 		item.save()
