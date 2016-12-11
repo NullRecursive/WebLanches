@@ -42,13 +42,13 @@ def add_pedido(request, id_produto):
 	if request.POST:
 		quantidade = request.POST.get('sth', 0)
 		quant = int(quantidade)
-		pedido = Pedido.objects.filter(usuario = usuario)
-		if pedido is None:
-				pedido = Pedido(usuario = usuario.pk)
-				pedido.save()
 		pedido = Pedido.objects.filter(usuario = usuario.pk)
-		print pedido.pk
-		item = Item(id_pedido = pedido.pk, id_produto = id_produto, quantidade = quant)
+		if pedido is False:
+				pedido = Pedido(usuario = usuario.pk, estado_do_pedido = 0)
+				pedido.save()
+		pedido = Pedido.objects.filter(usuario = usuario.pk, estado_do_pedido = 0)
+
+		item = Item(id_pedido = pedido.id, id_produto = id_produto, quantidade = quant)
 		item.save()
 
 
