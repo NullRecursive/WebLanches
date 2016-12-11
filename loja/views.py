@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from .models import Usuario, Produto, Pedido, Item
 from .forms import FormLogin, FormCadastro, FormStatus
 from django.contrib.auth import authenticate, login
@@ -5,7 +6,7 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from .controllers import ControllerUsuario
 
-# -*- coding: utf-8 -*-
+
 def home(request):
 	return redirect(produto_tipo, tipo = 'todos')
 
@@ -14,7 +15,7 @@ def login_page(request):
 		form = FormLogin(request.POST)
 		controller =  ControllerUsuario()
 		if controller.logar(request,form):
-			return redirect(ver_comprovante(request,1))
+			return ver_comprovante(request,1)
 	else:
 		form = FormLogin()
 
@@ -76,8 +77,9 @@ def ver_comprovante(request, id_pedido):
 	itens =  Item.objects.filter(id_pedido = id_pedido)
 	dicionario = {}
 	for item in itens:
-		dicionario[item.id_produto] = Produto.objects.get(nome = item.id_produto)
-	return render(request,'loja/pedido/comprovante.html', {'dicionario': dicionario})
+		dicionario[item.id_produto] = Produto.objects.get(pk=item.id_produto)
+	return render(request,'loja/pedido/comprovante.html',{'dicionario': dicionario})
+
 
 def all_pedidos(request):
 	if request.user.is_superuser:

@@ -4,8 +4,8 @@
 
 <div id = "formulario">
 		<ol>
-			{% for item_key, item_value in dicionario.iteritems %}
-				<li>"{{ item_key }}"---------"{{ item_value.preco  }}"</li>
+			{% for itemk,itemv in dicionario.items %}
+				<li>{{itemk}} -------------------------------- {{itemv.preco}}</li>
 			{% endfor %}
 		</ol>
 </div>
