@@ -11,6 +11,9 @@ def home(request):
 	return redirect(produto_tipo, tipo = 'todos')
 
 def login_page(request):
+	if request.user.is_authenticated():
+		return redirect(home)
+		
 	if request.method == 'POST':
 		form = FormLogin(request.POST)
 		controller =  ControllerUsuario()
