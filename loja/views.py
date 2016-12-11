@@ -12,7 +12,7 @@ def home(request):
 def login_page(request):
 	if request.user.is_authenticated():
 		return redirect(home)
-		
+
 	if request.method == 'POST':
 		form = FormLogin(request.POST)
 		controller =  ControllerUsuario()
@@ -38,15 +38,18 @@ def cad_page(request):
 
 
 def add_pedido(request, id_produto):
+	usuario = request.user  #pega usuario da requisicao
 	if request.POST:
-		quantidade = request.POST.get('quantidade_pedido')
+		quantidade = request.POST.get('sth', 0)
 		quant = int(quantidade)
-		usuario = request.Usuario #pega usuario da requisicao
-		pedido = Pedido(usuario = usuario.pk, estado_do_pedido = ESTADO_PEDIDO[0][0])
-		pedido.save()
-		pedido_ido = Pedido.objects.filter(usuario = usuario, estado_do_pedido = ESTADO_PEDIDO[0])
-		item = Item(id_pedido = pedido_ido.pk, id_produto = id_produto, quantidade = quant)
+		pedido = Pedido.objects.filter(usuario = usuario.pk)
+		if pedido is False:
+				pedido = Pedido(usuario = usuario.pk)
+				pedido.save()
+		item = Item(id_pedido = pedido.id, id_produto = id_produto, quantidade = quant)
 		item.save()
+
+
 	return redirect(pedidos_usuario)
 
 def produto_tipo(request, tipo):
@@ -81,10 +84,7 @@ def itens_pedido(request, id_pedido):
 
 def ver_comprovante(request, id_pedido):
 	itens =  Item.objects.filter(id_pedido = id_pedido)
-	dicionario = {}
-	for item in itens:
-		dicionario[item.id_produto] = Produto.objects.get(pk=item.id_produto)
-	return render(request,'loja/pedido/comprovante.html',{'dicionario': dicionario})
+	return render(request,'loja/pedido/comprovante.html',{'itens': itens})
 
 
 def all_pedidos(request):

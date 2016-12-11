@@ -27,7 +27,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">{{ produto.nome }}</h4>
               </div>
-              
+
               <form action="{% url 'add_pedido' id_produto=produto.nome %}" data-toggle="validator" role="form" class="form-inline" method="POST">{% csrf_token %}
                   <div class="modal-body">
                     <h5 class="modal-title" id="myModalLabel">{{ produto.descricao }}</h5>
@@ -36,7 +36,7 @@
 
                       <div class="form-group form-group-sm">
                         <label for="id_quantidade">Quantidade:</label>
-                        <input type="text" class="form-control" id="exampleInputName2" placeholder="">
+                        <input type="text" class="form-control" id="quantidade_pedido" placeholder="">
                       </div>
 
                   </div>
@@ -46,7 +46,7 @@
                     <button type="submit" class="btn btn-primary">Salvar</button>
                   </div>
             </form>
-            
+
             </div>
           </div>
         </div>
