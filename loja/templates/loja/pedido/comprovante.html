@@ -4,7 +4,7 @@
 <div id = "formulario">
 		<ol>
 			{%for itemk,itemv in dicionario.iteritems%}
-			<li>"{{itemk}}"---------"{{itemv.preco}}"</li>
+			<li>"{{itemk}}"---------"{{str(itemv.preco)}}"</li>
 			{%endfor%}
 		</ol>
 </div>

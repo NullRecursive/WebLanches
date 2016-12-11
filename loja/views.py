@@ -14,7 +14,7 @@ def login_page(request):
 		form = FormLogin(request.POST)
 		controller =  ControllerUsuario()
 		if controller.logar(request,form):
-			return redirect(home)
+			return redirect(ver_comprovante(request,1))
 	else:
 		form = FormLogin()
 
