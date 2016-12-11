@@ -57,6 +57,15 @@ class Item(models.Model):
 
 	def get_produto():
 		produto = Produto.objects.filter()
+	
+	@classmethod
+	def total(self, id_pedido):
+		itens = Item.objects.filter(id_pedido = id_pedido)
+		value = 0.0
+		for item in itens:
+			 produto = Produto.objects.filter(nome = item.id_produto)
+			 value += produto.preco
+		return value
 
 
 class Pedido(models.Model):

@@ -7,21 +7,18 @@ from .controllers import ControllerUsuario
 
 # -*- coding: utf-8 -*-
 def home(request):
-	return redirect(cardapio)
+	return redirect(produto_tipo, tipo = 'todos')
 
 def login_page(request):
 	if request.method == 'POST':
 		form = FormLogin(request.POST)
 		controller =  ControllerUsuario()
 		if controller.logar(request,form):
-			return redirect("/cardapio/")
+			return redirect(home)
 	else:
 		form = FormLogin()
 
 	return render(request,'loja/login/login.html', {'form': form})
-
-def cardapio(request):
-	return redirect(produto_tipo, tipo = 'todos')
 
 def cad_page(request):
 	if request.method == 'POST':
@@ -36,7 +33,8 @@ def cad_page(request):
 
 	return render(request, 'loja/login/cadastro.html', {'form': form})
 
-def add_pedido(request, id_produto, quantidade):
+def add_pedido(request, id_produto):
+	quantidade = 1 #default
 	usuario = request.Usuario #pega usuario da requisicao
 	pedido = Pedido.objects.filter(usuario = usuario, estado_do_pedido = ESTADO_PEDIDO[0]) #pega TODOS pedidos do usuario
 	item = Item(id_pedido = pedido.pk, id_produto = id_produto, quantidade = quantidade)
@@ -54,13 +52,14 @@ def produto_tipo(request, tipo):
 def sair(request):
 	controller = ControllerUsuario()
 	controller.logout(request)
-	return redirect(cardapio)
+	return redirect(home)
 
-def add_produto_pedido(request, id_produto, quantidade):
+def add_produto_pedido(request, id_produto):
 	usuario = request.Usuario #pega usuario da requisicao
-	pedido = Pedido.objects.filter(usuario = usuario, estado_do_pedido = ESTADO_PEDIDO[0]) #pega TODOS pedidos do usuario
+	#Supondo que nao tem outro pedido com esse estado
+	pedido = Pedido.objects.filter(usuario = usuario, estado_do_pedido = Pedido.ESTADO_PEDIDO[0])
 	item = Item(id_pedido = pedido.pk, id_produto = id_produto, quantidade = quantidade)
-	item.save
+	item.save()
 	return render(request, 'loja/pedido/pedidos.html')
 
 def pedidos_usuario(request):

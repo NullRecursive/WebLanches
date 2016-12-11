@@ -12,8 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Titulo da pagina -->
-        <title>WebLanches</title>
-
+        <title> WebLanches </title>
         <!-- meta tags -->
         <meta property="og:title" content="" />
         <meta property="og:type" content="website" />
@@ -35,11 +34,11 @@
         <script src="{% static 'js/jquery.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
-        <!--Fonte Loobster do google-->
-        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-
         <!-- Icone da pagina -->
         <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}" />
+
+        <!--Fonte Loobster do google-->
+        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
     </head>
     <body>
@@ -107,47 +106,19 @@
         </nav>
 
         <!-- MAIN -->
-
-            <div class="col-md-offset-1 col-md-10 col-md-offset-1 distance" >
-                <h1><a href="{% url 'home' %}" class="col-md-10 page_header_link">WebLanches</a></h1>
-                {% if not user.is_superuser %}
-
-                <!-- Carrinho -->
-                    <div class="col-md-2 pull-right">
-                        <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="menu_pedido" data-toggle="dropdown">
-                                <span style="font-size: 22px" class="glyphicon glyphicon-shopping-cart"></span>
-                                <div class="col-md-9 pull-right">Meu pedido <br />
-                                    <strong class="quantidade">0</strong> Itens
-                                </div>
-                            </button>
-
-                            <!-- Lista com produtos -->
-                            <ul class="dropdown-menu pull-right carrinho" role="menu" aria-label="menu_pedido">
-                                <!-- ITENS -->
-                                {% for item in pedido %}
-                                <li role="presentation">
-                                    <a role="menuitem" tabindex="-1" href="#">{{ item }}</a></li>
-                                {% endfor %}
-                                <!-- SEPARADOR -->
-                                <li role="presentation" class="divider"></li>
-
-                                <!-- REFERENTE A COMPRA -->
-                                <li role="presentation">
-                                    <div role="menuitem" tabindex="-1">
-                                        <a href="#" class="btn btn-default pull-right" data-loading-text="Avançando...">Fechar pedido</a>
-                                        <p> Total: R$ 0,00 </p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                <!-- Fim carrinho -->
-                {% endif %}
-            </div>
-
-
-
+        <div class="col-md-offset-1 col-md-10 col-md-offset-1 distance" >
+            <h1><a href="{% url 'home' %}" class="col-md-10 page_header_link">WebLanches</a></h1>
+            {% if not user.is_superuser %}
+                <div class="col-md-2 pull-right">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="menu_pedido" data-toggle="dropdown">
+                        <span style="font-size: 22px" class="glyphicon glyphicon-shopping-cart"></span>
+                        Fazer Pedido
+                    </button>
+                </div>
+            {% endif %}
+        </div>
+        
+        <!-- CONTEUDO -->
         <div class="content container distance">
             <div class="row">
                     {% block content %}
