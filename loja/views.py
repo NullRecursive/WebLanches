@@ -35,7 +35,7 @@ def cad_page(request):
 
 def add_pedido(request, id_produto):
 	if request.POST:
-		quantidade = request.POST.get('quanditdade_pedido')
+		quantidade = request.POST.get('quantidade_pedido')
 		quant = int(quantidade)
 		usuario = request.Usuario #pega usuario da requisicao
 		pedido = Pedido(usuario = usuario.pk, estado_do_pedido = ESTADO_PEDIDO[0][0])
@@ -43,7 +43,7 @@ def add_pedido(request, id_produto):
 		pedido_ido = Pedido.objects.filter(usuario = usuario, estado_do_pedido = ESTADO_PEDIDO[0])
 		item = Item(id_pedido = pedido_ido.pk, id_produto = id_produto, quantidade = quant)
 		item.save()
-	return render(request, 'loja/pedido/pedidos.html')
+	return redirect(pedidos_usuario)
 
 def produto_tipo(request, tipo):
 	tipo_produtos = []
@@ -57,14 +57,6 @@ def sair(request):
 	controller = ControllerUsuario()
 	controller.logout(request)
 	return redirect(home)
-
-def add_produto_pedido(request, id_produto):
-	usuario = request.Usuario #pega usuario da requisicao
-	#Supondo que nao tem outro pedido com esse estado
-	pedido = Pedido.objects.filter(usuario = usuario, estado_do_pedido = Pedido.ESTADO_PEDIDO[0])
-	item = Item(id_pedido = pedido.pk, id_produto = id_produto, quantidade = quantidade)
-	item.save()
-	return render(request, 'loja/pedido/pedidos.html')
 
 def pedidos_usuario(request):
 	if not request.user.is_superuser:
