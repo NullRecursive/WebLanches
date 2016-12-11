@@ -47,6 +47,7 @@ def add_pedido(request, id_produto):
 				pedido = Pedido(usuario = usuario.pk)
 				pedido.save()
 		pedido = Pedido.objects.filter(usuario = usuario.pk)
+		print pedido.pk
 		item = Item(id_pedido = pedido.pk, id_produto = id_produto, quantidade = quant)
 		item.save()
 
