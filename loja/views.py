@@ -73,12 +73,13 @@ def itens_pedido(request, id_pedido):
 	return render(request, 'loja/pedido/itens_pedido.html',
 		{'itens': itens, 'id_pedido' : id_pedido, 'status' : Pedido.ESTADO_PEDIDO, 'state_pedido' : state_pedido})
 
-def ver_comprovante(request,id_pedido):
+def ver_comprovante(request, id_pedido):
 	itens =  Item.objects.filter(id_pedido = id_pedido)
 	dicionario = {}
 	for item in itens:
 		dicionario[item.id_produto] = Produto.objects.get(pk=item.id_produto)
 	return render(request,'loja/pedido/comprovante.html',{'dicionario': dicionario})
+
 
 def all_pedidos(request):
 	if request.user.is_superuser:
