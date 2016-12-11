@@ -6,7 +6,6 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from .controllers import ControllerUsuario
 
-
 def home(request):
 	return redirect(produto_tipo, tipo = 'todos')
 
@@ -17,8 +16,8 @@ def login_page(request):
 	if request.method == 'POST':
 		form = FormLogin(request.POST)
 		controller =  ControllerUsuario()
-		if controller.logar(request,form):
-			return ver_comprovante(request,1)
+		if controller.logar(request, form):
+			return ver_comprovante(request, 2)
 	else:
 		form = FormLogin()
 
@@ -36,6 +35,7 @@ def cad_page(request):
 		form = FormCadastro()
 
 	return render(request, 'loja/login/cadastro.html', {'form': form})
+
 
 def add_pedido(request, id_produto):
 	if request.POST:
@@ -62,6 +62,7 @@ def sair(request):
 	controller.logout(request)
 	return redirect(home)
 
+
 def pedidos_usuario(request):
 	if not request.user.is_superuser:
 		usuario = request.user
@@ -69,12 +70,14 @@ def pedidos_usuario(request):
 		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos})
 	return redirect(home)
 
+
 def itens_pedido(request, id_pedido):
 	itens = Item.objects.filter(id_pedido = id_pedido)
 	produtos = Produto.objects.all()
 	state_pedido = get_object_or_404(Pedido, pk = id_pedido).estado_do_pedido
 	return render(request, 'loja/pedido/itens_pedido.html',
 		{'itens': itens, 'id_pedido' : id_pedido, 'status' : Pedido.ESTADO_PEDIDO, 'state_pedido' : state_pedido})
+
 
 def ver_comprovante(request, id_pedido):
 	itens =  Item.objects.filter(id_pedido = id_pedido)
@@ -86,7 +89,7 @@ def ver_comprovante(request, id_pedido):
 
 def all_pedidos(request):
 	if request.user.is_superuser:
-		pedidos = Pedido.objects.exclude(categoria = Pedido.ESTADO_PEDIDO[0][0])
+		pedidos = Pedido.objects.exclude(estado_do_pedido = Pedido.ESTADO_PEDIDO[0][0]).order_by('data_do_pedido')
 		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos})
 	return redirect(home)
 
