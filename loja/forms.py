@@ -39,6 +39,13 @@ class FormCadastro(forms.Form):
 		exclude = ['csenha']
 		fields = ['nome', 'email', 'senha', 'username', 'telefone', 'cpf', 'endereco', 'cep']
 
+	def clean_usuario(self):
+		usuario_novo = self.cleaned_data['username']
+		if User.objects.get_by_natural_key(username = usuario_novo) != None:
+			raise forms.ValidationError(u'Usuário já existe!')
+		else:
+			return self.cleaned_data['username']
+
 class FormProduto(forms.Form):
 	nome = forms.CharField(
 		widget = forms.TextInput(
@@ -53,24 +60,23 @@ class FormProduto(forms.Form):
 	em_Falta = forms.BooleanField(
 		widget = forms.TextInput(
 			attrs={'required' : 'required'}))
+			
 	class Meta:
 		model = Produto
 		fields = ['nome', 'preco', 'descricao','em_Falta']
 
 
 
-	def clean_usuario(self):
-		usuario_novo = self.cleaned_data['username']
-		if User.objects.get_by_natural_key(username = usuario_novo) != None:
-			raise forms.ValidationError(u'Usuário já existe!')
-		else:
-			return self.cleaned_data['username']
-
 class FormLogin(forms.Form):
 	usuario = forms.CharField(
 		max_length = 40)
 	senha = forms.CharField(
 		widget = forms.PasswordInput)
+
+class FormAddProdutoItem(forms.Form):
+	quantidade =  forms.IntegerField(
+	widget = forms.TextInput(
+		attrs={'required': 'required'}))
 
 class FormStatus(forms.Form):
 	status = forms.ChoiceField(choices = Pedido.ESTADO_PEDIDO)

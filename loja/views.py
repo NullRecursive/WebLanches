@@ -34,18 +34,22 @@ def cad_page(request):
 	return render(request, 'loja/login/cadastro.html', {'form': form})
 
 def add_pedido(request, id_produto):
-	quantidade = 1 #default
-	usuario = request.Usuario #pega usuario da requisicao
-	pedido = Pedido.objects.filter(usuario = usuario, estado_do_pedido = ESTADO_PEDIDO[0]) #pega TODOS pedidos do usuario
-	item = Item(id_pedido = pedido.pk, id_produto = id_produto, quantidade = quantidade)
-	item.save()
+	if request.POST:
+		quantidade = request.POST.get('quanditdade_pedido')
+		quant = int(quantidade)
+		usuario = request.Usuario #pega usuario da requisicao
+		pedido = Pedido(usuario = usuario.pk, estado_do_pedido = ESTADO_PEDIDO[0][0])
+		pedido.save()
+		pedido_ido = Pedido.objects.filter(usuario = usuario, estado_do_pedido = ESTADO_PEDIDO[0])
+		item = Item(id_pedido = pedido_ido.pk, id_produto = id_produto, quantidade = quant)
+		item.save()
 	return render(request, 'loja/pedido/pedidos.html')
 
 def produto_tipo(request, tipo):
 	tipo_produtos = []
 	if tipo == 'todos':
-		tipo_produtos = Produto.objects.all() 
-	else:			
+		tipo_produtos = Produto.objects.all()
+	else:
 		tipo_produtos = Produto.objects.filter(categoria = tipo)
 	return render(request, 'loja/cardapio/tipo_produtos.html', {'produtos': tipo_produtos})
 
