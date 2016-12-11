@@ -3,9 +3,11 @@
 {% block content %}
 <div id = "formulario">
 		<ol>
-			{%for itemk,itemv in dicionario.iteritems%}
-			<li>"{{itemk}}"---------"{{str(itemv.preco)}}"</li>
-			{%endfor%}
+			{% for itemk,itemv in dicionario.items %}
+				
+				<li>{{itemk}} -------------------------------- {{itemv.preco}}</li>
+			
+			{% endfor %}
 		</ol>
 </div>
 {% endblock %}
