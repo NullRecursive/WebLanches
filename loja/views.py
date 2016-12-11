@@ -81,7 +81,7 @@ def ver_comprovante(request, id_pedido):
 
 def all_pedidos(request):
 	if request.user.is_superuser:
-		pedidos = Pedido.objects.all()
+		pedidos = Pedido.objects.filter(categoria = list(Pedido.ESTADO_PEDIDO)[1:])
 		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos})
 	return redirect(home)
 
