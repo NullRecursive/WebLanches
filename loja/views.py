@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from .controllers import ControllerUsuario
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse
 
 def home(request):
 	return redirect(produto_tipo, tipo = 'todos')
@@ -40,15 +42,26 @@ def cad_page(request):
 def add_pedido(request, id_produto):
 	usuario = request.user  #pega usuario da requisicao
 	if request.POST:
-		quantidade = request.POST.get('sth', 0)
-		quant = int(quantidade)
-		pedido = Pedido.objects.filter(usuario = usuario.pk)
-		if pedido is False:
-				pedido = Pedido(usuario = usuario.pk)
-				pedido.save()
-		item = Item(id_pedido = pedido.id, id_produto = id_produto, quantidade = quant)
-		item.save()
-
+		quantidade = request.POST.get('quantidade_pedido')
+		return HttpResponse(quantidade) #para mostrar o q ta pegando
+		produto = Produto.objects.get(nome = id_produto)
+		
+		pedido = None
+		try:
+			pedido = Pedido.objects.get(usuario = usuario.pk, estado_do_pedido = Pedido.ESTADO_PEDIDO[0][0])
+		except ObjectDoesNotExist or Exception:
+			pedido = Pedido(usuario = usuario)
+			pedido.save()
+		
+		#provavelmente item deve ter um atributo pra dizer se esta encerrado
+		item = None
+		try:
+			item = Item.objects.get(id_pedido = pedido.pk, id_produto = id_produto)
+			item.addQuantidade(quantidade) #falta testar
+			item.save()
+		except ObjectDoesNotExist:
+			item = Item(id_pedido = pedido, id_produto = produto, quantidade = quantidade)
+			item.save()
 
 	return redirect(pedidos_usuario)
 
@@ -98,7 +111,7 @@ def alter_status(request, id_pedido):
 		status_key = request.POST.getlist('pedido_status')
 		new_status = str(status_key[0])
 
-		pedido = get_object_or_404(Pedido, pk = id_pedido)
+		pedido = Pedido.objects.get(pk = id_pedido)
 		pedido.estado_do_pedido = new_status
 		pedido.save()
 

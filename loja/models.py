@@ -67,6 +67,8 @@ class Item(models.Model):
 			 value += produto.preco
 		return value
 
+	def addQuantidade(self, quantidade):
+		self.quantidade += quantidade
 
 class Pedido(models.Model):
 	usuario = models.ForeignKey('auth.User')
@@ -88,7 +90,7 @@ class Pedido(models.Model):
 	estado_do_pedido = models.CharField(
 		max_length = 12,
 		choices = ESTADO_PEDIDO, 
-		default = ESTADO_PEDIDO[0])
+		default = ESTADO_PEDIDO[0][0])
 	
 
 	def __str__(self):

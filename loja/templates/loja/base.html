@@ -108,7 +108,7 @@
         <!-- MAIN -->
         <div class="col-md-offset-1 col-md-10 col-md-offset-1 distance" >
             <h1><a href="{% url 'home' %}" class="col-md-10 page_header_link">WebLanches</a></h1>
-            {% if not user.is_superuser %}
+            {% if not user.is_superuser and user.is_authenticated%}
                 <div class="col-md-2 pull-right">
                     <button class="btn btn-default dropdown-toggle" type="button" id="menu_pedido" data-toggle="dropdown">
                         <span style="font-size: 22px" class="glyphicon glyphicon-shopping-cart"></span>
