@@ -63,7 +63,7 @@ def add_pedido(request, id_produto):
 				item.save()
 			return redirect(pedidos_usuario)
 	else:
-		return redirect(home)
+		return redirect(login_page)
 
 
 def produto_tipo(request, tipo):
