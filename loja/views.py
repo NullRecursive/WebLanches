@@ -61,10 +61,10 @@ def add_pedido(request, id_produto):
 			except ObjectDoesNotExist or Exception:
 				item = Item(id_pedido = pedido, id_produto = produto, quantidade = quantidade)
 				item.save()
+			return redirect(pedidos_usuario)
 	else:
 		return redirect(login)
-		
-	return redirect(pedidos_usuario)
+
 
 def produto_tipo(request, tipo):
 	tipo_produtos = []
