@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .controllers import ControllerUsuario
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
-
+from .report import write_to_pdf
 def home(request):
 	return redirect(produto_tipo, tipo = 'todos')
 
@@ -95,7 +95,7 @@ def itens_pedido(request, id_pedido):
 
 def ver_comprovante(request, id_pedido):
 	itens =  Item.objects.filter(id_pedido = id_pedido)
-	return render(request,'loja/pedido/comprovante.html',{'itens': itens})
+	return ver_pdf(request,render)
 
 
 def all_pedidos(request):
@@ -114,3 +114,6 @@ def alter_status(request, id_pedido):
 		pedido.save()
 
 	return redirect(itens_pedido, id_pedido = id_pedido)
+def ver_pdf(request,render):
+	
+	return write_to_pdf(request,render)
