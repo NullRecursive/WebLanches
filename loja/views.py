@@ -40,10 +40,9 @@ def cad_page(request):
 
 
 def add_pedido(request, id_produto):
-	usuario = request.user  #pega usuario da requisicao
 	if request.POST:
-		quantidade = request.POST.get('quantidade_pedido')
-		return HttpResponse(quantidade) #para mostrar o q ta pegando
+		usuario = request.user
+		quantidade = int(request.POST.get('qtd_pedido'))
 		produto = Produto.objects.get(nome = id_produto)
 		
 		pedido = None
@@ -53,13 +52,12 @@ def add_pedido(request, id_produto):
 			pedido = Pedido(usuario = usuario)
 			pedido.save()
 		
-		#provavelmente item deve ter um atributo pra dizer se esta encerrado
 		item = None
 		try:
-			item = Item.objects.get(id_pedido = pedido.pk, id_produto = id_produto)
-			item.addQuantidade(quantidade) #falta testar
+			item = Item.objects.get(id_pedido = pedido.pk, id_produto = id_produto, ativo = True)
+			item.addQuantidade(quantidade) 
 			item.save()
-		except ObjectDoesNotExist:
+		except ObjectDoesNotExist or Exception:
 			item = Item(id_pedido = pedido, id_produto = produto, quantidade = quantidade)
 			item.save()
 

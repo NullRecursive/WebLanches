@@ -55,6 +55,8 @@ class Item(models.Model):
 
 	quantidade = models.IntegerField(default = 0)
 
+	ativo = models.BooleanField(default = True)
+
 	def get_produto():
 		produto = Produto.objects.filter()
 	
