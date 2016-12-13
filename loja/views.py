@@ -40,7 +40,7 @@ def cad_page(request):
 
 
 def add_pedido(request, id_produto):
-	if request.user.is_anonymous:
+	if request.user.is_authenticated:
 		if request.POST:
 			usuario = request.user
 			quantidade = int(request.POST.get('qtd_pedido'))
