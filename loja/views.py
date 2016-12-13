@@ -40,28 +40,31 @@ def cad_page(request):
 
 
 def add_pedido(request, id_produto):
-	if request.POST:
-		usuario = request.user
-		quantidade = int(request.POST.get('qtd_pedido'))
-		produto = Produto.objects.get(nome = id_produto)
-		
-		pedido = None
-		try:
-			pedido = Pedido.objects.get(usuario = usuario.pk, estado_do_pedido = Pedido.ESTADO_PEDIDO[0][0])
-		except ObjectDoesNotExist or Exception:
-			pedido = Pedido(usuario = usuario)
-			pedido.save()
-		
-		item = None
-		try:
-			item = Item.objects.get(id_pedido = pedido.pk, id_produto = id_produto, ativo = True)
-			item.addQuantidade(quantidade) 
-			item.save()
-		except ObjectDoesNotExist or Exception:
-			item = Item(id_pedido = pedido, id_produto = produto, quantidade = quantidade)
-			item.save()
+	if request.user.is_authenticated:
+		if request.POST:
+			usuario = request.user
+			quantidade = int(request.POST.get('qtd_pedido'))
+			produto = Produto.objects.get(nome = id_produto)
 
-	return redirect(pedidos_usuario)
+			pedido = None
+			try:
+				pedido = Pedido.objects.get(usuario = usuario.pk, estado_do_pedido = Pedido.ESTADO_PEDIDO[0][0])
+			except ObjectDoesNotExist or Exception:
+				pedido = Pedido(usuario = usuario)
+				pedido.save()
+
+			item = None
+			try:
+				item = Item.objects.get(id_pedido = pedido.pk, id_produto = id_produto, ativo = True)
+				item.addQuantidade(quantidade)
+				item.save()
+			except ObjectDoesNotExist or Exception:
+				item = Item(id_pedido = pedido, id_produto = produto, quantidade = quantidade)
+				item.save()
+			return redirect(pedidos_usuario)
+	else:
+		return redirect(login_page)
+
 
 def produto_tipo(request, tipo):
 	tipo_produtos = []
@@ -80,7 +83,7 @@ def sair(request):
 def pedidos_usuario(request):
 	if not request.user.is_superuser:
 		usuario = request.user
-		pedidos = Pedido.objects.filter(usuario = usuario.pk)
+		pedidos = Pedido.objects.filter(usuario = usuario.pk).order_by('-data_do_pedido')
 		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos})
 	return redirect(home)
 
@@ -88,7 +91,7 @@ def pedidos_usuario(request):
 def itens_pedido(request, id_pedido):
 	itens = Item.objects.filter(id_pedido = id_pedido)
 	produtos = Produto.objects.all()
-	state_pedido = get_object_or_404(Pedido, pk = id_pedido).estado_do_pedido
+	state_pedido = Pedido.objects.get(pk = id_pedido).estado_do_pedido
 	return render(request, 'loja/pedido/itens_pedido.html',
 		{'itens': itens, 'id_pedido' : id_pedido, 'status' : Pedido.ESTADO_PEDIDO, 'state_pedido' : state_pedido})
 
@@ -114,6 +117,28 @@ def alter_status(request, id_pedido):
 		pedido.save()
 
 	return redirect(itens_pedido, id_pedido = id_pedido)
+
 def ver_pdf(request,render):
-	
 	return write_to_pdf(request,render)
+
+
+def concluir_pedido(request, id_pedido):
+	pedido = Pedido.objects.get(pk = id_pedido)
+	pedido.estado_do_pedido = Pedido.ESTADO_PEDIDO[1][0]
+	pedido.save()
+
+	return redirect(itens_pedido, id_pedido)
+
+def modificar_qtd_item(request, id_item, id_pedido):
+	if request.POST:
+		quantidade_nova = int(request.POST.get('qtd_item'))
+		if quantidade_nova > 0:		
+			item = Item.objects.get(pk = id_item)
+			item.quantidade = quantidade_nova
+			item.save()
+	return redirect(itens_pedido, id_pedido)
+
+def cancelar_pedido(request, id_pedido):
+	Item.objects.filter(id_pedido = id_pedido).delete()
+	Pedido.objects.filter(pk = id_pedido).delete()
+	return redirect(home)

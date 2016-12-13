@@ -14,6 +14,9 @@ urlpatterns = [
     url(r'^pedidos/$', views.pedidos_usuario, name = 'pedidos_usuario'),
     url(r'^pedido/(?P<id_pedido>[0-9]+)/itens/$', views.itens_pedido, name = 'itens_pedido'),
     url(r'^alter_status/(?P<id_pedido>[0-9]+)/$', views.alter_status, name = 'alter_status'),
+    url(r'^concluir_pedido/(?P<id_pedido>[0-9]+)/$', views.concluir_pedido, name = 'concluir_pedido'),
+    url(r'^modificar_qtd_item/(?P<id_item>[0-9]+)/(?P<id_pedido>[0-9]+)/$', views.modificar_qtd_item, name = 'modificar_qtd_item'),
+    url(r'^cancelar_pedido/(?P<id_pedido>[0-9]+)/$', views.cancelar_pedido, name = 'cancelar_pedido'),
 
     url(r'^pedidos-gerenciamento/$', views.all_pedidos, name = 'all_pedidos'),
 ]
