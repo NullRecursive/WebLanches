@@ -40,9 +40,9 @@ def cad_page(request):
 
 
 def add_pedido(request, id_produto):
-	
-	if request.AnonymousUser.is_authenticated:
+	if request.user.is_authenticated:
 		if request.POST:
+			usuario = request.user
 			quantidade = int(request.POST.get('qtd_pedido'))
 			produto = Produto.objects.get(nome = id_produto)
 
@@ -63,7 +63,7 @@ def add_pedido(request, id_produto):
 				item.save()
 			return redirect(pedidos_usuario)
 	else:
-		return redirect(login)
+		return redirect(home)
 
 
 def produto_tipo(request, tipo):
