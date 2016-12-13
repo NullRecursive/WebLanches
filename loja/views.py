@@ -80,7 +80,7 @@ def sair(request):
 def pedidos_usuario(request):
 	if not request.user.is_superuser:
 		usuario = request.user
-		pedidos = Pedido.objects.filter(usuario = usuario.pk)
+		pedidos = Pedido.objects.filter(usuario = usuario.pk).order_by('-data_do_pedido')
 		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos})
 	return redirect(home)
 
@@ -88,7 +88,7 @@ def pedidos_usuario(request):
 def itens_pedido(request, id_pedido):
 	itens = Item.objects.filter(id_pedido = id_pedido)
 	produtos = Produto.objects.all()
-	state_pedido = get_object_or_404(Pedido, pk = id_pedido).estado_do_pedido
+	state_pedido = Pedido.objects.get(pk = id_pedido).estado_do_pedido
 	return render(request, 'loja/pedido/itens_pedido.html',
 		{'itens': itens, 'id_pedido' : id_pedido, 'status' : Pedido.ESTADO_PEDIDO, 'state_pedido' : state_pedido})
 
@@ -114,3 +114,24 @@ def alter_status(request, id_pedido):
 		pedido.save()
 
 	return redirect(itens_pedido, id_pedido = id_pedido)
+
+def concluir_pedido(request, id_pedido):
+	pedido = Pedido.objects.get(pk = id_pedido)
+	pedido.estado_do_pedido = Pedido.ESTADO_PEDIDO[1][0]
+	pedido.save()
+
+	return redirect(itens_pedido, id_pedido)
+
+def modificar_qtd_item(request, id_item, id_pedido):
+	if request.POST:
+		quantidade_nova = int(request.POST.get('qtd_item'))
+		if quantidade_nova > 0:		
+			item = Item.objects.get(pk = id_item)
+			item.quantidade = quantidade_nova
+			item.save()
+	return redirect(itens_pedido, id_pedido)
+
+def cancelar_pedido(request, id_pedido):
+	Item.objects.filter(id_pedido = id_pedido).delete()
+	Pedido.objects.filter(pk = id_pedido).delete()
+	return redirect(home)

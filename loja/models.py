@@ -101,6 +101,7 @@ class Pedido(models.Model):
 	def save(self, force_insert=False, force_update=False):
 		self.data_do_pedido = timezone.now()
 		super(Pedido, self).save(force_insert, force_update)
+	
 
 # SIGNAL
 @receiver(post_save, sender = Pedido)
