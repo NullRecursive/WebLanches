@@ -40,22 +40,25 @@ def cad_page(request):
 
 
 def add_pedido(request, id_produto):
+	if not request.user.is_authenticated:
+		return redirect(login)
+
 	if request.POST:
 		usuario = request.user
 		quantidade = int(request.POST.get('qtd_pedido'))
 		produto = Produto.objects.get(nome = id_produto)
-		
+
 		pedido = None
 		try:
 			pedido = Pedido.objects.get(usuario = usuario.pk, estado_do_pedido = Pedido.ESTADO_PEDIDO[0][0])
 		except ObjectDoesNotExist or Exception:
 			pedido = Pedido(usuario = usuario)
 			pedido.save()
-		
+
 		item = None
 		try:
 			item = Item.objects.get(id_pedido = pedido.pk, id_produto = id_produto, ativo = True)
-			item.addQuantidade(quantidade) 
+			item.addQuantidade(quantidade)
 			item.save()
 		except ObjectDoesNotExist or Exception:
 			item = Item(id_pedido = pedido, id_produto = produto, quantidade = quantidade)

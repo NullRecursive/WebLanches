@@ -57,10 +57,11 @@ class FormProduto(forms.Form):
 	descricao = forms.CharField(
 		widget = forms.TextInput(
 			attrs={'required' : 'required'}))
+
 	em_Falta = forms.BooleanField(
 		widget = forms.TextInput(
 			attrs={'required' : 'required'}))
-			
+
 	class Meta:
 		model = Produto
 		fields = ['nome', 'preco', 'descricao','em_Falta']
