@@ -8,3 +8,4 @@ def write_to_pdf(request,html):
     if not pdf.err: 
         return HttpResponse(result.getvalue(), content_type='application/pdf') 
     else: return HttpResponse('Errors')
+    

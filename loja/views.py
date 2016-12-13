@@ -19,7 +19,7 @@ def login_page(request):
 		form = FormLogin(request.POST)
 		controller =  ControllerUsuario()
 		if controller.logar(request, form):
-			return ver_comprovante(request, 2)
+			return ver_comprovante(request, 1)
 	else:
 		form = FormLogin()
 
@@ -98,7 +98,7 @@ def itens_pedido(request, id_pedido):
 
 def ver_comprovante(request, id_pedido):
 	itens =  Item.objects.filter(id_pedido = id_pedido)
-	return ver_pdf(request,render)
+	return render(request,'loja/pedido/comprovante.html',{'itens':itens})
 
 
 def all_pedidos(request):
@@ -111,13 +111,11 @@ def alter_status(request, id_pedido):
 	if request.POST and request.user.is_superuser:
 		status_key = request.POST.getlist('pedido_status')
 		new_status = str(status_key[0])
-
 		pedido = Pedido.objects.get(pk = id_pedido)
 		pedido.estado_do_pedido = new_status
 		pedido.save()
 
-	return redirect(itens_pedido, id_pedido = id_pedido)
-
+	
 def ver_pdf(request,render):
 	return write_to_pdf(request,render)
 
@@ -126,7 +124,6 @@ def concluir_pedido(request, id_pedido):
 	pedido = Pedido.objects.get(pk = id_pedido)
 	pedido.estado_do_pedido = Pedido.ESTADO_PEDIDO[1][0]
 	pedido.save()
-
 	return redirect(itens_pedido, id_pedido)
 
 def modificar_qtd_item(request, id_item, id_pedido):
