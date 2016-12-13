@@ -40,7 +40,7 @@ def cad_page(request):
 
 
 def add_pedido(request, id_produto):
-	if not request.user.is_authenticated:
+	if request.user.is_anonymous:
 		return redirect(login)
 
 	if request.POST:
