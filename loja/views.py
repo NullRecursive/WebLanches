@@ -138,3 +138,13 @@ def cancelar_pedido(request, id_pedido):
 	Item.objects.filter(id_pedido = id_pedido).delete()
 	Pedido.objects.filter(pk = id_pedido).delete()
 	return redirect(home)
+
+def buscar(request):
+	vazio = False
+	if request.POST:
+		value_busca = str(request.POST.get('busca'))
+		valores_busca = Produto.objects.filter(nome__icontains = value_busca)
+		if len(valores_busca) <= 0:
+			vazio = True
+	return render(request, 'loja/cardapio/tipo_produtos.html', {'produtos': valores_busca, 'vazio' : vazio})
+	

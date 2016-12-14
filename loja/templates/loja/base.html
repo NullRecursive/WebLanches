@@ -21,6 +21,8 @@
         <meta property="og:description" content="" />
         <meta property="fb:app_id" content="" />
 
+        <link rel="stylesheet" href="{% static 'css/buscar.css' %}">
+
         <!-- Bootstrap -->
         <link rel="stylesheet" href="{% static 'css/bootstrap/css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/bootstrap/css/bootstrap-theme.min.css' %}">
@@ -78,7 +80,7 @@
                                         <li><a href="{% url 'admin:index' %}" >Gerenciamento</a></li>
                                         <li><a href="{% url 'all_pedidos' %}" >Ver pedidos</a></li>
                                     {% else %}
-                                    <li><a href="{% url 'pedidos_usuario' %}" >Ver pedidos</a></li>
+                                        <li><a href="{% url 'pedidos_usuario' %}" >Ver pedidos</a></li>
                                     {% endif %}
                                     <li><a href="{% url 'sair' %}">Sair</a></li>
                                 </ul>
@@ -107,19 +109,30 @@
 
         <!-- MAIN -->
         <div class="col-md-offset-1 col-md-10 col-md-offset-1 distance" >
-            <h1><a href="{% url 'home' %}" class="col-md-10 page_header_link">WebLanches</a></h1>
-            {% if not user.is_superuser and user.is_authenticated%}
+            <h1><a href="{% url 'home' %}" class="col-md-3 page_header_link">WebLanches</a></h1>
+
+            {% if not user.is_superuser and user.is_authenticated %}
                 <div class="col-md-2 pull-right">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="menu_pedido" data-toggle="dropdown">
-                        <span style="font-size: 22px" class="glyphicon glyphicon-shopping-cart"></span>
-                        Fazer Pedido
-                    </button>
+                    <a href="#" class="btn btn-default basic_link" id="menu_pedido" >
+                        <span class="glyphicon glyphicon-shopping-cart"></span> <b>Fazer Pedido</b>
+                    </a>
                 </div>
             {% endif %}
+
+            <form action="{% url 'buscar' %}" class="col-md-7 input-group" data-toggle="validator" role="form" method="POST">{% csrf_token %}
+                <input type="text" class="form-control" name="busca" id="busca" placeholder="Procurar por..."/>
+
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"> <b>Buscar</b></span></button>
+                </span>
+            </form>
+
         </div>
-        
+
+
         <!-- CONTEUDO -->
         <div class="content container distance">
+
             <div class="row">
                     {% block content %}
 
