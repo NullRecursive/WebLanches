@@ -23,6 +23,6 @@
 	 {%endfor%}
 
 	</table>
-	<button type="button" class="btn btn-default">Salvar comprovante</button>
+	 <a href="{% url 'ver_pdf' id_pedido=id_pedido %}" class="btn btn-default basic_link pull-right" style="margin-left: 10px;">Ver Documento</a>
 	{% endblock %}
 	

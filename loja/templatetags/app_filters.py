@@ -1,5 +1,6 @@
 from django import template
 from loja.models import Item
+import loja.views
 register = template.Library()
 
 @register.filter(name='show_admin')
