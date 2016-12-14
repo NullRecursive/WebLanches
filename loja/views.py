@@ -20,7 +20,7 @@ def login_page(request):
 		form = FormLogin(request.POST)
 		controller =  ControllerUsuario()
 		if controller.logar(request, form):
-			return ver_pdf(request,1)
+			return redirect(home)
 	else:
 		form = FormLogin()
 
@@ -110,8 +110,8 @@ def itens_pedido(request, id_pedido):
 
 
 def ver_comprovante(request, id_pedido):
-	itens =  Item.objects.filter(id_pedido = id_pedido)
-	return render(request,'loja/pedido/comprovante.html',{'itens':itens})
+	itens = Item.objects.filter(id_pedido = id_pedido)
+	return render(request, 'loja/pedido/comprovante.html', {'itens': itens})
 
 def all_pedidos(request):
 	if request.user.is_superuser:
@@ -132,7 +132,7 @@ def concluir_pedido(request, id_pedido):
 	pedido = Pedido.objects.get(pk = id_pedido)
 	pedido.estado_do_pedido = Pedido.ESTADO_PEDIDO[1][0]
 	pedido.save()
-	return redirect(itens_pedido, id_pedido)
+	return redirect(ver_comprovante, id_pedido)
 
 def modificar_qtd_item(request, id_item, id_pedido):
 	if request.POST:
