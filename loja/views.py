@@ -132,7 +132,8 @@ def concluir_pedido(request, id_pedido):
 	pedido = Pedido.objects.get(pk = id_pedido)
 	pedido.estado_do_pedido = Pedido.ESTADO_PEDIDO[1][0]
 	pedido.save()
-	return redirect(ver_comprovante, id_pedido)
+	
+	return ver_comprovante(request, id_pedido)
 
 def modificar_qtd_item(request, id_item, id_pedido):
 	if request.POST:
