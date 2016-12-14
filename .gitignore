@@ -1,6 +1,7 @@
 *.pyc
 __pycache__
 myvenv
+xhtml2pdfenv
 db.sqlite3
 .DS_Store
 .vscode*
