@@ -1,0 +1,39 @@
+{% load staticfiles %}
+{% load app_filters %}
+<!DOCTYPE html>
+<!-- Template de geracao do pdf do cliente -->
+<html>
+<head>
+	<title>Comprovante de pedido</title>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap/css/bootstrap-theme.min.css' %}">
+
+</head>
+	<body>
+		<label>Nome do cliente:</label> 
+		<label>{{usuario.first_name}}</label>
+			<center>
+			<table class="table">
+			  <thead>
+			    <tr>
+			     <th>Quantidade</th>
+			      <th>Nome</th>
+			      <th>Preco total</th>
+			      
+			    </tr>
+			  </thead>
+			  <tbody>
+
+			 {%for item in itens%}
+			    <tr>
+			    	<td>{{item.quantidade}}</td>
+			      	<td>{{item.id_produto}}</td>
+			      	<td>{{item.id_pedido|total_pedido}}</td>
+			    </tr>
+			 {%endfor%}
+
+			</table>
+			</center>
+	</body>
+</html>

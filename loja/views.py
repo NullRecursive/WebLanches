@@ -19,7 +19,7 @@ def login_page(request):
 		form = FormLogin(request.POST)
 		controller =  ControllerUsuario()
 		if controller.logar(request, form):
-			return ver_comprovante(request, 1)
+			return ver_pdf(request,1)
 	else:
 		form = FormLogin()
 
@@ -100,7 +100,6 @@ def ver_comprovante(request, id_pedido):
 	itens =  Item.objects.filter(id_pedido = id_pedido)
 	return render(request,'loja/pedido/comprovante.html',{'itens':itens})
 
-
 def all_pedidos(request):
 	if request.user.is_superuser:
 		pedidos = Pedido.objects.exclude(estado_do_pedido = Pedido.ESTADO_PEDIDO[0][0]).order_by('data_do_pedido')
@@ -114,12 +113,6 @@ def alter_status(request, id_pedido):
 		pedido = Pedido.objects.get(pk = id_pedido)
 		pedido.estado_do_pedido = new_status
 		pedido.save()
-
-	
-def ver_pdf(request,render):
-	return write_to_pdf(request,render)
-
-
 def concluir_pedido(request, id_pedido):
 	pedido = Pedido.objects.get(pk = id_pedido)
 	pedido.estado_do_pedido = Pedido.ESTADO_PEDIDO[1][0]
@@ -139,3 +132,9 @@ def cancelar_pedido(request, id_pedido):
 	Item.objects.filter(id_pedido = id_pedido).delete()
 	Pedido.objects.filter(pk = id_pedido).delete()
 	return redirect(home)
+
+def ver_pdf(request, id_pedido):
+	pedido = Pedido.objects.get(id = id_pedido)
+	usuario = Usuario.objects.get(username = pedido.usuario)
+	itens =  Item.objects.filter(id_pedido = id_pedido)
+	return  write_to_pdf(request,'loja/pedido/template_comprovante.html',{'itens':itens,'usuario':usuario})
