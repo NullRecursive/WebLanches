@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from .models import Usuario, Produto, Pedido, Item
-from .forms import FormLogin, FormCadastro, FormStatus
+from .forms import FormLogin, FormCadastro, FormStatus, FormProduto
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
@@ -39,6 +39,18 @@ def cad_page(request):
 
 	return render(request, 'loja/login/cadastro.html', {'form': form})
 
+def cad_produto(request):
+	if request.method == 'POST':
+		form = FormProduto(request.POST)
+		controller = ControllerUsuario()
+		if controller.cadastrar(request, form):
+			messages.success(request, "Usuario criado com sucesso")
+		else:
+			messages.error(request, "Usuario ja existente!")
+	else:
+		form = FormCadastro()
+
+	return render(request, 'loja/login/cadastro.html', {'form': form})
 
 def add_pedido(request, id_produto):
 	if request.user.is_authenticated:
@@ -123,7 +135,7 @@ def concluir_pedido(request, id_pedido):
 def modificar_qtd_item(request, id_item, id_pedido):
 	if request.POST:
 		quantidade_nova = int(request.POST.get('qtd_item'))
-		if quantidade_nova > 0:		
+		if quantidade_nova > 0:
 			item = Item.objects.get(pk = id_item)
 			item.quantidade = quantidade_nova
 			item.save()
