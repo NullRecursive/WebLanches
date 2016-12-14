@@ -151,3 +151,9 @@ def buscar(request):
 		return render(request, 'loja/cardapio/tipo_produtos.html', {'produtos': valores_busca, 'vazio' : vazio})
 	return redirect(home)
 	
+def editar_profile(request):
+	usuario = Usuario(request.user)
+
+	return HttpResponse(usuario.first_name)
+
+	return render(request, 'loja/login/cadastro.html', {'form': form})

@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^entrar/$', views.login_page, name = 'login'),
     url(r'^sair$', views.sair, name = 'sair'),
     url(r'^cadastrar/$', views.cad_page, name = 'cadastrar'),
+    url(r'^editar_profile/$', views.editar_profile, name = 'editar_profile'),
 
     url(r'^cardapio/(?P<tipo>[a-z]*)/$', views.produto_tipo, name = 'produto_tipo'),
     url(r'^add_pedido/(?P<id_produto>[a-zA-Z]*)/$', views.add_pedido, name = 'add_pedido'),
