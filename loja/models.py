@@ -36,7 +36,7 @@ class Produto(models.Model):
 		max_length = 10,
 		choices = PRODUTOS,
 		default = PRODUTOS[0]
-	)	
+	)
 
 	def __str__(self):
 		return self.nome

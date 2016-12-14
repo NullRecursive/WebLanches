@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^cadastrar/$', views.cad_page, name = 'cadastrar'),
 
     url(r'^cardapio/(?P<tipo>[a-z]*)/$', views.produto_tipo, name = 'produto_tipo'),
-    url(r'^add_pedido/(?P<id_produto>[a-zA-Z]*)/$', views.add_pedido, name = 'add_pedido'),
+    url(r'^add_pedido/(?P<id_produto>[a-zA-Z0-9\s]*)/$', views.add_pedido, name = 'add_pedido'),
     url(r'^cadastrar_produto/$', views.cad_produto, name = 'cadastrar_produto'),
 
 

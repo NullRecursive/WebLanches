@@ -15,17 +15,18 @@
         <hr>
         <h4>{{ produto.nome | title }}</h4>
         <hr>
-        <p >R$ {{ produto.preco }}</p>
-        <button type="button" class="btn btn-primary btn-mini" data-toggle="modal" data-target="#myModal">
+        <b><p >R$ {{ produto.preco }}</p></b>
+
+        <button type="button" class="btn btn-primary btn-mini" data-toggle="modal" data-target="#{{produto.nome}}">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </button>
 
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="{{produto.nome}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">{{ produto.nome | title }}</h4>
+                <h4 class="modal-title" id="myModalLabel">{{ produto.nome}}</h4>
               </div>
 
               <form action="{% url 'add_pedido' id_produto=produto.nome %}" data-toggle="validator" role="form" class="form-inline" method="POST">{% csrf_token %}
