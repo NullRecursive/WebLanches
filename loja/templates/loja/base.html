@@ -119,7 +119,7 @@
                 </div>
             {% endif %}
 
-            <form action="{% url 'buscar' %}" class="col-md-7 input-group" data-toggle="validator" role="form" method="POST">{% csrf_token %}
+            <form action="{% url 'buscar' %}" class=" input-group" data-toggle="validator" role="form" method="POST">{% csrf_token %}
                 <input type="text" class="form-control" name="busca" id="busca" placeholder="Procurar por..."/>
 
                 <span class="input-group-btn">
