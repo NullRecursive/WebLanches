@@ -134,6 +134,7 @@ def concluir_pedido(request, id_pedido):
 	pedido.save()
 	return ver_comprovante(request,id_pedido)
 
+
 def modificar_qtd_item(request, id_item, id_pedido):
 	if request.POST:
 		quantidade_nova = int(request.POST.get('qtd_item'))
