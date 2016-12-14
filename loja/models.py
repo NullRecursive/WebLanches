@@ -65,8 +65,8 @@ class Item(models.Model):
 		itens = Item.objects.filter(id_pedido = id_pedido)
 		value = 0.0
 		for item in itens:
-			 produto = Produto.objects.filter(nome = item.id_produto)
-			 value += produto.preco
+			 produto = Produto.objects.get(nome = item.id_produto)
+			 value += (produto.preco*item.quantidade)
 		return value
 
 	def addQuantidade(self, quantidade):
