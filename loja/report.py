@@ -1,3 +1,4 @@
+# comentar se nao funcionar 
 from xhtml2pdf import pisa 
 import cStringIO as StringIO 
 from django.template.loader import get_template 
