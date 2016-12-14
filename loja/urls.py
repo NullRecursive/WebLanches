@@ -10,6 +10,8 @@ urlpatterns = [
 
     url(r'^cardapio/(?P<tipo>[a-z]*)/$', views.produto_tipo, name = 'produto_tipo'),
     url(r'^add_pedido/(?P<id_produto>[a-zA-Z]*)/$', views.add_pedido, name = 'add_pedido'),
+    url(r'^cadastrar_produto/$', views.cad_produto, name = 'cadastrar_produto'),
+
 
     url(r'^pedidos/$', views.pedidos_usuario, name = 'pedidos_usuario'),
     url(r'^pedido/(?P<id_pedido>[0-9]+)/itens/$', views.itens_pedido, name = 'itens_pedido'),

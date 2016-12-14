@@ -41,16 +41,25 @@ def cad_page(request):
 
 def cad_produto(request):
 	if request.method == 'POST':
-		form = FormProduto(request.POST)
-		controller = ControllerUsuario()
-		if controller.cadastrar(request, form):
-			messages.success(request, "Usuario criado com sucesso")
-		else:
-			messages.error(request, "Usuario ja existente!")
-	else:
-		form = FormCadastro()
+		form = FormProduto(request.POST, request.FILES)
 
-	return render(request, 'loja/login/cadastro.html', {'form': form})
+		if form.is_valid():
+			produto = Produto()
+			produto.nome = form.cleaned_data["nome"]
+			produto.preco = form.cleaned_data["preco"]
+			produto.descricao = form.cleaned_data["descricao"]
+			produto.imagem = form.cleaned_data["imagem"]
+			produto.em_Falta = form.cleaned_data["em_Falta"]
+			produto.categoria = form.cleaned_data["categoria"]
+			produto.save()
+
+			messages.success(request, "Procuto criado com sucesso ")
+		else:
+			messages.error(request, "Produto já existente!")
+	else:
+		form = FormProduto()
+
+	return render(request, 'loja/cadastrar_produto.html', {'form': form})
 
 def add_pedido(request, id_produto):
 	if request.user.is_authenticated:

@@ -1,7 +1,7 @@
 from .models import Usuario, Pedido, Item, Produto
 from django.contrib.auth import authenticate, login, logout
 from django.db import models
-from .forms import FormLogin, FormCadastro, FormAddProdutoItem
+from .forms import FormLogin, FormCadastro
 from django.db import IntegrityError
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -40,31 +40,6 @@ class ControllerUsuario:
             else:
                 return True
         #return False # Ta com um erro FDP que nao reconhece
-
-def cadastrar_produto(self, request, form):
-    form = FormProduto(request.POST)
-
-    if form.is_valid():
-        try:
-            nome = form.cleaned_data['nome']
-            preco = form.cleaned_data['preco']
-            descricao = form.cleaned_data['descricao']
-            #imagem = form.cleaned_data['nome']
-            em_falta = form.cleaned_data['em_Falta']
-
-
-            produto = Produto()
-            produto.nome =  nome
-            produto.preco = preco
-            produto.descricao = descricao
-            produto.em_Falta = em_falta
-
-            Produto.save(produto)
-
-        except IntegrityError:
-            return False
-        else:
-            return True
 
     def logar(self, request, form):
     	if form.is_valid():

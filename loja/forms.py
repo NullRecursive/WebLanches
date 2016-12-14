@@ -51,23 +51,20 @@ class FormProduto(forms.Form):
 		widget = forms.TextInput(
 			attrs={'autofocus': 'autofocus', 'required': 'required'}),
 		max_length = 40)
+
 	preco = forms.FloatField(
 		widget = forms.TextInput(
 			attrs={'required': 'required'}))
+
 	descricao = forms.CharField(
 		widget = forms.TextInput(
 			attrs={'required' : 'required'}))
-	imagem = forms.ImageFied(
-		widget = forms.FileInput(
-			attrs={'required' : 'required'}))
+	imagem = forms.ImageField(required = False)
 
-	em_Falta = forms.BooleanField(
-		widget = forms.TextInput(
-			attrs={'required' : 'required'}))
+	em_Falta = forms.BooleanField(required=False)
 
-	class Meta:
-		model = Produto
-		fields = ['nome', 'preco', 'descricao','em_Falta']
+	categoria =  forms.ChoiceField(choices = Produto.PRODUTOS)
+
 
 
 

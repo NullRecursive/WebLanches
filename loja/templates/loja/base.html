@@ -77,7 +77,9 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     {% if user.is_superuser %}
+
                                         <li><a href="{% url 'admin:index' %}" >Gerenciamento</a></li>
+                                        <li><a href="{% url 'cadastrar_produto' %}" >Cadastrar produto</a></li>
                                         <li><a href="{% url 'all_pedidos' %}" >Ver pedidos</a></li>
                                     {% else %}
                                         <li><a href="{% url 'pedidos_usuario' %}" >Ver pedidos</a></li>
