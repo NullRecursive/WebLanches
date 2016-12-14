@@ -57,6 +57,9 @@ class FormProduto(forms.Form):
 	descricao = forms.CharField(
 		widget = forms.TextInput(
 			attrs={'required' : 'required'}))
+	imagem = forms.ImageField(
+		widget = forms.FileInput(
+			attrs={'required' : 'required'}))
 
 	em_Falta = forms.BooleanField(
 		widget = forms.TextInput(
@@ -66,18 +69,12 @@ class FormProduto(forms.Form):
 		model = Produto
 		fields = ['nome', 'preco', 'descricao','em_Falta']
 
-
-
 class FormLogin(forms.Form):
 	usuario = forms.CharField(
 		max_length = 40)
 	senha = forms.CharField(
 		widget = forms.PasswordInput)
 
-class FormAddProdutoItem(forms.Form):
-	quantidade =  forms.IntegerField(
-	widget = forms.TextInput(
-		attrs={'required': 'required'}))
 
 class FormStatus(forms.Form):
 	status = forms.ChoiceField(choices = Pedido.ESTADO_PEDIDO)

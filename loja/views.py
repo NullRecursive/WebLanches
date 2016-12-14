@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from .models import Usuario, Produto, Pedido, Item
-from .forms import FormLogin, FormCadastro, FormStatus
+from .forms import FormLogin, FormCadastro, FormStatus, FormProduto
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from .controllers import ControllerUsuario
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
-#from .report import write_to_pdf
+from .report import write_to_pdf
 
 def home(request):
 	return redirect(produto_tipo, tipo = 'todos')
@@ -20,7 +20,7 @@ def login_page(request):
 		form = FormLogin(request.POST)
 		controller =  ControllerUsuario()
 		if controller.logar(request, form):
-			return ver_comprovante(request, 1)
+			return ver_pdf(request,1)
 	else:
 		form = FormLogin()
 
@@ -39,6 +39,18 @@ def cad_page(request):
 
 	return render(request, 'loja/login/cadastro.html', {'form': form})
 
+def cad_produto(request):
+	if request.method == 'POST':
+		form = FormProduto(request.POST)
+		controller = ControllerUsuario()
+		if controller.cadastrar(request, form):
+			messages.success(request, "Usuario criado com sucesso")
+		else:
+			messages.error(request, "Usuario ja existente!")
+	else:
+		form = FormCadastro()
+
+	return render(request, 'loja/login/cadastro.html', {'form': form})
 
 def add_pedido(request, id_produto):
 	if request.user.is_authenticated:
@@ -77,7 +89,7 @@ def produto_tipo(request, tipo):
 
 def sair(request):
 	controller = ControllerUsuario()
-	controller.logout(request)
+	controller.sair(request)
 	return redirect(home)
 
 
@@ -101,7 +113,6 @@ def ver_comprovante(request, id_pedido):
 	itens =  Item.objects.filter(id_pedido = id_pedido)
 	return render(request,'loja/pedido/comprovante.html',{'itens':itens})
 
-
 def all_pedidos(request):
 	if request.user.is_superuser:
 		pedidos = Pedido.objects.exclude(estado_do_pedido = Pedido.ESTADO_PEDIDO[0][0]).order_by('data_do_pedido')
@@ -115,11 +126,7 @@ def alter_status(request, id_pedido):
 		pedido = Pedido.objects.get(pk = id_pedido)
 		pedido.estado_do_pedido = new_status
 		pedido.save()
-
-	
-def ver_pdf(request,render):
-	return write_to_pdf(request,render)
-
+	return render(itens_pedido, id_pedido)
 
 def concluir_pedido(request, id_pedido):
 	pedido = Pedido.objects.get(pk = id_pedido)
@@ -130,7 +137,7 @@ def concluir_pedido(request, id_pedido):
 def modificar_qtd_item(request, id_item, id_pedido):
 	if request.POST:
 		quantidade_nova = int(request.POST.get('qtd_item'))
-		if quantidade_nova > 0:		
+		if quantidade_nova > 0:
 			item = Item.objects.get(pk = id_item)
 			item.quantidade = quantidade_nova
 			item.save()
@@ -141,6 +148,13 @@ def cancelar_pedido(request, id_pedido):
 	Pedido.objects.filter(pk = id_pedido).delete()
 	return redirect(home)
 
+
+def ver_pdf(request, id_pedido):
+	pedido = Pedido.objects.get(id = id_pedido)
+	usuario = Usuario.objects.get(username = pedido.usuario)
+	itens =  Item.objects.filter(id_pedido = id_pedido)
+	return  write_to_pdf(request,'loja/pedido/template_comprovante.html',{'itens':itens,'usuario':usuario})
+
 def buscar(request):
 	vazio = False
 	if request.POST:
@@ -150,6 +164,7 @@ def buscar(request):
 			vazio = True
 		return render(request, 'loja/cardapio/tipo_produtos.html', {'produtos': valores_busca, 'vazio' : vazio})
 	return redirect(home)
+
 	
 def editar_profile(request):
 	usuario = Usuario(request.user)
