@@ -45,7 +45,7 @@
             {% for item in itens %}
 
                 {% if 'em_andamento' in state_pedido %}
-                <a data-toggle="modal" data-target="#myModal" class="basic_link" style="text-decoration:none;">
+                <a data-toggle="modal" data-target="#myModal{{ item.id_produto }}" class="basic_link" style="text-decoration:none;">
                 {% endif %}  
                     <li class="list-group-item">
                         {{ item.id_produto }} <!-- id_produto == eh o nome do produto --><br />
@@ -57,7 +57,7 @@
                 {% endif %}
 
                 {% if 'em_andamento' in state_pedido %}
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal fade" id="myModal{{ item.id_produto }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                         
