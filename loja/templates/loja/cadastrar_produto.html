@@ -5,6 +5,19 @@
 <form action="{% url 'cadastrar_produto' %}" enctype="multipart/form-data"     class="form-horizontal col-md-offset-1 col-md-10 my_form" method="POST">
 {% csrf_token %}
 
+{% for mensagem in messages %}
+     {% if mensagem.level == 40 %}
+         <ul>
+           <li>{{ mensagem }}</li>
+         </ul>
+     {% endif %}
+     {% if mensagem.level == 25 %}
+          <script type="text/javascript">
+              alert("{{mensagem}}")
+              window.location.href = "/cardapio/todos/"
+          </script>
+     {% endif %}
+ {% endfor %}
 
 
    <div class="form-group has-feedback">
