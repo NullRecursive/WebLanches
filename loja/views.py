@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .controllers import ControllerUsuario
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
-from .report import write_to_pdf
+#from .report import write_to_pdf
 
 def home(request):
 	return redirect(produto_tipo, tipo = 'todos')
