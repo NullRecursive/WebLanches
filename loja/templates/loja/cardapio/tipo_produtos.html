@@ -17,9 +17,19 @@
         <hr>
         <b><p >R$ {{ produto.preco }}</p></b>
 
-        <button type="button" class="btn btn-primary btn-mini" data-toggle="modal" data-target="#{{produto.nome|cut:" "}}">
-          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        </button>
+        <div class="form-group">
+            <button type="button" class="btn btn-primary btn-mini" data-toggle="modal" data-target="#{{produto.nome|cut:" "}}">
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
+
+            {% if user.is_superuser %}
+                <a href="{% url 'deleta_produto' id_pedido={{produto.nome}} %}" class="btn btn-default basic_link pull-right" style="margin-left: 10px;">
+                         <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+                </a>
+            {% endif %}
+        </div>
+
+
 
         <div class="modal fade" id="{{produto.nome|cut:" "}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
