@@ -65,8 +65,6 @@ def deleta_produto(request, id_nome):
 	Produto.objects.filter(nome = id_nome).delete()
 	return redirect(home)
 
-
-
 def add_pedido(request, id_produto):
 	if request.user.is_authenticated:
 		if request.POST:

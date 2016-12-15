@@ -70,14 +70,14 @@ class ControllerUsuario:
                 cep = form.cleaned_data['cep']
 
                 user = Usuario.objects.get(username=request.user.username)
-                user.password =  senha
+                user.password = senha
                 user.email = email
                 user.telefone = telefone
                 user.endereco = endereco
                 user.first_name = nome
                 user.cpf = cpf
                 user.cep = cep
-                user.save
+                user.save()
 
             except IntegrityError:
                 return False
