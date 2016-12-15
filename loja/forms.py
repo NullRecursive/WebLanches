@@ -60,7 +60,6 @@ class FormProduto(forms.Form):
 	imagem = forms.ImageField(
 		widget = forms.FileInput(
 			attrs={'required' : 'required'}))
-
 	em_Falta = forms.BooleanField(
 		widget = forms.TextInput(
 			attrs={'required' : 'required'}))

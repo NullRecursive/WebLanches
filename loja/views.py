@@ -170,6 +170,6 @@ def buscar(request):
 def editar_profile(request):
 	usuario = Usuario(request.user)
 
-	return HttpResponse(usuario.first_name)
+	return HttpResponse(usuario)
 
 	return render(request, 'loja/login/cadastro.html', {'form': form})
