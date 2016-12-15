@@ -53,7 +53,7 @@ def cad_produto(request):
 			produto.categoria = form.cleaned_data["categoria"]
 			produto.save()
 
-			messages.success(request, "Procuto criado com sucesso ")
+			messages.success(request, "Produto criado com sucesso ")
 		else:
 			messages.error(request, "Produto já existente!")
 	else:
