@@ -17,11 +17,11 @@
         <hr>
         <b><p >R$ {{ produto.preco }}</p></b>
 
-        <button type="button" class="btn btn-primary btn-mini" data-toggle="modal" data-target="#{{produto.nome}}">
+        <button type="button" class="btn btn-primary btn-mini" data-toggle="modal" data-target="#{{produto.nome|cut:" "}}">
           <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
         </button>
 
-        <div class="modal fade" id="{{produto.nome}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="{{produto.nome|cut:" "}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
