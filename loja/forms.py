@@ -67,8 +67,6 @@ class FormProduto(forms.Form):
 	categoria =  forms.ChoiceField(choices = Produto.PRODUTOS)
 
 
-
-
 class FormLogin(forms.Form):
 	usuario = forms.CharField(
 		max_length = 40)

@@ -54,3 +54,32 @@ class ControllerUsuario:
 
     def sair(self, request):
         logout(request)
+
+    def editar_usuario(self, request, form):
+        form = FormCadastro(request.POST)
+        if form.is_valid():
+            try:
+                usuario = form.cleaned_data['username']
+                email = form.cleaned_data['email']
+                telefone = form.cleaned_data['telefone']
+                nome = form.cleaned_data['nome']
+                endereco = form.cleaned_data['endereco']
+                senha = form.cleaned_data['senha']
+                csenha = form.cleaned_data['csenha']
+                cpf = form.cleaned_data['cpf']
+                cep = form.cleaned_data['cep']
+
+                user = Usuario.objects.get(username=request.user.username)
+                user.password = senha
+                user.email = email
+                user.telefone = telefone
+                user.endereco = endereco
+                user.first_name = nome
+                user.cpf = cpf
+                user.cep = cep
+                user.save()
+
+            except IntegrityError:
+                return False
+            else:
+                return True
