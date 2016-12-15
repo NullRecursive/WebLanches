@@ -166,15 +166,20 @@ def buscar(request):
 		return render(request, 'loja/cardapio/tipo_produtos.html', {'produtos': valores_busca, 'vazio' : vazio})
 	return redirect(home)
 
-	
-def editar_profile(request):
-	usuario = Usuario.objects.get(username = request.user.username)
-	form = FormCadastro()
-
-	return HttpResponse(form)
-
-	return render(request, 'loja/login/cadastro.html', {'form': form})
-
 def fazer_pedido(request):
 
 	pass
+
+def editar_perfil(request):
+	if request.user.is_authenticated:
+		usuario = Usuario.objects.get(username = request.user.username)
+		if request.method == 'POST':
+			form = FormCadastro(request.POST)
+			controller = ControllerUsuario()
+			if controller.editar_usuario(request, form):
+				messages.success(request, "Informacões alteradas com sucesso")
+			else:
+				messages.error(request, "Erro ao editar informacões")
+		else:
+			form = FormCadastro()
+		return render(request,'loja/editar_perfil.html',{'form':form,'usuario':usuario})

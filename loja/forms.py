@@ -3,7 +3,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from .models import Usuario, Pedido, Produto
 
-class FormCadastro(forms.Form):
+class FormCadastro(forms.ModelForm):
 	nome = forms.CharField(
 		widget = forms.TextInput(
 			attrs={'autofocus': 'autofocus', 'required': 'required'}),

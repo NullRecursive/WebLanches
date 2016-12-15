@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # comentar se nao funcionar 
 from xhtml2pdf import pisa 
 from io import StringIO, BytesIO
@@ -11,7 +12,6 @@ def write_to_pdf(request, template_path, context):
     html = template.render(context) 
     result = BytesIO()
     pdf = pisa.pisaDocument(StringIO(html), dest = result)
-
     if not pdf.err: 
         return HttpResponse(result.getvalue(), content_type = 'application/pdf')
     else: 
