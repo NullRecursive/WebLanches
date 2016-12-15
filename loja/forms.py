@@ -2,6 +2,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from .models import Usuario, Pedido, Produto
+from PIL import Image
 
 
 class FormCadastro(forms.Form):

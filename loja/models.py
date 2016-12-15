@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from PIL import Image
 
 class Usuario(User):
 	telefone = models.CharField(max_length = 20)
@@ -23,7 +24,8 @@ class Produto(models.Model):
 	)
 	preco = models.FloatField()
 	descricao = models.TextField(blank = True)
-	imagem = models.ImageField(upload_to = 'loja/static/product_images')
+	imagem = models.ImageField(upload_to = 'loja/static/product_images',height_field=171, width_field=170)
+	
 	em_Falta = models.BooleanField()
 
 	PRODUTOS =  (('hamburguer',u'Hambuguer'),
