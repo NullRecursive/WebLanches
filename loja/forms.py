@@ -56,7 +56,7 @@ class FormProduto(forms.Form):
 		widget = forms.TextInput(
 			attrs={'required': 'required'}))
 
-	descricao = forms.CharField(
+	descricao = forms.TextField(
 		widget = forms.TextInput(
 			attrs={'required' : 'required'}))
 	imagem = forms.ImageField(required = False)
