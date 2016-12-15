@@ -36,14 +36,19 @@
         <ul class="list-group">
             {% for item in itens %}
 
-                <a data-toggle="modal" data-target="#myModal" class="basic_link" style="text-decoration:none;">    
+                {% if 'em_andamento' in state_pedido %}
+                <a data-toggle="modal" data-target="#myModal" class="basic_link" style="text-decoration:none;">
+                {% endif %}  
                     <li class="list-group-item">
                         {{ item.id_produto }} <!-- id_produto == eh o nome do produto --><br />
                         Quantidade: {{ item.quantidade }}
                         <span class="list-group-progress" style="width: 75%;"></span>
                     </li>
+                {% if 'em_andamento' in state_pedido %}
                 </a>
+                {% endif %}
 
+                {% if 'em_andamento' in state_pedido %}
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -72,20 +77,21 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
             {% endfor %}
         </ul>
         
     {% endif %}
 
-    {% if 'em_andamento' in state_pedido and not vazio %}
+    {% if 'em_andamento' in state_pedido and not vazio and not user.is_superuser %}
         <a href="{% url 'concluir_pedido' id_pedido=id_pedido %}" class="btn btn-default basic_link pull-right" style="margin-left: 10px;">Concluir Pedido</a>
     {% endif %}
     
-    {% if not vazio %}
+    {% if not vazio and not user.is_superuser %}
         <a href="{% url 'cancelar_pedido' id_pedido=id_pedido %}" class="btn btn-default basic_link pull-right" style="margin-left: 10px;">Cancelar Pedido</a>
     {% endif %}
 
-    {% if 'em_andamento' in state_pedido %}
+    {% if 'em_andamento' in state_pedido and not user.is_superuser %}
         <a href="{% url 'home' %}" class="btn btn-default basic_link pull-right">Continuar Comprando</a>
     {% endif %}
 

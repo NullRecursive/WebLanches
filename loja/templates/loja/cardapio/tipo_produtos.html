@@ -36,7 +36,7 @@
 
                       <div class="form-group form-group-sm">
                         <label for="quantidade_pedido">Quantidade:</label>
-                        <input type="text" class="form-control" id="quantidade_pedido" name="qtd_pedido">
+                        <input type="text" class="form-control" id="quantidade_pedido" name="qtd_pedido" maxlength="2">
                       </div>
 
                   </div>
@@ -55,10 +55,6 @@
   </div>
 {% endfor %}
 
-{% if vazio %}
-    <p>Não há nenhum produto correspondente no estoque!</p>
-    <a href="{% url 'home' %}" class="btn btn-default basic_link" alt="Ir para pagina inicial">Clique aki para ir para a pagina inicial</a>
-{% endif %}
 </div>
 
 

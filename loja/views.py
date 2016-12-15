@@ -138,7 +138,7 @@ def alter_status(request, id_pedido):
 		pedido = Pedido.objects.get(pk = id_pedido)
 		pedido.estado_do_pedido = new_status
 		pedido.save()
-	return render(itens_pedido, id_pedido)
+	return itens_pedido(request, id_pedido)
 
 def concluir_pedido(request, id_pedido):
 	pedido = Pedido.objects.get(pk = id_pedido)
