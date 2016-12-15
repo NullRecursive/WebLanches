@@ -6,20 +6,29 @@
     <div class="dashhead-titles">
         <h3 class="dashhead-title">Meus Pedidos</h3>
     </div>
-  
-    <ul class="list-group">
-        {% for pedido in pedidos %}
-                <a href="{% url 'itens_pedido' id_pedido=pedido.pk %}" class="basic_link" style="text-decoration:none;">
+    {% if vazio %}
+        <div>
+            {% if user.is_superuser %}
+                <p>Não há nenhum pedido no momento!</p>
+            {% else %}
+                <p>Voce não fez nenhum pedido, volte para o cardápio e selecione algum produto!</p>
+            {% endif %}
+        </div>
+    {% else %}
+        <ul class="list-group">
+            {% for pedido in pedidos %}
+                    <a href="{% url 'itens_pedido' id_pedido=pedido.pk %}" class="basic_link" style="text-decoration:none;">
 
-                <button type="button" class="list-group-item">
-                    Pedido {{ pedido.pk }} <br />
-                    {{ pedido.get_estado_do_pedido_display }}
-                </button>
+                    <button type="button" class="list-group-item">
+                        Pedido {{ pedido.pk }} <br />
+                        {{ pedido.get_estado_do_pedido_display }}
+                    </button>
 
-                </li>
-            </a>
-        {% endfor %}
-    </ul>
+                    </li>
+                </a>
+            {% endfor %}
+        </ul>
+    {% endif %}
 </div>
 
 {% endblock %}

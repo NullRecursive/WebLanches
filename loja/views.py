@@ -95,18 +95,27 @@ def sair(request):
 
 def pedidos_usuario(request):
 	if not request.user.is_superuser:
+		vazio = False
 		usuario = request.user
 		pedidos = Pedido.objects.filter(usuario = usuario.pk).order_by('-data_do_pedido')
-		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos})
+		if len(pedidos) <= 0:
+			vazio = True
+		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos, 'vazio' : vazio })
 	return redirect(home)
 
 
 def itens_pedido(request, id_pedido):
+	vazio = False
 	itens = Item.objects.filter(id_pedido = id_pedido)
-	produtos = Produto.objects.all()
 	state_pedido = Pedido.objects.get(pk = id_pedido).estado_do_pedido
+	if len(itens) <= 0:
+		vazio = True
 	return render(request, 'loja/pedido/itens_pedido.html',
-		{'itens': itens, 'id_pedido' : id_pedido, 'status' : Pedido.ESTADO_PEDIDO, 'state_pedido' : state_pedido})
+		{'itens': itens, 
+		'id_pedido' : id_pedido, 
+		'status' : Pedido.ESTADO_PEDIDO, 
+		'state_pedido' : state_pedido,
+		'vazio' : vazio })
 
 
 def ver_comprovante(request, id_pedido):
@@ -115,8 +124,11 @@ def ver_comprovante(request, id_pedido):
 
 def all_pedidos(request):
 	if request.user.is_superuser:
+		vazio = False
 		pedidos = Pedido.objects.exclude(estado_do_pedido = Pedido.ESTADO_PEDIDO[0][0]).order_by('data_do_pedido')
-		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos})
+		if len(pedidos) <= 0:
+			vazio = True
+		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos, 'vazio' : vazio})
 	return redirect(home)
 
 def alter_status(request, id_pedido):
@@ -142,7 +154,7 @@ def modificar_qtd_item(request, id_item, id_pedido):
 			item = Item.objects.get(pk = id_item)
 			item.quantidade = quantidade_nova
 			item.save()
-	return redirect(itens_pedido, id_pedido)
+	return itens_pedido(request, id_pedido)
 
 def cancelar_pedido(request, id_pedido):
 	Item.objects.filter(id_pedido = id_pedido).delete()
@@ -154,7 +166,7 @@ def ver_pdf(request, id_pedido):
 	pedido = Pedido.objects.get(id = id_pedido)
 	usuario = Usuario.objects.get(username = pedido.usuario)
 	itens =  Item.objects.filter(id_pedido = id_pedido)
-	return  write_to_pdf(request,'loja/pedido/template_comprovante.html',{'itens':itens,'usuario':usuario})
+	return write_to_pdf(request,'loja/pedido/template_comprovante.html',{'itens':itens,'usuario':usuario})
 
 def buscar(request):
 	vazio = False
@@ -176,5 +188,12 @@ def editar_profile(request):
 	return render(request, 'loja/login/cadastro.html', {'form': form})
 
 def fazer_pedido(request):
-
-	pass
+	try:
+		pedido = Pedido.objects.filter(
+			usuario = request.user, 	
+			estado_do_pedido = Pedido.ESTADO_PEDIDO[0][0])[0]
+		return itens_pedido(request, pedido.pk)
+	except IndexError:
+		pedido = Pedido(usuario = request.user)
+		pedido.save()
+		return itens_pedido(request, pedido.pk)
