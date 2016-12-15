@@ -24,8 +24,9 @@ class Produto(models.Model):
 	)
 	preco = models.FloatField()
 	descricao = models.TextField(blank = True)
-	imagem = models.ImageField(upload_to = 'loja/static/product_images',height_field=171, width_field=170)
 	
+	imagem = models.ImageField(upload_to = 'loja/static/product_images')
+
 	em_Falta = models.BooleanField()
 
 	PRODUTOS =  (('hamburguer',u'Hambuguer'),
