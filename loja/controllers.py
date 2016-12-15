@@ -41,6 +41,7 @@ class ControllerUsuario:
                 return True
         #return False # Ta com um erro FDP que nao reconhece
 
+<<<<<<< HEAD
     def cadastrar_produto(self, request, form):
         form = FormProduto(request.POST)
 
@@ -65,6 +66,8 @@ class ControllerUsuario:
             else:
                 return True
 
+=======
+>>>>>>> produto
     def logar(self, request, form):
     	if form.is_valid():
        		usuario = form.cleaned_data['usuario']
