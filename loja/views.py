@@ -111,7 +111,7 @@ def itens_pedido(request, id_pedido):
 
 def ver_comprovante(request, id_pedido):
 	itens = Item.objects.filter(id_pedido = id_pedido)
-	return render(request, 'loja/pedido/comprovante.html', {'itens': itens})
+	return render(request, 'loja/pedido/comprovante.html', {'itens': itens,'id_pedido':id_pedido})
 
 def all_pedidos(request):
 	if request.user.is_superuser:
@@ -132,8 +132,8 @@ def concluir_pedido(request, id_pedido):
 	pedido = Pedido.objects.get(pk = id_pedido)
 	pedido.estado_do_pedido = Pedido.ESTADO_PEDIDO[1][0]
 	pedido.save()
-	
-	return ver_comprovante(request, id_pedido)
+	return ver_comprovante(request,id_pedido)
+
 
 def modificar_qtd_item(request, id_item, id_pedido):
 	if request.POST:

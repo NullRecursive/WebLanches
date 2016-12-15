@@ -18,8 +18,7 @@ urlpatterns = [
     url(r'^concluir_pedido/(?P<id_pedido>[0-9]+)/$', views.concluir_pedido, name = 'concluir_pedido'),
     url(r'^modificar_qtd_item/(?P<id_item>[0-9]+)/(?P<id_pedido>[0-9]+)/$', views.modificar_qtd_item, name = 'modificar_qtd_item'),
     url(r'^cancelar_pedido/(?P<id_pedido>[0-9]+)/$', views.cancelar_pedido, name = 'cancelar_pedido'),
-
+    url(r'^gerar_pdf/(?P<id_pedido>[0-9]+)/$',views.ver_pdf,name = 'ver_pdf'),
     url(r'^buscar/$', views.buscar, name = 'buscar'),
-
     url(r'^pedidos-gerenciamento/$', views.all_pedidos, name = 'all_pedidos'),
 ]
