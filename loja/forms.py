@@ -3,6 +3,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from .models import Usuario, Pedido, Produto
 
+
 class FormCadastro(forms.Form):
 	nome = forms.CharField(
 		widget = forms.TextInput(
@@ -60,6 +61,7 @@ class FormProduto(forms.Form):
 		widget = forms.TextInput(
 			attrs={'required' : 'required'}))
 	imagem = forms.ImageField(required = False)
+
 
 	em_Falta = forms.BooleanField(required=False)
 
