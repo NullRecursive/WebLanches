@@ -61,6 +61,12 @@ def cad_produto(request):
 
 	return render(request, 'loja/cadastrar_produto.html', {'form': form})
 
+def deleta_produto(request, id_nome):
+	Produto.objects.filter(nome = id_nome).delete()
+	return redirect(home)
+
+
+
 def add_pedido(request, id_produto):
 	if request.user.is_authenticated:
 		if request.POST:
@@ -123,9 +129,9 @@ def itens_pedido(request, id_pedido):
 	if len(itens) <= 0:
 		vazio = True
 	return render(request, 'loja/pedido/itens_pedido.html',
-		{'itens': itens, 
-		'id_pedido' : id_pedido, 
-		'status' : Pedido.ESTADO_PEDIDO, 
+		{'itens': itens,
+		'id_pedido' : id_pedido,
+		'status' : Pedido.ESTADO_PEDIDO,
 		'state_pedido' : state_pedido,
 		'vazio' : vazio,
 		'usuario' : usuario.__str__,
@@ -193,7 +199,7 @@ def buscar(request):
 		return render(request, 'loja/cardapio/tipo_produtos.html', {'produtos': valores_busca, 'vazio' : vazio})
 	return redirect(home)
 
-	
+
 def editar_profile(request):
 	usuario = Usuario.objects.get(username = request.user.username)
 	form = FormCadastro()
@@ -205,7 +211,7 @@ def editar_profile(request):
 def fazer_pedido(request):
 	try:
 		pedido = Pedido.objects.filter(
-			usuario = request.user, 	
+			usuario = request.user,
 			estado_do_pedido = Pedido.ESTADO_PEDIDO[0][0])[0]
 		return itens_pedido(request, pedido.pk)
 	except IndexError:
