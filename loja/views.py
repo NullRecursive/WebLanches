@@ -107,7 +107,10 @@ def pedidos_usuario(request):
 def itens_pedido(request, id_pedido):
 	vazio = False
 	itens = Item.objects.filter(id_pedido = id_pedido)
-	state_pedido = Pedido.objects.get(pk = id_pedido).estado_do_pedido
+	pedido = Pedido.objects.get(pk = id_pedido)
+	state_pedido = pedido.estado_do_pedido
+	usuario = Usuario.objects.get(username = pedido.usuario)
+
 	if len(itens) <= 0:
 		vazio = True
 	return render(request, 'loja/pedido/itens_pedido.html',
@@ -115,7 +118,10 @@ def itens_pedido(request, id_pedido):
 		'id_pedido' : id_pedido, 
 		'status' : Pedido.ESTADO_PEDIDO, 
 		'state_pedido' : state_pedido,
-		'vazio' : vazio })
+		'vazio' : vazio,
+		'usuario' : usuario.__str__,
+		'endereco' : usuario.endereco,
+		'cep' : usuario.cep })
 
 
 def ver_comprovante(request, id_pedido):

@@ -6,6 +6,14 @@
 <div class="dashhead">
     {% if user.is_superuser %}
     <div class="dashhead-titles">
+        <h3 class="dashhead-title">Solicitante</h3>
+            <p>{{ usuario | title }}</p>
+
+        <h3 class="dashhead-title">Endereço</h3>
+            <p>{{ endereco }}, {{ cep }}</p>
+    </div>
+
+    <div class="dashhead-titles">
         <h3 class="dashhead-title">Status do Pedido</h3>
 
         <form action="{% url 'alter_status' id_pedido=id_pedido %}" method="POST">{% csrf_token %}
