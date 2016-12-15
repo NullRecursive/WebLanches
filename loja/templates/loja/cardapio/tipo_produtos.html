@@ -23,7 +23,7 @@
             </button>
 
             {% if user.is_superuser %}
-                <a href="{% url 'deleta_produto' id_pedido={{produto.nome}} %}" class="btn btn-default basic_link pull-right" style="margin-left: 10px;">
+                <a href="{% url 'deleta_produto' id_pedido=produto.nome %}" class="btn btn-default basic_link pull-right" style="margin-left: 10px;">
                          <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
                 </a>
             {% endif %}
