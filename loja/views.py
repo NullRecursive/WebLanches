@@ -168,8 +168,13 @@ def buscar(request):
 
 	
 def editar_profile(request):
-	usuario = Usuario(request.user)
+	usuario = Usuario.objects.get(username = request.user.username)
+	form = FormCadastro()
 
-	return HttpResponse(usuario)
+	return HttpResponse(form)
 
 	return render(request, 'loja/login/cadastro.html', {'form': form})
+
+def fazer_pedido(request):
+
+	pass
