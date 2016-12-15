@@ -11,8 +11,8 @@
 
 </head>
 	<body>
-		<label>Nome do cliente:</label> 
-		<label>{{usuario.first_name}}</label>
+		<label><b>Nome do cliente:</b></label> 
+		<label>{{ usuario.first_name }}</label>
 			<center>
 			<table class="table">
 			  <thead>
@@ -25,13 +25,13 @@
 			  </thead>
 			  <tbody>
 
-			 {%for item in itens%}
+			 {% for item in itens %}
 			    <tr>
-			    	<td>{{item.quantidade}}</td>
-			      	<td>{{item.id_produto}}</td>
-			      	<td>{{item.id_pedido|total_pedido}}</td>
+			    	<td>{{ item.quantidade }}</td>
+			      	<td>{{ item.id_produto }}</td>
+			      	<td>{{ item.id_pedido | total_pedido }}</td>
 			    </tr>
-			 {%endfor%}
+			 {% endfor %}
 
 			</table>
 			</center>
