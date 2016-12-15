@@ -41,16 +41,25 @@ def cad_page(request):
 
 def cad_produto(request):
 	if request.method == 'POST':
-		form = FormProduto(request.POST)
-		controller = ControllerUsuario()
-		if controller.cadastrar(request, form):
-			messages.success(request, "Usuario criado com sucesso")
-		else:
-			messages.error(request, "Usuario ja existente!")
-	else:
-		form = FormCadastro()
+		form = FormProduto(request.POST, request.FILES)
 
-	return render(request, 'loja/login/cadastro.html', {'form': form})
+		if form.is_valid():
+			produto = Produto()
+			produto.nome = form.cleaned_data["nome"]
+			produto.preco = form.cleaned_data["preco"]
+			produto.descricao = form.cleaned_data["descricao"]
+			produto.imagem = form.cleaned_data["imagem"]
+			produto.em_Falta = form.cleaned_data["em_Falta"]
+			produto.categoria = form.cleaned_data["categoria"]
+			produto.save()
+
+			messages.success(request, "Procuto criado com sucesso ")
+		else:
+			messages.error(request, "Produto já existente!")
+	else:
+		form = FormProduto()
+
+	return render(request, 'loja/cadastrar_produto.html', {'form': form})
 
 def add_pedido(request, id_produto):
 	if request.user.is_authenticated:
@@ -95,18 +104,33 @@ def sair(request):
 
 def pedidos_usuario(request):
 	if not request.user.is_superuser:
+		vazio = False
 		usuario = request.user
 		pedidos = Pedido.objects.filter(usuario = usuario.pk).order_by('-data_do_pedido')
-		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos})
+		if len(pedidos) <= 0:
+			vazio = True
+		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos, 'vazio' : vazio })
 	return redirect(home)
 
 
 def itens_pedido(request, id_pedido):
+	vazio = False
 	itens = Item.objects.filter(id_pedido = id_pedido)
-	produtos = Produto.objects.all()
-	state_pedido = Pedido.objects.get(pk = id_pedido).estado_do_pedido
+	pedido = Pedido.objects.get(pk = id_pedido)
+	state_pedido = pedido.estado_do_pedido
+	usuario = Usuario.objects.get(username = pedido.usuario)
+
+	if len(itens) <= 0:
+		vazio = True
 	return render(request, 'loja/pedido/itens_pedido.html',
-		{'itens': itens, 'id_pedido' : id_pedido, 'status' : Pedido.ESTADO_PEDIDO, 'state_pedido' : state_pedido})
+		{'itens': itens, 
+		'id_pedido' : id_pedido, 
+		'status' : Pedido.ESTADO_PEDIDO, 
+		'state_pedido' : state_pedido,
+		'vazio' : vazio,
+		'usuario' : usuario.__str__,
+		'endereco' : usuario.endereco,
+		'cep' : usuario.cep })
 
 
 def ver_comprovante(request, id_pedido):
@@ -115,8 +139,11 @@ def ver_comprovante(request, id_pedido):
 
 def all_pedidos(request):
 	if request.user.is_superuser:
+		vazio = False
 		pedidos = Pedido.objects.exclude(estado_do_pedido = Pedido.ESTADO_PEDIDO[0][0]).order_by('data_do_pedido')
-		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos})
+		if len(pedidos) <= 0:
+			vazio = True
+		return render(request, 'loja/pedido/pedidos.html', {'pedidos' : pedidos, 'vazio' : vazio})
 	return redirect(home)
 
 def alter_status(request, id_pedido):
@@ -126,7 +153,7 @@ def alter_status(request, id_pedido):
 		pedido = Pedido.objects.get(pk = id_pedido)
 		pedido.estado_do_pedido = new_status
 		pedido.save()
-	return render(itens_pedido, id_pedido)
+	return itens_pedido(request, id_pedido)
 
 def concluir_pedido(request, id_pedido):
 	pedido = Pedido.objects.get(pk = id_pedido)
@@ -142,7 +169,7 @@ def modificar_qtd_item(request, id_item, id_pedido):
 			item = Item.objects.get(pk = id_item)
 			item.quantidade = quantidade_nova
 			item.save()
-	return redirect(itens_pedido, id_pedido)
+	return itens_pedido(request, id_pedido)
 
 def cancelar_pedido(request, id_pedido):
 	Item.objects.filter(id_pedido = id_pedido).delete()
@@ -154,7 +181,7 @@ def ver_pdf(request, id_pedido):
 	pedido = Pedido.objects.get(id = id_pedido)
 	usuario = Usuario.objects.get(username = pedido.usuario)
 	itens =  Item.objects.filter(id_pedido = id_pedido)
-	return  write_to_pdf(request,'loja/pedido/template_comprovante.html',{'itens':itens,'usuario':usuario})
+	return write_to_pdf(request,'loja/pedido/template_comprovante.html',{'itens':itens,'usuario':usuario})
 
 def buscar(request):
 	vazio = False
@@ -167,6 +194,7 @@ def buscar(request):
 	return redirect(home)
 
 def fazer_pedido(request):
+<<<<<<< HEAD
 
 	pass
 
@@ -183,3 +211,14 @@ def editar_perfil(request):
 		else:
 			form = FormCadastro()
 		return render(request,'loja/editar_perfil.html',{'form':form,'usuario':usuario})
+=======
+	try:
+		pedido = Pedido.objects.filter(
+			usuario = request.user, 	
+			estado_do_pedido = Pedido.ESTADO_PEDIDO[0][0])[0]
+		return itens_pedido(request, pedido.pk)
+	except IndexError:
+		pedido = Pedido(usuario = request.user)
+		pedido.save()
+		return itens_pedido(request, pedido.pk)
+>>>>>>> d08ef023a9327e30029c9e0cc1e9eb2447c6e95c

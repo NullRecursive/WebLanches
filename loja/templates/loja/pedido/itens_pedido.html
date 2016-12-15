@@ -6,6 +6,14 @@
 <div class="dashhead">
     {% if user.is_superuser %}
     <div class="dashhead-titles">
+        <h3 class="dashhead-title">Solicitante</h3>
+            <p>{{ usuario | title }}</p>
+
+        <h3 class="dashhead-title">Endereço</h3>
+            <p>{{ endereco }}, {{ cep }}</p>
+    </div>
+
+    <div class="dashhead-titles">
         <h3 class="dashhead-title">Status do Pedido</h3>
 
         <form action="{% url 'alter_status' id_pedido=id_pedido %}" method="POST">{% csrf_token %}
@@ -25,56 +33,73 @@
     <div class="dashhead-titles">
         <h3 class="dashhead-title">Itens</h3>
     </div>
-  
-    <ul class="list-group">
-        {% for item in itens %}
+    
+    {% if vazio %}
+    <div>
+        <p>Voce não possui nenhum item em seu pedido, volte ao cardápio e selecione algum produto!</p>
+    </div>
+    
+    {% else %}
 
-            <a data-toggle="modal" data-target="#myModal" class="basic_link" style="text-decoration:none;">    
-                <li class="list-group-item">
-                    {{ item.id_produto }} <!-- id_produto == eh o nome do produto --><br />
-                    Quantidade: {{ item.quantidade }}
-                    <span class="list-group-progress" style="width: 75%;"></span>
-                </li>
-            </a>
+        <ul class="list-group">
+            {% for item in itens %}
 
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">{{ item.id_produto }}</h4>
-                    </div>
+                {% if 'em_andamento' in state_pedido %}
+                <a data-toggle="modal" data-target="#myModal{{ item.id_produto }}" class="basic_link" style="text-decoration:none;">
+                {% endif %}  
+                    <li class="list-group-item">
+                        {{ item.id_produto }} <!-- id_produto == eh o nome do produto --><br />
+                        Quantidade: {{ item.quantidade }}
+                        <span class="list-group-progress" style="width: 75%;"></span>
+                    </li>
+                {% if 'em_andamento' in state_pedido %}
+                </a>
+                {% endif %}
 
-                    <form action="{% url 'modificar_qtd_item' id_item=item.pk id_pedido=id_pedido %}" data-toggle="validator" role="form" class="form-inline" method="POST">{% csrf_token %}
-                        <div class="modal-body">
-                            <!--Formulario de quantidade-->
-                            <div class="form-group form-group-sm">
-                                <label for="quantidade_pedido">Quantidade:</label>
-                                <input type="text" class="form-control" id="quantidade_pedido" name="qtd_item" value="{{ item.quantidade }}">
+                {% if 'em_andamento' in state_pedido %}
+                <div class="modal fade" id="myModal{{ item.id_produto }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">{{ item.id_produto }}</h4>
+                        </div>
+
+                        <form action="{% url 'modificar_qtd_item' id_item=item.pk id_pedido=id_pedido %}" data-toggle="validator" role="form" class="form-inline" method="POST">{% csrf_token %}
+                            <div class="modal-body">
+                                <!--Formulario de quantidade-->
+                                <div class="form-group form-group-sm">
+                                    <label for="quantidade_pedido">Quantidade:</label>
+                                    <input type="text" class="form-control" id="quantidade_pedido" name="qtd_item" value="{{ item.quantidade }}">
+                                </div>
+
                             </div>
 
-                        </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Salvar</button>
+                            </div>
+                        </form>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Salvar</button>
                         </div>
-                    </form>
-
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-    </ul>
+                {% endif %}
+            {% endfor %}
+        </ul>
+        
+    {% endif %}
 
-    {% if not 'concluido' in state_pedido %}
+    {% if 'em_andamento' in state_pedido and not vazio and not user.is_superuser %}
         <a href="{% url 'concluir_pedido' id_pedido=id_pedido %}" class="btn btn-default basic_link pull-right" style="margin-left: 10px;">Concluir Pedido</a>
     {% endif %}
     
-    <a href="{% url 'cancelar_pedido' id_pedido=id_pedido %}" class="btn btn-default basic_link pull-right" style="margin-left: 10px;">Cancelar Pedido</a>
-    
-    {% if not 'concluido' in state_pedido %}
+    {% if not vazio and not user.is_superuser %}
+        <a href="{% url 'cancelar_pedido' id_pedido=id_pedido %}" class="btn btn-default basic_link pull-right" style="margin-left: 10px;">Cancelar Pedido</a>
+    {% endif %}
+
+    {% if 'em_andamento' in state_pedido and not user.is_superuser %}
         <a href="{% url 'home' %}" class="btn btn-default basic_link pull-right">Continuar Comprando</a>
     {% endif %}
 

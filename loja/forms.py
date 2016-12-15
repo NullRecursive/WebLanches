@@ -3,7 +3,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 from .models import Usuario, Pedido, Produto
 
-class FormCadastro(forms.ModelForm):
+
+class FormCadastro(forms.Form):
 	nome = forms.CharField(
 		widget = forms.TextInput(
 			attrs={'autofocus': 'autofocus', 'required': 'required'}),
@@ -51,22 +52,20 @@ class FormProduto(forms.Form):
 		widget = forms.TextInput(
 			attrs={'autofocus': 'autofocus', 'required': 'required'}),
 		max_length = 40)
+
 	preco = forms.FloatField(
 		widget = forms.TextInput(
 			attrs={'required': 'required'}))
+
 	descricao = forms.CharField(
 		widget = forms.TextInput(
 			attrs={'required' : 'required'}))
-	imagem = forms.ImageField(
-		widget = forms.FileInput(
-			attrs={'required' : 'required'}))
-	em_Falta = forms.BooleanField(
-		widget = forms.TextInput(
-			attrs={'required' : 'required'}))
+	imagem = forms.ImageField(required = False)	
 
-	class Meta:
-		model = Produto
-		fields = ['nome', 'preco', 'descricao','em_Falta']
+	em_Falta = forms.BooleanField(required=False)
+
+	categoria =  forms.ChoiceField(choices = Produto.PRODUTOS)
+
 
 class FormLogin(forms.Form):
 	usuario = forms.CharField(

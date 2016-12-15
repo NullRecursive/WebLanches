@@ -41,30 +41,6 @@ class ControllerUsuario:
                 return True
         #return False # Ta com um erro FDP que nao reconhece
 
-    def cadastrar_produto(self, request, form):
-        form = FormProduto(request.POST)
-
-        if form.is_valid():
-            try:
-                nome = form.cleaned_data['nome']
-                preco = form.cleaned_data['preco']
-                descricao = form.cleaned_data['descricao']
-                em_falta = form.cleaned_data['em_Falta']
-
-
-                produto = Produto()
-                produto.nome =  nome
-                produto.preco = preco
-                produto.descricao = descricao
-                produto.em_Falta = em_falta
-
-                Produto.save(produto)
-
-            except IntegrityError:
-                return False
-            else:
-                return True
-
     def logar(self, request, form):
     	if form.is_valid():
        		usuario = form.cleaned_data['usuario']
@@ -74,8 +50,8 @@ class ControllerUsuario:
 	        	login(request, user)
 	        	return True
 	        return False
-        
-        
+
+
     def sair(self, request):
         logout(request)
 
