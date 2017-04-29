@@ -1,10 +1,10 @@
-#WebLanches
+# WebLanches
 _Application web_
 
 ### Intro
 Django é um framework gratuito e de código aberto para a criação de aplicações web, escrito em Python. É um framework web, ou seja, é um conjunto de componentes que ajuda a desenvolver sites de forma mais rápida e mais fácil.
 
-###Instalação
+### Instalação
 - Instale o python no Ubuntu e seus derivados  
 ``` sudo apt install python3.5 ```  
 
