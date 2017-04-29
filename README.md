@@ -16,7 +16,7 @@ Django é um framework gratuito e de código aberto para a criação de aplicaç
 		- PyCharm
 		- Spyder
 	- Outros
-		- Visual Studio Code (Recomendado)
+		- Visual Studio Code 
 		- [Atom](atom.io)
 		- Sublime Text
 		- Gedit
