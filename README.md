@@ -92,3 +92,8 @@ Django é um framework gratuito e de código aberto para a criação de aplicaç
 - Crie o banco e um admin:
 	``` python manage.py migrate ```
 	``` python manage.py createsuperuser ```
+
+## Dependencias extras
+- ``` pip install django-widget-tweaks ```
+- ``` pip install pillow ```
+- ``` pip install --pre xhtml2pdf ```
